@@ -90,22 +90,25 @@ def publish(article):
             page.on('dialog', lambda dialog: dialog.dismiss())
             page.goto(f'https://{BLOG}/manage/newpost', wait_until='domcontentloaded')
             check_management_url(page.url)
+            page.wait_for_function('globalThis.tinyMCE?.activeEditor?.initialized === true', polling=100)
             page.locator('#post-title-inp').fill(article['title'])
-            page.locator('#category-btn').click()
-            page.get_by_role('option', name=article['category'], exact=True).click()
-            page.wait_for_function('globalThis.tinyMCE?.activeEditor?.initialized === true')
+            # 이 환경은 화면 프레임 대기가 멈추므로 준비된 DOM의 클릭 이벤트를 사용한다.
+            page.locator('#category-btn').evaluate('(el) => el.click()')
+            page.get_by_role('option', name=article['category'], exact=True).evaluate('(el) => el.click()')
             page.evaluate('(body) => { tinyMCE.activeEditor.setContent(body); tinyMCE.activeEditor.save(); }', article['html'])
-            page.wait_for_function('(marker) => tinyMCE.activeEditor.getContent().includes(marker)', arg=article['marker'])
+            page.wait_for_function('(marker) => tinyMCE.activeEditor.getContent().includes(marker)', arg=article['marker'], polling=100)
             page.locator('#tagText').fill('Python')
             page.locator('#tagText').press('Enter')
             check_management_url(page.url)
-            page.locator('#publish-layer-btn').click()
-            page.get_by_label('공개', exact=True).check()
+            page.locator('#publish-layer-btn').evaluate('(el) => el.click()')
+            page.locator('#open20').evaluate('(el) => el.click()')
+            if not page.locator('#open20').is_checked():
+                raise RuntimeError('공개 발행 설정을 확인하지 못했습니다')
             # 결과 응답이 없으면 예외를 전파한다. 상위 대장의 pending이 재발행을 막는다.
             with page.expect_response(lambda r: r.request.method == 'POST'
                                       and urlsplit(r.url).netloc == BLOG
                                       and urlsplit(r.url).path == '/manage/post.json', timeout=45000) as response:
-                page.locator('#publish-btn').click()
+                page.locator('#publish-btn').evaluate('(el) => el.click()')
             r = response.value
             if not r.ok:
                 raise RuntimeError('글 저장 응답을 확인하지 못했습니다')

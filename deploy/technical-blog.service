@@ -13,4 +13,3 @@ ExecStartPre=/usr/bin/git -C %h/ai-blog-automation fetch origin main
 ExecStartPre=/usr/bin/git -C %h/ai-blog-automation merge --ff-only origin/main
 ExecStart=/usr/bin/python3 -m automation.learning_blog
 TimeoutStartSec=300
-
