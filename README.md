@@ -1,10 +1,25 @@
 # AI 블로그 자동화 — 엔지니어링 쇼케이스
 
+## 기술 학습 블로그
+
+[Jack의 AI연구소](https://jacks-aiblog.tistory.com/)에서 Python·API·자동화를 작은 실습으로 기록합니다. 원고와 실행 코드, 테스트, 공식 문서를 연결합니다.
+
+- [학습 글과 원본](docs/posts/)
+- [독립 실행 예제 7개](labs/learning_basics.py)
+- [발행·운영 방법](docs/learning-blog-operations.md)
+
+```bash
+python3 -m labs.learning_basics timezone
+python3 -m unittest discover -s tests -v
+```
+
+검증된 원고를 한국 시각 매일 20:30에 하루 최대 한 편 발행합니다. 원고가 없거나 발행 여부가 불확실하면 보류합니다. 아래 내용은 기존 금융 블로그를 운영하며 만든 시스템의 개발 기록입니다.
+
 API가 사라진 Tistory에 **사람 개입 없이 매일 글을 발행**하는 시스템을 만들고 운영한 기록입니다.
 
 > 이 저장소는 **아키텍처와 설계를 공개하는 쇼케이스**입니다. 전체 구현(특히 봇 탐지 대응 등 민감한 부분)은 비공개이며, 코드 수준의 상세는 [전자책](https://kwonseongjae.github.io/ebook-landing/)에서 다룹니다.
 
-- 🟢 실제 매일 무인 발행되는 라이브 블로그: **[jack-0314.tistory.com](https://jack-0314.tistory.com)**
+- 기존 금융 블로그의 운영 기록: **[jack-0314.tistory.com](https://jack-0314.tistory.com)**
 - 📘 전자책(엔지니어링 기록) 미리보기·대기 신청: **[ebook-landing](https://kwonseongjae.github.io/ebook-landing/)**
 
 ---

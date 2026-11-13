@@ -1,0 +1,16 @@
+[Unit]
+Description=Technical learning blog daily publication
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/ai-blog-automation
+Environment=BLOG_AUTOMATION_ROOT=%h/blog-automation
+Environment=TECH_BLOG_STATE_DIR=%h/blog-automation/data/technical_blog
+Environment=GIT_TERMINAL_PROMPT=0
+ExecStartPre=/usr/bin/git -C %h/ai-blog-automation fetch origin main
+ExecStartPre=/usr/bin/git -C %h/ai-blog-automation merge --ff-only origin/main
+ExecStart=/usr/bin/python3 -m automation.learning_blog
+TimeoutStartSec=300
+

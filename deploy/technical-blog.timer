@@ -1,0 +1,11 @@
+[Unit]
+Description=Publish one verified learning article per Korean day
+
+[Timer]
+OnCalendar=*-*-* 20:30:00 Asia/Seoul
+Persistent=true
+AccuracySec=1min
+Unit=technical-blog.service
+
+[Install]
+WantedBy=timers.target

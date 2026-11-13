@@ -1,0 +1,75 @@
+[
+  {
+    "id": "python-kst-date",
+    "lab": "timezone",
+    "category": "Python·자동화",
+    "title": "Python 자동화의 하루 기준을 한국 시간으로 정하는 방법",
+    "sources": [
+      "https://docs.python.org/3.12/library/zoneinfo.html",
+      "https://docs.python.org/3.12/library/datetime.html"
+    ],
+    "markdown": "docs/posts/python-kst-date.md"
+  },
+  {
+    "id": "python-path-base",
+    "lab": "paths",
+    "category": "Python·자동화",
+    "title": "터미널에서는 되는데 예약 실행에서는 파일을 못 찾는 이유",
+    "sources": [
+      "https://docs.python.org/3.12/library/pathlib.html"
+    ],
+    "markdown": "docs/posts/python-path-base.md"
+  },
+  {
+    "id": "python-json-boundary",
+    "lab": "input",
+    "category": "API·백엔드",
+    "title": "JSON에 title이 있어도 바로 쓰면 안 되는 이유: 입력 검증 실습",
+    "sources": [
+      "https://docs.python.org/3.12/library/json.html",
+      "https://docs.python.org/3.12/library/stdtypes.html#dict.get"
+    ],
+    "markdown": "docs/posts/python-json-boundary.md"
+  },
+  {
+    "id": "python-atomic-state",
+    "lab": "atomic",
+    "category": "Python·자동화",
+    "title": "JSON 상태 파일을 덮어쓰다 멈추면: 임시 파일과 원자적 교체",
+    "sources": [
+      "https://docs.python.org/3.12/library/os.html#os.replace",
+      "https://docs.python.org/3.12/library/tempfile.html"
+    ],
+    "markdown": "docs/posts/python-atomic-state.md"
+  },
+  {
+    "id": "python-request-id",
+    "lab": "duplicate",
+    "category": "API·백엔드",
+    "title": "같은 요청이 두 번 왔을 때: SQLite 고유 키로 중복 저장 막기",
+    "sources": [
+      "https://docs.python.org/3.12/library/sqlite3.html"
+    ],
+    "markdown": "docs/posts/python-request-id.md"
+  },
+  {
+    "id": "python-subprocess-timeout",
+    "lab": "timeout",
+    "category": "오류 해결",
+    "title": "끝나지 않는 작업을 기다리지 않도록 subprocess 제한 시간 두기",
+    "sources": [
+      "https://docs.python.org/3.12/library/subprocess.html#subprocess.run"
+    ],
+    "markdown": "docs/posts/python-subprocess-timeout.md"
+  },
+  {
+    "id": "python-url-target",
+    "lab": "url",
+    "category": "API·백엔드",
+    "title": "URL에 블로그 이름이 들어 있으면 안전할까: 정확한 발행 대상 확인",
+    "sources": [
+      "https://docs.python.org/3.12/library/urllib.parse.html#urllib.parse.urlsplit"
+    ],
+    "markdown": "docs/posts/python-url-target.md"
+  }
+]
