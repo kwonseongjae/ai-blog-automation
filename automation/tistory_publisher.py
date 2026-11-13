@@ -3,6 +3,7 @@ import os
 import html
 import json
 import re
+import time
 from pathlib import Path
 from urllib.parse import urlsplit
 
@@ -66,18 +67,30 @@ def verify(url, article):
     return True
 
 
-def post_url(result):
-    if not isinstance(result, dict):
-        raise ValueError('글 저장 응답이 객체가 아닙니다')
-    entry = result.get('entryId')
-    if not re.fullmatch(r'[1-9][0-9]*', str(entry)):
-        raise ValueError('글 번호를 확인하지 못했습니다. 응답 항목: ' + ', '.join(result.keys()))
-    return validate_url(f'https://{BLOG}/{entry}')
+def validate_posts(result):
+    if not isinstance(result, dict) or not isinstance(result.get('items'), list):
+        raise ValueError('글 관리 목록의 응답 형식이 올바르지 않습니다')
+    for item in result['items']:
+        if (not isinstance(item, dict) or not re.fullmatch(r'[1-9][0-9]*', str(item.get('id')))
+                or not isinstance(item.get('title'), str)
+                or item.get('visibility') not in {'PUBLIC', 'PRIVATE', 'PROTECTED'}):
+            raise ValueError('글 관리 목록의 식별자·제목·공개 상태를 확인할 수 없습니다')
+    return result['items']
+
+
+def read_posts(cookies):
+    import httpx
+    jar = {c['name']: c['value'] for c in cookies}
+    r = httpx.get(f'https://{BLOG}/manage/posts.json', cookies=jar,
+                  follow_redirects=False, timeout=25, trust_env=False)
+    r.raise_for_status()
+    return validate_posts(r.json())
 
 
 def publish(article):
     from playwright.sync_api import sync_playwright
     cookies = load_saved_cookies()
+    previous = {item['id'] for item in read_posts(cookies)}
     with sync_playwright() as p:
         browser_env = {k: v for k, v in os.environ.items()
                        if k in {'HOME', 'PATH', 'LANG', 'LD_LIBRARY_PATH', 'DISPLAY', 'XDG_RUNTIME_DIR', 'TMPDIR'}}
@@ -95,6 +108,8 @@ def publish(article):
             # 이 환경은 화면 프레임 대기가 멈추므로 준비된 DOM의 클릭 이벤트를 사용한다.
             page.locator('#category-btn').evaluate('(el) => el.click()')
             page.get_by_role('option', name=article['category'], exact=True).evaluate('(el) => el.click()')
+            page.wait_for_function('(name) => document.querySelector("#category-btn").textContent.includes(name)',
+                                   arg=article['category'], polling=100)
             page.evaluate('(body) => { tinyMCE.activeEditor.setContent(body); tinyMCE.activeEditor.save(); }', article['html'])
             page.wait_for_function('(marker) => tinyMCE.activeEditor.getContent().includes(marker)', arg=article['marker'], polling=100)
             page.locator('#tagText').fill('Python')
@@ -112,6 +127,14 @@ def publish(article):
             r = response.value
             if not r.ok:
                 raise RuntimeError('글 저장 응답을 확인하지 못했습니다')
-            return post_url(r.json())
+            # 화면 이동으로 저장 응답 본문이 사라질 수 있어 새 ID와 공개 본문을 직접 대조한다.
+            for _ in range(3):
+                for item in read_posts(cookies):
+                    if item['id'] not in previous and item['title'] == article['title'] and item['visibility'] == 'PUBLIC':
+                        url = validate_url(f'https://{BLOG}/{item["id"]}')
+                        if verify(url, article):
+                            return url
+                time.sleep(1)
+            raise RuntimeError('새 공개 글의 본문을 확인하지 못했습니다. 자동 재발행을 보류합니다')
         finally:
             browser.close()

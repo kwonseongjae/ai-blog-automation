@@ -5,7 +5,7 @@ import tempfile
 from pathlib import Path
 from unittest.mock import patch
 
-from automation.tistory_publisher import check_management_url, load_saved_cookies, normalize_cookies, post_url, verify
+from automation.tistory_publisher import check_management_url, load_saved_cookies, normalize_cookies, validate_posts, verify
 
 
 class PublisherBoundaryTests(unittest.TestCase):
@@ -28,11 +28,15 @@ class PublisherBoundaryTests(unittest.TestCase):
             with self.subTest(url=url), self.assertRaises(RuntimeError):
                 check_management_url(url)
 
-    def test_response_must_have_the_documented_entry_id(self):
-        self.assertEqual(post_url({'entryId': 2}), 'https://jacks-aiblog.tistory.com/2')
-        for result in [None, [], {'id': 2}, {'entryId': '2/../manage'}, {'entryId': True}]:
+    def test_management_response_must_have_explicit_entry_fields(self):
+        value = {'items': [{'id': '2', 'title': '글 제목', 'visibility': 'PUBLIC'}]}
+        self.assertEqual(validate_posts(value)[0]['id'], '2')
+        self.assertEqual(validate_posts({'items': []}), [])
+        for result in [None, [], {'id': 2}, {'items': {}},
+                       {'items': [{'id': '2/../manage', 'title': '글 제목', 'visibility': 'PUBLIC'}]},
+                       {'items': [{'id': True, 'title': '글 제목', 'visibility': 'PUBLIC'}]}]:
             with self.subTest(result=result), self.assertRaises(ValueError):
-                post_url(result)
+                validate_posts(result)
 
     def test_public_verification_rejects_truncated_body_with_a_valid_marker(self):
         from types import SimpleNamespace
