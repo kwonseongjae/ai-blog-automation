@@ -2,7 +2,7 @@
 
 ## 기술 학습 블로그
 
-[Jack의 AI연구소](https://jacks-aiblog.tistory.com/)에서 Python·API·자동화를 작은 실습으로 기록합니다. 원고와 실행 코드, 테스트, 공식 문서를 연결합니다.
+[권성재의 기술노트](https://jacks-aiblog.tistory.com/)에서 Python·API·자동화를 작은 실습으로 기록합니다. 원고와 실행 코드, 테스트, 공식 문서를 연결합니다.
 
 - [학습 글과 원본](docs/posts/)
 - [독립 실행 예제 7개](labs/learning_basics.py)
@@ -11,6 +11,7 @@
 ```bash
 python3 -m labs.learning_basics timezone
 python3 -m unittest discover -s tests -v
+node tests/check_skin_widgets.js
 ```
 
 검증된 원고를 한국 시각 매일 20:30에 하루 최대 한 편 발행합니다. 원고가 없거나 발행 여부가 불확실하면 보류합니다. 아래 내용은 기존 금융 블로그를 운영하며 만든 시스템의 개발 기록입니다.
