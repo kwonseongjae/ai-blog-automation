@@ -25,7 +25,23 @@
     input.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();search();}});
     button.addEventListener('click',search);
   });
-  document.querySelectorAll('.learning-navigation a,.tt_category a,.learning-topics a').forEach(function(a){
+  if(document.body.id==='tt-body-index'){
+    var title=document.querySelector('.title-search .archives');
+    if(title)title.textContent='최근 기록';
+  }
+  var emptyCategories=new Set();
+  document.querySelectorAll('.tt_category .link_item').forEach(function(a){
+    var count=a.querySelector('.c_cnt');
+    // 집계가 없거나 형식이 달라지면 항목을 유지한다.
+    if(count&&/^\s*\(\s*0\s*\)\s*$/.test(count.textContent)){
+      emptyCategories.add(new URL(a.href,location.href).pathname);
+      a.closest('li').hidden=true;
+    }
+  });
+  document.querySelectorAll('.learning-menu a').forEach(function(a){
+    if(emptyCategories.has(new URL(a.href,location.href).pathname))a.closest('li').hidden=true;
+  });
+  document.querySelectorAll('.learning-navigation a,.tt_category a').forEach(function(a){
     try{if(decodeURIComponent(new URL(a.href,location.href).pathname)===decodeURIComponent(location.pathname))a.setAttribute('aria-current','page');}catch(e){}
   });
 })();
