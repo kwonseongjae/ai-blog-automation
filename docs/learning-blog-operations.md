@@ -27,6 +27,14 @@ python3 -m unittest discover -s tests -v
 
 환경 변수 `BLOG_AUTOMATION_ROOT`는 기존 자동화 프로젝트, `TECH_BLOG_STATE_DIR`는 새 블로그의 발행 상태 디렉터리를 가리킨다. 비밀 값은 공개 저장소에 넣지 않는다. 실행 환경에는 기존 세션 복호화에 쓰는 패키지와 Playwright 및 Chromium이 필요하다.
 
+### 로그인 유지
+
+기존 서버의 `blog-automation.service`가 로그인 유지를 담당한다. 매시간 관리자 화면에 접속해 세션을 확인하고, 한국 시각 02:00·06:50·20:00에는 영구 크롬 프로필을 이용해 쿠키를 갱신한다. 프로필의 로그인이 풀렸어도 저장된 세션이 유효하면 쿠키를 주입해 복구한다.
+
+새 블로그 발행기는 실행할 때마다 기존 운영 디렉터리의 `data/sessions/tistory.session`을 복호화해 읽는다. 세션을 별도로 복사하지 않으므로 기존 서버가 갱신한 쿠키를 다음 실행에 바로 사용한다. `blog-automation.service`와 `technical-blog.timer`를 함께 활성화해 두어야 한다. PC·WSL이 꺼져 있으면 세션 확인과 갱신도 실행되지 않는다.
+
+정기 접속만으로 로그인 유지 기간을 보장할 수는 없다. 저장 세션까지 만료되면 카카오 로그인과 추가 인증은 사람이 직접 진행한다. 기존 로그인 스크립트는 비밀번호 자동 입력과 가상 화면을 사용하므로 직접 로그인할 창을 여는 용도로 실행하지 않는다. 수동 인증을 다시 해야 할 때는 화면에 보이는 크롬에서 로그인하고, 새 블로그 관리 화면 접근을 확인한 다음 암호화된 세션을 갱신한다. 쿠키·비밀번호는 문서나 공개 저장소에 저장하지 않는다.
+
 ```bash
 python3 -m automation.learning_blog --dry-run
 systemctl --user status technical-blog.timer
