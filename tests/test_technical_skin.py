@@ -64,9 +64,9 @@ class TechnicalSkinTests(unittest.TestCase):
         self.assertEqual(result.count('<s_sidebar_element>'), 3)
         self.assertNotIn('default_L.png', result)
         self.assertIn('AI를 처음 쓰는 개발자', result)
-        for chip in ('시작하기', '에이전트·모델 비교', '프로젝트 적용'):
+        for chip in ('AI 시작하기', '도구·모델 비교', '프로젝트 적용기'):
             self.assertIn(chip, result.split('class="learning-chips"')[1].split('</div>')[0])
-        self.assertNotIn('자동화 실습</a></div>', result.split('class="learning-chips"')[1].split('</div>')[0])
+        self.assertNotIn('Python·자동화</a></div>', result.split('class="learning-chips"')[1].split('</div>')[0])
         self.assertIn('먼저 읽을 글', result)
         self.assertIn('GitHub 실습 코드', result)
         self.assertIn('GitHub 프로필', result)

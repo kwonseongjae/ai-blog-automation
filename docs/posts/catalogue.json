@@ -2,7 +2,7 @@
   {
     "id": "python-kst-date",
     "lab": "timezone",
-    "category": "자동화 실습",
+    "category": "Python·자동화",
     "title": "Python 자동화의 하루 기준을 한국 시간으로 정하는 방법",
     "sources": [
       "https://docs.python.org/3.12/library/zoneinfo.html",
@@ -22,7 +22,7 @@
   {
     "id": "python-path-base",
     "lab": "paths",
-    "category": "자동화 실습",
+    "category": "Python·자동화",
     "title": "터미널에서는 되는데 예약 실행에서는 파일을 못 찾는 이유",
     "sources": [
       "https://docs.python.org/3.12/library/pathlib.html"
@@ -41,7 +41,7 @@
   {
     "id": "ai-agent-first-task",
     "kind": "guide",
-    "category": "시작하기",
+    "category": "AI 시작하기",
     "title": "AI 에이전트란? 챗봇과 다른 점과 처음 맡길 일 3가지",
     "sources": [
       "https://learn.chatgpt.com/docs/working-with-agents.md",
@@ -86,7 +86,7 @@
   {
     "id": "codex-first-settings",
     "kind": "guide",
-    "category": "시작하기",
+    "category": "AI 시작하기",
     "title": "Codex 처음 쓸 때: 설치·로그인·작업 폴더부터 확인하는 법",
     "sources": [
       "https://learn.chatgpt.com/docs/codex/cli.md",
@@ -134,7 +134,7 @@
   {
     "id": "claude-code-first-settings",
     "kind": "guide",
-    "category": "시작하기",
+    "category": "AI 시작하기",
     "title": "Claude Code 처음 설정하기: Windows와 WSL 명령을 섞지 않는 법",
     "sources": [
       "https://code.claude.com/docs/en/quickstart",
@@ -184,7 +184,7 @@
   {
     "id": "daily-publish-state",
     "kind": "guide",
-    "category": "프로젝트 적용",
+    "category": "프로젝트 적용기",
     "title": "블로그 자동화에서 하루 한 번 발행을 지키는 방법",
     "sources": [
       "https://docs.python.org/3/library/fcntl.html",

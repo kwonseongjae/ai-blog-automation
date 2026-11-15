@@ -16,7 +16,7 @@ from zoneinfo import ZoneInfo
 
 BLOG = 'jacks-aiblog.tistory.com'
 REPOSITORY = 'https://github.com/kwonseongjae/ai-blog-automation'
-CATEGORIES = ('시작하기', '에이전트·모델 비교', '프로젝트 적용', '자동화 실습')
+CATEGORIES = ('AI 시작하기', '도구·모델 비교', '프로젝트 적용기', 'Python·자동화')
 ROOT = Path(__file__).resolve().parents[1]
 
 

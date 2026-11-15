@@ -14,7 +14,7 @@
 ## 전역 조건
 
 - 하루 최대 1편, 한국 시각 20:30. 2026-11-15 글은 발행 완료라 추가 발행하지 않는다.
-- 분류 이름은 정확히 `시작하기`, `에이전트·모델 비교`, `프로젝트 적용`, `자동화 실습`.
+- 분류 이름은 정확히 `AI 시작하기`, `도구·모델 비교`, `프로젝트 적용기`, `Python·자동화`.
 - 안내 글은 확인일·확인 범위·공식 출처 두 개 이상·표지가 필요하다.
 - 발행기는 작업 폴더에 변경이 있거나 HEAD가 원격 main과 다르면 발행을 보류한다. 반영은 main 병합과 푸시까지 끝나야 한다.
 - 로그인 정보·세션은 문서와 저장소에 넣지 않는다. 고객명·가격표·운영 데이터는 쓰지 않는다.
@@ -48,10 +48,10 @@
 **인터페이스**
 - 제공: `CATEGORIES: tuple[str, ...]` 위 네 이름. `tistory_publisher.default_tags(category: str) -> list[str]`.
 
-- [ ] **1단계: 실패하는 테스트.** `test_old_category_is_rejected`(옛 `'Python·자동화'` 원고가 `validate_article`에서 `ValueError`), `test_default_tags`(`'자동화 실습'` → `['Python', '자동화']`, 나머지 세 분류 → `['AI 활용']`).
+- [ ] **1단계: 실패하는 테스트.** `test_old_category_is_rejected`(옛 `'Python·자동화'` 원고가 `validate_article`에서 `ValueError`), `test_default_tags`(`'Python·자동화'` → `['Python', '자동화']`, 나머지 세 분류 → `['AI 활용']`).
 - [ ] **2단계:** `python3 -m unittest tests.test_learning_blog -v` 실행, 두 테스트가 실패하는지 확인.
-- [ ] **3단계:** `CATEGORIES`를 바꾸고 `default_tags`를 구현해 `article.get('tags', default_tags(article['category']))`로 호출한다. 기존 두 테스트 파일의 분류 이름을 `자동화 실습`과 `시작하기`로 바꾼다.
-- [ ] **4단계:** 카탈로그 분류를 정한다. `python-kst-date`, `python-path-base` → `자동화 실습`. `ai-agent-first-task`와 터미널 도구 첫 설정 글 두 편(식별자는 카탈로그 참조) → `시작하기`. `daily-publish-state` → `프로젝트 적용`.
+- [ ] **3단계:** `CATEGORIES`를 바꾸고 `default_tags`를 구현해 `article.get('tags', default_tags(article['category']))`로 호출한다. 기존 두 테스트 파일의 분류 이름을 `Python·자동화`과 `AI 시작하기`로 바꾼다.
+- [ ] **4단계:** 카탈로그 분류를 정한다. `python-kst-date`, `python-path-base` → `Python·자동화`. `ai-agent-first-task`와 터미널 도구 첫 설정 글 두 편(식별자는 카탈로그 참조) → `AI 시작하기`. `daily-publish-state` → `프로젝트 적용기`.
 - [ ] **5단계:** 전체 테스트 실행, 통과 확인.
 - [ ] **6단계: 커밋** `feat: 입문자 중심 분류로 변경`
 
@@ -102,7 +102,7 @@
 - JS: 깨진 썸네일을 숨기는 함수 `hideBrokenThumbnails()`(`img.complete && img.naturalWidth === 0`이거나 `error` 이벤트).
 
 - [ ] **1단계: 실패하는 테스트.**
-  - `test_technical_skin.py`: 소개 문구에 `AI를 처음 쓰는 개발자`, 주제 칩 세 개(`시작하기`, `에이전트·모델 비교`, `프로젝트 적용`), `먼저 읽을 글`이 있고 `자동화 실습` 칩은 없다. 두 번 변환해도 같다.
+  - `test_technical_skin.py`: 소개 문구에 `AI를 처음 쓰는 개발자`, 주제 칩 세 개(`AI 시작하기`, `도구·모델 비교`, `프로젝트 적용기`), `먼저 읽을 글`이 있고 `Python·자동화` 칩은 없다. 두 번 변환해도 같다.
   - `test_start_here_only_own_blog`: 다른 주소를 넣으면 `ValueError`.
   - `check_skin_widgets.js`: `naturalWidth 0`인 썸네일이 숨고 정상 썸네일은 그대로이며, 스크립트 두 번 실행해도 같다.
 - [ ] **2단계:** 실패 확인. `python3 -m unittest tests.test_technical_skin -v`, `node tests/check_skin_widgets.js`
@@ -142,10 +142,10 @@
 
 코드가 아닌 실제 블로그 변경이다. 각 항목 전에 확인을 받는다.
 
-- [ ] **1단계:** 관리 화면에서 카테고리 이름을 제자리에서 바꾼다(글이 따라 옮겨지므로 기존 글 수정 없음): `Python·자동화`→`자동화 실습`, `AI·데이터`→`시작하기`, `API·백엔드`→`에이전트·모델 비교`, `오류 해결`→`프로젝트 적용`. `학습 회고`는 남기되 사용하지 않는다. **2026-11-16 20:30 발행 전에 끝내야 한다.** 발행기가 분류 이름으로 항목을 고르기 때문이다.
+- [ ] **1단계:** 관리 화면에서 카테고리 이름을 제자리에서 바꾼다(글이 따라 옮겨지므로 기존 글 수정 없음): `Python·자동화`는 그대로 두고, `AI·데이터`→`AI 시작하기`, `API·백엔드`→`도구·모델 비교`, `오류 해결`→`프로젝트 적용기`. `학습 회고`는 남기되 사용하지 않는다. **2026-11-16 20:30 발행 전에 끝내야 한다.** 발행기가 분류 이름으로 항목을 고르기 때문이다.
 - [ ] **2단계:** 스킨을 수정하기 전에 현재 HTML·CSS·설정을 운영 디렉터리에 백업한 뒤 변경한 스킨을 적용한다.
 - [ ] **3단계:** 변경을 main에 병합·푸시한다. 푸시 후 `git rev-parse HEAD`와 `git ls-remote origin refs/heads/main`이 같고 `git status --short`가 비어 있는지 확인한다.
-- [ ] **4단계:** `... python3 -m automation.learning_blog --dry-run`으로 다음 글이 `status: ready`, 분류가 `시작하기`인지 확인한다.
+- [ ] **4단계:** `... python3 -m automation.learning_blog --dry-run`으로 다음 글이 `status: ready`, 분류가 `AI 시작하기`인지 확인한다.
 - [ ] **5단계:** 공개 대문을 열어 소개 문구·칩·카드·표지, 글 1·2·3의 분류 표시, 대문의 robots 태그가 `noindex`가 아닌 것을 확인한다.
 
 ### 작업 8: 새 입문 글과 빈 날 글 (글마다 반복)

@@ -2,7 +2,7 @@
   {
     "id": "python-json-boundary",
     "lab": "input",
-    "category": "자동화 실습",
+    "category": "Python·자동화",
     "title": "JSON에 title이 있어도 바로 쓰면 안 되는 이유: 입력 검증 실습",
     "sources": [
       "https://docs.python.org/3.12/library/json.html",
@@ -22,7 +22,7 @@
   {
     "id": "python-atomic-state",
     "lab": "atomic",
-    "category": "자동화 실습",
+    "category": "Python·자동화",
     "title": "JSON 상태 파일을 덮어쓰다 멈추면: 임시 파일과 원자적 교체",
     "sources": [
       "https://docs.python.org/3.12/library/os.html#os.replace",
@@ -42,7 +42,7 @@
   {
     "id": "python-request-id",
     "lab": "duplicate",
-    "category": "자동화 실습",
+    "category": "Python·자동화",
     "title": "같은 요청이 두 번 왔을 때: SQLite 고유 키로 중복 저장 막기",
     "sources": [
       "https://docs.python.org/3.12/library/sqlite3.html"
@@ -61,7 +61,7 @@
   {
     "id": "python-subprocess-timeout",
     "lab": "timeout",
-    "category": "자동화 실습",
+    "category": "Python·자동화",
     "title": "끝나지 않는 작업을 기다리지 않도록 subprocess 제한 시간 두기",
     "sources": [
       "https://docs.python.org/3.12/library/subprocess.html#subprocess.run"
@@ -80,7 +80,7 @@
   {
     "id": "python-url-target",
     "lab": "url",
-    "category": "자동화 실습",
+    "category": "Python·자동화",
     "title": "URL에 블로그 이름이 들어 있으면 안전할까: 정확한 발행 대상 확인",
     "sources": [
       "https://docs.python.org/3.12/library/urllib.parse.html#urllib.parse.urlsplit"

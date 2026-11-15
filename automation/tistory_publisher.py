@@ -12,7 +12,7 @@ from automation.learning_blog import BLOG, ROOT, read_assets, validate_url
 
 
 def default_tags(category):
-    return ['Python', '자동화'] if category == '자동화 실습' else ['AI 활용']
+    return ['Python', '자동화'] if category == 'Python·자동화' else ['AI 활용']
 
 
 def normalize_cookies(saved):
