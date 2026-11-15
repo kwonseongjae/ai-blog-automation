@@ -1,0 +1,193 @@
+{
+  "checked_on": "2026-11-15",
+  "environment": "Linux 한 환경, Codex CLI 0.167.2, Claude Code 2.1.325, 조건별 1회 실행",
+  "request": "tests 폴더의 테스트가 실패합니다. 원인을 찾아 textutil.py만 고치고 python3 -m unittest discover -s tests 로 통과를 확인해 주세요. 테스트 파일은 수정하지 마세요. 마지막에 무엇을 고쳤는지 두 줄로 알려주세요.",
+  "runs": [
+    {
+      "tool": "codex",
+      "model": "gpt-6.1-sol",
+      "effort": "low",
+      "tokens": "37403",
+      "returncode": 0,
+      "reply": "",
+      "seconds": 26.3,
+      "tests_pass": true,
+      "test_file_unchanged": true,
+      "fixed_code": "def slugify(text):\n    \"\"\"제목을 URL에 쓸 수 있는 소문자 글자와 하이픈으로 바꾼다.\"\"\"\n    text = \"\".join(char for char in text.lower() if char.isalnum() or char.isspace() or char == \"-\")\n    words = text.split()\n    return \"-\".join(words)\n"
+    },
+    {
+      "tool": "codex",
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "tokens": "19879",
+      "returncode": 0,
+      "reply": "",
+      "seconds": 30.1,
+      "tests_pass": true,
+      "test_file_unchanged": true,
+      "fixed_code": "import re\n\n\ndef slugify(text):\n    \"\"\"제목을 URL에 쓸 수 있는 소문자 글자와 하이픈으로 바꾼다.\"\"\"\n    words = re.sub(r\"[^\\w\\s-]\", \"\", text).lower().split()\n    return \"-\".join(words)\n"
+    },
+    {
+      "tool": "codex",
+      "model": "gpt-6.1-terra",
+      "effort": "medium",
+      "tokens": "18847",
+      "returncode": 0,
+      "reply": "",
+      "seconds": 25.7,
+      "tests_pass": true,
+      "test_file_unchanged": true,
+      "fixed_code": "def slugify(text):\n    \"\"\"제목을 URL에 쓸 수 있는 소문자 글자와 하이픈으로 바꾼다.\"\"\"\n    text = \"\".join(char for char in text.lower() if char.isalnum() or char.isspace() or char == \"-\")\n    words = text.split()\n    return \"-\".join(words)\n"
+    },
+    {
+      "tool": "codex",
+      "model": "gpt-6-luna",
+      "effort": "medium",
+      "tokens": "16512",
+      "returncode": 0,
+      "reply": "",
+      "seconds": 26.8,
+      "tests_pass": true,
+      "test_file_unchanged": true,
+      "fixed_code": "import re\n\n\ndef slugify(text):\n    \"\"\"제목을 URL에 쓸 수 있는 소문자 글자와 하이픈으로 바꾼다.\"\"\"\n    return re.sub(r\"[\\W_]+\", \"-\", text.lower()).strip(\"-\")\n"
+    },
+    {
+      "tool": "claude",
+      "model": "haiku",
+      "effort": null,
+      "reported_ms": 11448,
+      "turns": 6,
+      "cost_usd": 0.00397946,
+      "usage": {
+        "input_tokens": 8,
+        "cache_creation_input_tokens": 12530,
+        "cache_read_input_tokens": 65016,
+        "output_tokens": 1645
+      },
+      "reply": "원인은 `slugify`가 공백 한 칸으로만 나누고 구두점을 제거하지 않아서였습니다. 테스트는 연속 공백을 하나의 하이픈으로 묶고 `,`, `!` 같은 기호를 지우기를 기대합니다.\n\n- **수정 내용 (`textutil.py`만 변경):** 소문자로 바꾼 뒤 글자·숫자·공백·하이픈 이외의 문자를 `re.sub`으로 제거하고, `split()`(인자 없이)으로 나눠 `-`로 이어 붙이도록 바꿨습니다.\n- **검증:** `python3 -m unittest discover -s tests` 실행 결과 3개 테스트 모두 `OK`로 통과했",
+      "is_error": false,
+      "seconds": 12.5,
+      "tests_pass": true,
+      "test_file_unchanged": true,
+      "fixed_code": "import re\n\n\ndef slugify(text):\n    \"\"\"제목을 URL에 쓸 수 있는 소문자 글자와 하이픈으로 바꾼다.\"\"\"\n    cleaned = re.sub(r\"[^\\w\\s-]\", \"\", text.lower())\n    return \"-\".join(cleaned.split())\n"
+    },
+    {
+      "tool": "claude",
+      "model": "sonnet",
+      "effort": null,
+      "reported_ms": 6937,
+      "turns": 5,
+      "cost_usd": 0.05784659999999999,
+      "usage": {
+        "input_tokens": 8,
+        "cache_creation_input_tokens": 10759,
+        "cache_read_input_tokens": 62046,
+        "output_tokens": 859
+      },
+      "reply": "`textutil.py`의 `slugify`가 `split(\" \")`으로 공백을 하나씩 나누고 특수문자도 지우지 않아서 `hello---world`나 `hello,-world!` 같은 결과가 나오던 게 원인이었습니다.\n기호를 정규식으로 제거하고 `split()`으로 연속 공백을 무시하도록 고쳤으며, `python3 -m unittest discover -s tests`에서 3개 테스트가 모두 통과했습니다.",
+      "is_error": false,
+      "seconds": 7.9,
+      "tests_pass": true,
+      "test_file_unchanged": true,
+      "fixed_code": "import re\n\n\ndef slugify(text):\n    \"\"\"제목을 URL에 쓸 수 있는 소문자 글자와 하이픈으로 바꾼다.\"\"\"\n    words = re.sub(r\"[^\\w\\s-]\", \"\", text.lower()).split()\n    return \"-\".join(words)\n"
+    },
+    {
+      "tool": "claude",
+      "model": "opus",
+      "effort": null,
+      "reported_ms": 12600,
+      "turns": 4,
+      "cost_usd": 0.11613939999999999,
+      "usage": {
+        "input_tokens": 6,
+        "cache_creation_input_tokens": 10887,
+        "cache_read_input_tokens": 43197,
+        "output_tokens": 1019
+      },
+      "reply": "`python3 -m unittest discover -s tests` 실행 결과 3개 테스트가 모두 통과했습니다. 테스트 파일은 수정하지 않았습니다.\n\n- 원인: `slugify`가 공백 한 칸 기준으로만 단어를 나눠서, 공백이 연달아 있으면 하이픈이 여러 개 생겼고(`hello---world`) `,`·`!` 같은 기호가 그대로 남았습니다.\n- 수정: `textutil.py`에서 정규식 `re.findall(r\"[^\\W_]+\", ...)`으로 글자·숫자 덩어리만 뽑아 하이픈으로 잇도록 바꿔, 여분의 공백과 기호가 빠지게 했습니다",
+      "is_error": false,
+      "seconds": 17.2,
+      "tests_pass": true,
+      "test_file_unchanged": true,
+      "fixed_code": "import re\n\n\ndef slugify(text):\n    \"\"\"제목을 URL에 쓸 수 있는 소문자 글자와 하이픈으로 바꾼다.\"\"\"\n    words = re.findall(r\"[^\\W_]+\", text.lower())\n    return \"-\".join(words)\n"
+    },
+    {
+      "tool": "claude",
+      "model": "fable",
+      "effort": null,
+      "reported_ms": 12800,
+      "turns": 3,
+      "cost_usd": 0.223138,
+      "usage": {
+        "input_tokens": 6,
+        "cache_creation_input_tokens": 11696,
+        "cache_read_input_tokens": 45770,
+        "output_tokens": 670
+      },
+      "reply": "`textutil.py`의 `slugify`만 고쳤고, `python3 -m unittest discover -s tests` 결과 3개 테스트 모두 통과합니다.\n\n- 원인: `split(\" \")`가 공백 하나 단위로만 나눠서 연속 공백이 빈 단어(`hello---world`)가 되고, 쉼표·느낌표 같은 기호도 그대로 남았습니다.\n- 수정: 정규식 `re.findall(r\"[^\\W_]+\", text.lower())`로 글자·숫자 덩어리만 뽑아 하이픈으로 잇도록 바꿨습니다(한글 등 유니코드 글자는 유지).",
+      "is_error": false,
+      "seconds": 13.8,
+      "tests_pass": true,
+      "test_file_unchanged": true,
+      "fixed_code": "import re\n\n\ndef slugify(text):\n    \"\"\"제목을 URL에 쓸 수 있는 소문자 글자와 하이픈으로 바꾼다.\"\"\"\n    words = re.findall(r\"[^\\W_]+\", text.lower())\n    return \"-\".join(words)\n"
+    }
+  ],
+  "edge_inputs": {
+    "inputs": [
+      "a_b",
+      "a-b",
+      "a--b",
+      "--a--"
+    ],
+    "outputs": {
+      "m_claude_fable_None": [
+        "a-b",
+        "a-b",
+        "a-b",
+        "a"
+      ],
+      "m_claude_haiku_None": [
+        "a_b",
+        "a-b",
+        "a--b",
+        "--a--"
+      ],
+      "m_claude_opus_None": [
+        "a-b",
+        "a-b",
+        "a-b",
+        "a"
+      ],
+      "m_claude_sonnet_None": [
+        "a_b",
+        "a-b",
+        "a--b",
+        "--a--"
+      ],
+      "m_codex_gpt-6-luna_medium": [
+        "a-b",
+        "a-b",
+        "a-b",
+        "a"
+      ],
+      "m_codex_gpt-6_1-sol_low": [
+        "ab",
+        "a-b",
+        "a--b",
+        "--a--"
+      ],
+      "m_codex_gpt-6_1-sol_medium": [
+        "a_b",
+        "a-b",
+        "a--b",
+        "--a--"
+      ],
+      "m_codex_gpt-6_1-terra_medium": [
+        "ab",
+        "a-b",
+        "a--b",
+        "--a--"
+      ]
+    }
+  }
+}
