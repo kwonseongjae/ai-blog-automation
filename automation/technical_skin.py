@@ -5,6 +5,7 @@ from urllib.parse import quote
 
 from automation.learning_blog import CATEGORIES, REPOSITORY
 
+BLOG_TITLE = 'Jack의 AI 개발노트'
 CSS = '<style id="learning-style">\n' + Path(__file__).with_suffix('.css').read_text().strip() + '\n</style>'
 SCRIPT = '<script id="learning-widgets">\n' + Path(__file__).with_suffix('.js').read_text().strip() + '\n</script>'
 
@@ -19,14 +20,16 @@ def navigation():
 def home():
     return f"""<!-- learning-home:start -->
 <section id="learning-home" class="learning-home" aria-labelledby="learning-title">
-  <h2 id="learning-title">직접 실행하고, 이해한 것을 기록합니다.</h2>
-  <p>Python에서 시작해 코드와 문제 해결 과정을 쌓아갑니다.</p>
-  <div class="learning-actions"><a href="{REPOSITORY}" target="_blank" rel="noopener">실습 코드 저장소</a><a href="https://github.com/kwonseongjae" target="_blank" rel="noopener">GitHub 프로필</a></div>
+  <h2 id="learning-title">개발하면서 배운 것들을 적습니다.</h2>
+  <p>Python과 자동화를 공부하고 있습니다.<br>실습 코드와 막혔던 부분을 함께 정리합니다.</p>
+  <div class="learning-actions"><a href="{REPOSITORY}" target="_blank" rel="noopener">GitHub 실습 코드</a><a href="https://github.com/kwonseongjae" target="_blank" rel="noopener">GitHub 프로필</a></div>
 </section>
 <!-- learning-home:end -->"""
 
 
-PROFILE = """<section class="learning-profile" aria-label="기록 원칙"><h3 class="title-sidebar">기록 원칙</h3><p>실행한 코드와 확인 결과,<br>공식 출처와 적용 한계를 남깁니다.</p></section>"""
+PROFILE = """<section class="learning-profile" aria-label="블로그 소개"><h3 class="title-sidebar">Jack</h3><p>Python과 자동화에서 시작해<br>AI 활용으로 공부를 넓혀갑니다.</p><p>글에 사용한 코드는 GitHub에,<br>참고한 문서는 본문에 남깁니다.</p></section>"""
+
+COVER = '<span class="learning-cover" aria-hidden="true"><span class="learning-cover-category">[##_list_rep_category_##]</span><strong>[##_list_rep_title_text_##]</strong></span>'
 
 
 def _sidebar(match):
@@ -48,9 +51,18 @@ def transform(source):
     if '</head>' not in source or '<div class="area-main">' not in source:
         raise ValueError('확인된 Odyssey 스킨 구조가 아닙니다')
     source = re.sub(r'<s_sidebar_element>(.*?)</s_sidebar_element>', _sidebar, source, flags=re.S)
-    source = source.replace('[##_var_footerCopyright_##]', '권성재의 기술노트 · 코드와 함께 쌓는 학습 기록')
+    if 'class="learning-cover"' not in source:
+        image = '<img src="[##_list_rep_thumbnail_raw_url_##]" class="img-thumbnail" role="presentation">'
+        source = source.replace(image, image + COVER, 1)
+        source = re.sub(r'(<a\b[^>]*?href="\[##_list_rep_link_##\]"[^>]*)(>\s*<p class="thumbnail")',
+                        r'\1 aria-label="[##_list_rep_title_text_##]"\2', source, count=1)
+    footer = BLOG_TITLE + ' · 학습과 실습 기록'
+    source = source.replace('[##_var_footerCopyright_##]', footer)
+    source = source.replace('권성재의 기술노트 · 코드와 함께 쌓는 학습 기록', footer)
     source = source.replace('</head>', CSS + '\n</head>', 1)
-    if '</header>' in source:
+    if '</h1>' in source and '</header>' in source:
+        source = source.replace('</h1>', '</h1>\n' + navigation(), 1)
+    elif '</header>' in source:
         source = source.replace('</header>', '</header>\n' + navigation(), 1)
     source = source.replace('<div class="area-main">', '<div class="area-main">\n' + home(), 1)
     return source.replace('</body>', SCRIPT + '\n</body>', 1)

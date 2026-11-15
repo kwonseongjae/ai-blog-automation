@@ -5,6 +5,8 @@ const vm = require('node:vm');
 const source = fs.readFileSync('automation/technical_skin.js', 'utf8');
 for (const bodyId of ['tt-body-index', 'tt-body-category']) {
   const title = {textContent: '전체 글'};
+  const covers = ['Python 자동화의 하루 기준을 한국 시간으로 정하는 방법',
+    '터미널에서는 되는데 예약 실행에서는 파일을 못 찾는 이유', '새 학습 기록'].map(textContent => ({textContent}));
   const counts = ['(0)', '(2)', null, '알 수 없음', '( 0 )', '(1,000)'];
   const rows = counts.map((count, i) => ({
     hidden: false,
@@ -24,6 +26,7 @@ for (const bodyId of ['tt-body-index', 'tt-body-category']) {
     querySelectorAll: selector => {
       if (selector === '.tt_category .link_item') return rows;
       if (selector === '.learning-menu a') return menu;
+      if (selector === '.learning-cover strong') return covers;
       return [];
     },
   };
@@ -35,5 +38,6 @@ for (const bodyId of ['tt-body-index', 'tt-body-category']) {
   assert.deepEqual(rows.map(row => row.hidden), [true, false, false, false, true, false]);
   assert.deepEqual(menu.map(row => row.hidden), [true, false, false, false, true, false]);
   assert.equal(title.textContent, bodyId === 'tt-body-index' ? '최근 기록' : '전체 글');
+  assert.deepEqual(covers.map(cover => cover.textContent), ['한국 시간\n날짜 기준', '파일 경로\n실행 위치', '새 학습 기록']);
 }
 console.log('카테고리 집계·미확인 값·메뉴 동기화·재실행·목록 제목 확인 통과');

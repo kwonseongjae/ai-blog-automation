@@ -33,13 +33,29 @@ class TechnicalSkinTests(unittest.TestCase):
         self.assertIn('<s_search>검색</s_search>', result)
         self.assertEqual(result.count('<s_sidebar_element>'), 3)
         self.assertNotIn('default_L.png', result)
-        self.assertIn('직접 실행하고, 이해한 것을 기록합니다.', result)
-        self.assertIn('실습 코드 저장소', result)
+        self.assertIn('개발하면서 배운 것들을 적습니다.', result)
+        self.assertIn('GitHub 실습 코드', result)
         self.assertIn('GitHub 프로필', result)
         self.assertNotIn('class="learning-topics"', result)
-        self.assertIn('기록 원칙', result)
+        self.assertIn('Jack', result)
         self.assertIn('aria-label="블로그 메뉴"', result)
         self.assertIn('learning-widgets', result)
+        self.assertEqual(transform(result), result)
+
+    def test_cover_keeps_native_image_and_uses_real_post_placeholders(self):
+        source = '''<html><head></head><body><header><h1>[##_title_##]</h1></header>
+<div class="area-main"><s_list_rep><article>
+<a href="[##_list_rep_link_##]"><p class="thumbnail" <s_list_rep_thumbnail>has-thumbnail="1"</s_list_rep_thumbnail>>
+<img src="[##_list_rep_thumbnail_raw_url_##]" class="img-thumbnail" role="presentation"></p></a>
+</article></s_list_rep></div><footer>[##_var_footerCopyright_##]</footer></body></html>'''
+        result = transform(source)
+        self.assertIn('class="learning-cover"', result)
+        self.assertIn('[##_list_rep_title_text_##]', result)
+        self.assertIn('[##_list_rep_category_##]', result)
+        self.assertIn('<s_list_rep_thumbnail>has-thumbnail="1"</s_list_rep_thumbnail>', result)
+        self.assertIn('aria-label="[##_list_rep_title_text_##]"', result)
+        self.assertIn('Jack의 AI 개발노트', result)
+        self.assertLess(result.index('aria-label="블로그 메뉴"'), result.index('</header>'))
         self.assertEqual(transform(result), result)
 
 

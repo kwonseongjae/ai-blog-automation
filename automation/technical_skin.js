@@ -29,6 +29,11 @@
     var title=document.querySelector('.title-search .archives');
     if(title)title.textContent='최근 기록';
   }
+  document.querySelectorAll('.learning-cover strong').forEach(function(cover){
+    var title=cover.textContent;
+    if(title.includes('한국 시간'))cover.textContent='한국 시간\n날짜 기준';
+    else if(title.includes('파일')&&title.includes('실행'))cover.textContent='파일 경로\n실행 위치';
+  });
   var emptyCategories=new Set();
   document.querySelectorAll('.tt_category .link_item').forEach(function(a){
     var count=a.querySelector('.c_cnt');
