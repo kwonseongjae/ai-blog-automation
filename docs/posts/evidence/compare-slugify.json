@@ -1,0 +1,41 @@
+{
+  "checked_on": "2026-11-15",
+  "environment": "Linux, Codex CLI 0.167.2, Claude Code 2.1.325",
+  "runs_per_tool": 1,
+  "request": "tests 폴더의 테스트가 실패합니다. 원인을 찾아 textutil.py만 고치고 python3 -m unittest discover -s tests 로 통과를 확인해 주세요. 테스트 파일은 수정하지 마세요. 마지막에 무엇을 고쳤는지 두 줄로 알려주세요.",
+  "start_files": {
+    "textutil.py": "def slugify(text):\n    \"\"\"제목을 URL에 쓸 수 있는 소문자 글자와 하이픈으로 바꾼다.\"\"\"\n    words = text.strip().lower().split(\" \")\n    return \"-\".join(words)\n",
+    "tests/test_textutil.py": "import unittest\n\nfrom textutil import slugify\n\n\nclass SlugifyTests(unittest.TestCase):\n    def test_basic(self):\n        self.assertEqual(slugify(\"Hello World\"), \"hello-world\")\n\n    def test_extra_spaces(self):\n        self.assertEqual(slugify(\"  Hello   World  \"), \"hello-world\")\n\n    def test_symbols_removed(self):\n        self.assertEqual(slugify(\"Hello, World!\"), \"hello-world\")\n\n\nif __name__ == \"__main__\":\n    unittest.main()\n"
+  },
+  "start_result": "테스트 3개 중 2개 실패",
+  "codex": {
+    "command": "codex exec -s workspace-write --skip-git-repo-check \"<요청>\"",
+    "seconds": 71.3,
+    "tokens_used": 18882,
+    "tests": "3 passed",
+    "test_file_unchanged": true,
+    "fixed_line": "words = \"\".join(c for c in text.lower() if c.isalnum() or c.isspace()).split()",
+    "note": "개인 전역 지침·훅을 끄지 않고 실행"
+  },
+  "claude_code": {
+    "command": "claude -p \"<요청>\" --permission-mode acceptEdits --allowedTools \"Read\" \"Edit\" \"Write\" \"Bash(python3 -m unittest *)\" --output-format json --setting-sources project,local",
+    "seconds": 6.9,
+    "reported_duration_ms": 5909,
+    "turns": 4,
+    "usage": {
+      "output_tokens": 712,
+      "cache_creation_input_tokens": 10375,
+      "cache_read_input_tokens": 42802
+    },
+    "reported_cost_usd": 0.0529,
+    "tests": "3 passed",
+    "test_file_unchanged": true,
+    "fixed_line": "words = re.sub(r\"[^\\w\\s-]\", \"\", text.lower()).split()  # import re 추가",
+    "note": "개인 설정 제외(--setting-sources project,local)"
+  },
+  "caveats": [
+    "각 1회 실행",
+    "사용량 집계 방식이 달라 직접 비교 불가",
+    "모델·추론 설정·개인 설정 범위가 같지 않음"
+  ]
+}
