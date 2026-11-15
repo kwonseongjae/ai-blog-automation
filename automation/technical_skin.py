@@ -18,6 +18,7 @@ SIDE_PROMO = ('AI 도구를 처음 쓰신다면 여기부터', 'https://jacks-ai
 VERIFY = ('<meta name="google-site-verification" content="kiT270Ci3IlqxFGJc5FkJyqgmk1WbyalXPzMM0uSE6E" />\n'
           '<meta name="naver-site-verification" content="8e426f4aff52279727befdfbbe719b39b53f3cd4" />')
 CSS = '<style id="learning-style">\n' + Path(__file__).with_suffix('.css').read_text().strip() + '\n</style>'
+EXTRAS = '<script id="learning-extras">\n' + Path(__file__).with_name('technical_skin_extras.js').read_text().strip() + '\n</script>'
 SCRIPT = '<script id="learning-widgets">\n' + Path(__file__).with_suffix('.js').read_text().strip() + '\n</script>'
 
 
@@ -80,6 +81,7 @@ def transform(source):
     source = re.sub(r'\n?<!-- learning-home:start -->.*?<!-- learning-home:end -->', '', source, flags=re.S)
     source = re.sub(r'\n?<!-- learning-navigation:start -->.*?<!-- learning-navigation:end -->', '', source, flags=re.S)
     source = re.sub(r'<script id="learning-widgets">.*?</script>\n?', '', source, flags=re.S)
+    source = re.sub(r'<script id="learning-extras">.*?</script>\n?', '', source, flags=re.S)
     source = re.sub(r'<meta name="(?:google|naver)-site-verification"[^>]*>\s*', '', source)
     if '</head>' not in source or '<div class="area-main">' not in source:
         raise ValueError('확인된 Odyssey 스킨 구조가 아닙니다')
@@ -98,4 +100,4 @@ def transform(source):
     elif '</header>' in source:
         source = source.replace('</header>', '</header>\n' + navigation(), 1)
     source = source.replace('<div class="area-main">', '<div class="area-main">\n' + home(), 1)
-    return source.replace('</body>', SCRIPT + '\n</body>', 1)
+    return source.replace('</body>', SCRIPT + '\n' + EXTRAS + '\n</body>', 1)

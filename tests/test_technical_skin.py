@@ -15,6 +15,8 @@ class TechnicalSkinTests(unittest.TestCase):
         self.assertNotIn('jack-0314', result)
         self.assertIn('prefers-reduced-motion', result)
         self.assertEqual(result.count('google-site-verification'), 1)
+        self.assertEqual(result.count('id="learning-extras"'), 1)
+        self.assertIn('data-learning-theme', result)
         self.assertIn('<li>Claude Code</li>', result.split('class="learning-tools"')[1].split('</ul>')[0])
         self.assertIn('<em>01</em>', result.split('class="learning-cards"')[1])
         self.assertEqual(result.count('naver-site-verification'), 1)

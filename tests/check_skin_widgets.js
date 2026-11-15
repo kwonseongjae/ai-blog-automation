@@ -57,3 +57,10 @@ for (const bodyId of ['tt-body-index', 'tt-body-category']) {
   assert.deepEqual(covers.map(cover => cover.textContent), ['한국 시간\n날짜 기준', '파일 경로\n실행 위치', '새 학습 기록']);
 }
 console.log('카테고리 집계·미확인 값·메뉴 동기화·재실행·목록 제목 확인 통과');
+
+// 추가 기능 스크립트는 필요한 DOM 기능이 없으면 아무것도 하지 않아야 한다.
+{
+  const extras = fs.readFileSync('automation/technical_skin_extras.js', 'utf8');
+  assert.doesNotThrow(() => vm.runInContext(extras, vm.createContext({document: {querySelector: () => null}})));
+  console.log('추가 기능 스크립트: DOM이 없을 때 무동작 확인');
+}

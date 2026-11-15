@@ -158,3 +158,48 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{o
 .learning-promo{margin-top:18px}.learning-promo a{display:block;padding:14px 16px;border-radius:10px;background:#eef2fc;color:var(--learn-link);font-size:14px;font-weight:650;line-height:1.6;text-decoration:none}
 .learning-meta{margin:0 0 14px;color:#778397;font-size:13px}.learning-correction{margin:0 0 18px;padding:12px 14px;border-left:3px solid var(--learn-link);background:#f5f7fa;font-size:14px}
 @media(max-width:768px){.learning-home{padding:24px 18px 18px;border-radius:12px}.learning-cards{grid-template-columns:1fr}}
+
+/* 진행 막대 · 떠 있는 버튼 · 목록 메타 아이콘 */
+.learning-progress{position:fixed;left:0;top:0;z-index:40;width:0;height:3px;background:var(--learn-link)}
+.learning-floating{position:fixed;right:16px;bottom:84px;z-index:30;display:flex;flex-direction:column;gap:8px}
+.learning-floating button,.learning-theme-toggle{cursor:pointer;font-family:inherit}
+.learning-floating button{width:46px;height:46px;padding:0;border:1px solid var(--learn-line);border-radius:50%;background:#fff;color:var(--learn-ink);font-size:12px;font-weight:700;box-shadow:0 4px 14px #202a3518}
+.learning-floating button[hidden]{display:none}
+.learning-floating button:hover{border-color:var(--learn-link);color:var(--learn-link)}
+.learning-navigation .learning-theme-toggle{min-height:44px;padding:0;border:0;background:transparent;color:var(--learn-ink);font-size:14px;font-weight:600;white-space:nowrap}
+.learning-navigation .learning-theme-toggle:hover{color:var(--learn-link);text-decoration:underline;text-underline-offset:7px}
+.article-type-common .category:before,.article-type-common .date:before{content:"";display:inline-block;width:12px;height:12px;margin-right:5px;vertical-align:-1px;background:currentColor;opacity:.7;-webkit-mask:var(--icon) center/contain no-repeat;mask:var(--icon) center/contain no-repeat}
+.article-type-common .category{--icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.78.41L8 12.3l-5.22 3.61A.5.5 0 0 1 2 15.5z'/%3E%3C/svg%3E")}
+.article-type-common .date{--icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z'/%3E%3C/svg%3E")}
+
+/* 다크 테마: 변수와 고정 색상을 함께 바꾼다 */
+html[data-learning-theme=dark]{color-scheme:dark;--learn-ink:#e7ecf4;--learn-link:#8fb0ff;--learn-line:#2c3646;--learn-paper:#1a212c}
+html[data-learning-theme=dark] body,html[data-learning-theme=dark] .header,html[data-learning-theme=dark] #wrap,html[data-learning-theme=dark] #container{background:#12171f!important;color:var(--learn-ink)}
+html[data-learning-theme=dark] .header .title-logo:before{background:#223054}
+html[data-learning-theme=dark] .learning-home{background:linear-gradient(135deg,#171e2a 0%,#141b27 100%)}
+html[data-learning-theme=dark] .learning-cards a,html[data-learning-theme=dark] .learning-start,html[data-learning-theme=dark] .learning-tools li,html[data-learning-theme=dark] .learning-floating button,html[data-learning-theme=dark] .learning-menu ul{background:#1a212c;color:var(--learn-ink)}
+html[data-learning-theme=dark] .learning-menu li a:hover{background:#232c3a}
+html[data-learning-theme=dark] .learning-home p,html[data-learning-theme=dark] .learning-cards span,html[data-learning-theme=dark] .learning-principles li,html[data-learning-theme=dark] .learning-tools li,html[data-learning-theme=dark] .article-type-common .summary,html[data-learning-theme=dark] .learning-meta{color:#a3afc2!important}
+html[data-learning-theme=dark] .learning-table{border-color:var(--learn-line)}
+html[data-learning-theme=dark] .learning-table th{background:#202a38!important;color:#c9d4e6}
+html[data-learning-theme=dark] .learning-table tbody tr:nth-child(even){background:#161d28}
+html[data-learning-theme=dark] .article-view pre,html[data-learning-theme=dark] .tt_article_useless_p_margin pre{background:#161d28!important;color:#d4deee!important;border-color:var(--learn-line)}
+html[data-learning-theme=dark] .article-view :not(pre)>code,html[data-learning-theme=dark] .tt_article_useless_p_margin :not(pre)>code{background:#202a38;color:#a9c3ff}
+html[data-learning-theme=dark] .learning-promo a{background:#1d2740;color:#a9c3ff}
+html[data-learning-theme=dark] .learning-correction,html[data-learning-theme=dark] .learning-toc{background:#1a212c}
+html[data-learning-theme=dark] .header .util .search{background:var(--learn-paper)}
+html[data-learning-theme=dark] .header .searchInput{color:var(--learn-ink)}
+html[data-learning-theme=dark] .article-view :is(h1,h2,h3,h4,li,td,th,p,span,strong,em,blockquote,summary),html[data-learning-theme=dark] .tt_article_useless_p_margin :is(h1,h2,h3,h4,li,td,th,p,strong,em,blockquote,summary),html[data-learning-theme=dark] .container_postbtn *,html[data-learning-theme=dark] .area-view :is(span,em),html[data-learning-theme=dark] .area-comment *{color:var(--learn-ink)}
+html[data-learning-theme=dark] .article-view pre *,html[data-learning-theme=dark] .tt_article_useless_p_margin pre *{color:inherit}
+html[data-learning-theme=dark] .article-view a,html[data-learning-theme=dark] .tt_article_useless_p_margin a{color:var(--learn-link)}
+html[data-learning-theme=dark] .learning-code .learning-copy{background:#202a38;color:#a9c3ff;border-color:var(--learn-line)}
+html[data-learning-theme=dark] .header .util .search .learning-search-button{color:#a3afc2}
+html[data-learning-theme=dark] .tt_category a,html[data-learning-theme=dark] .tt_category .link_item,html[data-learning-theme=dark] .tt_category .c_cnt{color:#a3afc2!important}
+html[data-learning-theme=dark] .paging .selected{color:#12171f}
+html[data-learning-theme=dark] .article-view .hljs-attr,html[data-learning-theme=dark] .article-view .hljs-built_in{color:#e6b455}
+html[data-learning-theme=dark] .article-view :is(h1,h2,h3,h4,li,p,td,th,strong,summary),html[data-learning-theme=dark] .article-footer strong,html[data-learning-theme=dark] .list-recent strong{color:var(--learn-ink)!important}
+html[data-learning-theme=dark] .article-view pre :is(span,strong){color:inherit!important}
+html[data-learning-theme=dark] .learning-toc a{color:var(--learn-link)}
+html[data-learning-theme=dark] .paging .selected,html[data-learning-theme=dark] .paging .selected *{color:#12171f!important}
+html[data-learning-theme=dark] .learning-toc a,html[data-learning-theme=dark] .article-view .learning-toc li a{color:var(--learn-link)!important}
+html[data-learning-theme=dark] span.selected,html[data-learning-theme=dark] span.selected *{color:#12171f!important}
