@@ -30,8 +30,11 @@
     if(title)title.textContent='최근 기록';
   }
   document.querySelectorAll('.img-thumbnail').forEach(function(img){
+    var box=img.closest&&img.closest('.thumbnail');
     var hide=function(){img.hidden=true;};
-    if(img.complete&&img.naturalWidth===0)hide();else img.addEventListener('error',hide);
+    var ok=function(){if(box)box.classList.add('learning-loaded');};
+    if(img.complete){if(img.naturalWidth===0)hide();else ok();}
+    else{img.addEventListener('load',function(){if(img.naturalWidth>0)ok();else hide();});img.addEventListener('error',hide);}
   });
   document.querySelectorAll('.learning-cover strong').forEach(function(cover){
     var title=cover.textContent;

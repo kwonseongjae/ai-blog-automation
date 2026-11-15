@@ -20,8 +20,11 @@ for (const bodyId of ['tt-body-index', 'tt-body-category']) {
     closest() { return this; },
     setAttribute() {},
   }));
-  const makeThumb = (complete, naturalWidth) => ({complete, naturalWidth, hidden: false, listeners: {},
-    addEventListener(name, fn) { this.listeners[name] = fn; }});
+  const makeThumb = (complete, naturalWidth) => {
+    const box = {loaded: false, classList: {add(name) { if (name === 'learning-loaded') box.loaded = true; }}};
+    return {complete, naturalWidth, hidden: false, listeners: {}, box, closest: () => box,
+      addEventListener(name, fn) { this.listeners[name] = fn; }};
+  };
   const thumbs = [makeThumb(true, 0), makeThumb(true, 640), makeThumb(false, 0)];
   const document = {
     body: {id: bodyId},
@@ -42,6 +45,11 @@ for (const bodyId of ['tt-body-index', 'tt-body-category']) {
   assert.deepEqual(rows.map(row => row.hidden), [true, false, false, false, true, false]);
   assert.deepEqual(menu.map(row => row.hidden), [true, false, false, false, true, false]);
   assert.deepEqual(thumbs.map(t => t.hidden), [true, false, false]);
+  assert.deepEqual(thumbs.map(t => t.box.loaded), [false, true, false]);
+  thumbs[2].naturalWidth = 640;
+  thumbs[2].listeners.load();
+  assert.equal(thumbs[2].box.loaded, true);
+  thumbs[2].naturalWidth = 0;
   thumbs[2].listeners.error();
   assert.equal(thumbs[2].hidden, true);
   assert.equal(thumbs[1].hidden, false);

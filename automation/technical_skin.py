@@ -47,7 +47,7 @@ def home():
 <!-- learning-home:end -->"""
 
 
-PROFILE = """<section class="learning-profile" aria-label="블로그 소개"><h3 class="title-sidebar">Jack</h3><p>AI 도구 활용과 Python 자동화.<br>직접 만든 프로젝트를 이해하고<br>다른 작업에도 적용해봅니다.</p><p>실행한 내용과 예시를 구분하고,<br>코드와 참고 문서를 남깁니다.</p></section>"""
+PROFILE = """<section class="learning-profile" aria-label="블로그 소개"><h3 class="title-sidebar">Jack</h3><p>AI 도구를 처음 쓰는 개발자를 위해<br>설정과 비교, 직접 만든 프로젝트에<br>적용한 과정을 기록합니다.</p><p>실행한 내용과 예시를 구분하고,<br>코드와 참고 문서를 남깁니다.</p></section>"""
 
 COVER = '<span class="learning-cover" aria-hidden="true"><span class="learning-cover-category">[##_list_rep_category_##]</span><strong>[##_list_rep_title_text_##]</strong></span>'
 

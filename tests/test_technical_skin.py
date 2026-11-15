@@ -43,6 +43,8 @@ class TechnicalSkinTests(unittest.TestCase):
 
     def test_cover_stays_under_thumbnail(self):
         self.assertNotIn('.thumbnail[has-thumbnail="1"] .learning-cover{display:none}', technical_skin.CSS)
+        self.assertIn('.thumbnail.learning-loaded .learning-cover{display:none}', technical_skin.CSS)
+        self.assertIn('background-image:none!important', technical_skin.CSS)
 
     def test_unrecognized_template_is_not_silently_overwritten(self):
         with self.assertRaises(ValueError):
