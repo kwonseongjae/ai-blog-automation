@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from automation.tistory_publisher import default_tags
-from automation.learning_blog import BLOG, kst_day, publish_daily, render_markdown, resolve_pending, validate_article, validate_catalogue, validate_url
+from automation.learning_blog import project_box, BLOG, kst_day, publish_daily, render_markdown, resolve_pending, validate_article, validate_catalogue, validate_url
 
 
 class LearningBlogTests(unittest.TestCase):
@@ -41,6 +41,36 @@ class LearningBlogTests(unittest.TestCase):
         self.assertEqual(default_tags('자동화 실습'), ['Python', '자동화'])
         for name in ('시작하기', '에이전트·모델 비교', '프로젝트 적용', '미등록'):
             self.assertEqual(default_tags(name), ['AI 활용'])
+
+    def project(self, **kw):
+        return {'name': '발행기', 'url': 'https://github.com/kwonseongjae/ai-blog-automation',
+                'role': '상태 기록 구현', 'result': '테스트로 확인'} | kw
+
+    def test_project_box_escapes(self):
+        html = project_box(self.project(name='<b>발행기</b>'))
+        self.assertIn('이 글의 프로젝트', html)
+        self.assertIn('&lt;b&gt;', html)
+        self.assertNotIn('<b>', html)
+
+    def test_project_url_must_be_own_repo(self):
+        for url in ('https://github.com/other/repo', 'https://evil.test/kwonseongjae/x',
+                    'http://github.com/kwonseongjae/x'):
+            with self.subTest(url=url), self.assertRaises(ValueError):
+                validate_article(self.article | {'project': self.project(url=url)}, self.root)
+        with self.assertRaises(ValueError):
+            validate_article(self.article | {'project': {'name': '이름만'}}, self.root)
+        validate_article(self.article | {'project': self.project()}, self.root)
+
+    def test_no_project_no_box(self):
+        captured = {}
+        self.publish(publish=lambda payload: captured.update(payload) or f'https://{BLOG}/2')
+        self.assertNotIn('이 글의 프로젝트', captured['html'])
+
+    def test_project_box_in_published_body(self):
+        captured = {}
+        self.article = self.article | {'project': self.project()}
+        self.publish(publish=lambda payload: captured.update(payload) or f'https://{BLOG}/2')
+        self.assertIn('이 글의 프로젝트', captured['html'])
 
     def test_kst_midnight_uses_local_date(self):
         self.assertEqual(kst_day(datetime(2026, 11, 12, 15, 1, tzinfo=timezone.utc)), '2026-11-13')

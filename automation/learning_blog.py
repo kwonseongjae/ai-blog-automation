@@ -64,6 +64,8 @@ def validate_article(article, root):
             ('/openai/codex', '/anthropics/claude-code', '/kwonseongjae/ai-blog-automation'))
         if p.scheme != 'https' or not (official or official_repo):
             raise ValueError('허용된 공식 문서 주소가 아닙니다')
+    if article.get('project') is not None:
+        validate_project(article['project'])
     read_assets(article, root)
     return path
 
@@ -84,6 +86,21 @@ def read_assets(article, root):
             raise ValueError('PNG 이미지가 아닙니다')
         result[name] = 'data:image/png;base64,' + base64.b64encode(data).decode('ascii')
     return result
+
+
+def validate_project(project):
+    if not isinstance(project, dict) or not all(isinstance(project.get(k), str) and project[k].strip()
+                                                for k in ('name', 'url', 'role', 'result')):
+        raise ValueError('프로젝트 항목에는 이름·주소·역할·결과가 필요합니다')
+    if not project['url'].startswith('https://github.com/kwonseongjae/'):
+        raise ValueError('프로젝트 주소는 본인 저장소여야 합니다')
+
+
+def project_box(project):
+    validate_project(project)
+    e = html.escape
+    return (f'<h2>이 글의 프로젝트</h2><p><a href="{e(project["url"], quote=True)}">{e(project["name"])}</a></p>'
+            f'<ul><li>내가 한 일: {e(project["role"])}</li><li>확인한 결과: {e(project["result"])}</li></ul>')
 
 
 def validate_catalogue(catalogue, root):
@@ -231,6 +248,8 @@ def publish_daily(state_dir, catalogue, *, root, publish, verify, now=None, dry_
             cover = f'![{article["title"]}](asset:cover)\n\n'
             illustrated = source.replace('\n## ', '\n' + cover + '## ', 1) if '\n## ' in source else cover + source
         body = f'<div id="{marker}">\n{render_markdown(illustrated, assets)}\n</div>'
+        if article.get('project'):
+            body += project_box(article['project'])
         revision = article.get('revision')
         if revision:
             if not re.fullmatch(r'[0-9a-f]{40}', revision):
