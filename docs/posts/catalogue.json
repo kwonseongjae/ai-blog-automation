@@ -332,6 +332,56 @@
     ]
   },
   {
+    "id": "skills-first-guide",
+    "kind": "guide",
+    "category": "AI 시작하기",
+    "title": "스킬(SKILL.md) 처음 만들기: Codex와 Claude Code에서 같은 파일로 써 본 결과",
+    "sources": [
+      "https://learn.chatgpt.com/docs/build-skills",
+      "https://code.claude.com/docs/en/skills"
+    ],
+    "markdown": "docs/posts/skills-first-guide.md",
+    "checked_on": "2026-11-15",
+    "verification": "Linux 한 환경에서 같은 SKILL.md를 Codex CLI 0.167.2와 Claude Code 2.1.325에 넣고 이름 호출·이름 없는 요청·스킬 없는 폴더를 각 1회 실행해 출력 형식을 확인. 개인용 위치와 우선순위, 경계 요청, 스킬 없이 규칙을 직접 적은 경우는 미확인.",
+    "assets": {
+      "cover": "docs/posts/assets/skills-first-guide-cover.png",
+      "flow": "docs/posts/assets/skills-first-guide-flow.png"
+    },
+    "cover_text": [
+      "AI 시작하기",
+      "스킬 만들기",
+      "SKILL.md",
+      "같은 파일을 두 도구에서 써 보기"
+    ],
+    "diagram_title": "스킬 확인 순서",
+    "diagram_steps": [
+      [
+        "스킬 폴더 만들기",
+        "SKILL.md 한 개, 두 위치에 복사"
+      ],
+      [
+        "두 방식으로 호출",
+        "이름으로 부르기 · 이름 없이 요청"
+      ],
+      [
+        "빈 폴더와 비교",
+        "출력 형식과 덧붙인 문장 확인"
+      ]
+    ],
+    "tags": [
+      "스킬",
+      "SKILL.md",
+      "Codex 스킬",
+      "Claude Code 스킬",
+      "AI 코딩 입문"
+    ],
+    "related": [
+      "agents-claude-md-first-guide",
+      "agent-permissions-first-guide",
+      "codex-vs-claude-code-compare"
+    ]
+  },
+  {
     "id": "daily-publish-state",
     "kind": "guide",
     "category": "프로젝트 적용기",
