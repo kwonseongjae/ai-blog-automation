@@ -8,7 +8,9 @@ from automation.learning_blog import CATEGORIES, REPOSITORY, validate_url
 BLOG_TITLE = 'Jack의 AI 개발노트'
 # 먼저 읽을 글: 입문 순서대로 직접 고른다. 새 입문 글이 발행되면 한 줄 추가한다.
 START_HERE = (('AI 에이전트란? 챗봇과 다른 점과 처음 맡길 일 3가지', 'https://jacks-aiblog.tistory.com/3'),)
-CHIP_CATEGORIES = CATEGORIES[:3]
+# 대문 주제 카드: 분류 이름(CATEGORIES 앞 세 개)과 한 줄 설명
+TOPIC_NOTES = ('설치, 로그인, 지침 파일, 권한 같은 첫 설정', '같은 과제를 맡겨 보고 차이를 기록합니다', '직접 만든 프로젝트에 쓴 방법과 결과')
+PRINCIPLES = ('하루 최대 한 편', '직접 실행해 확인한 내용', '확인일과 공식 출처 표기')
 # 사이드바 안내 상자: 입문 글 모음으로 보내고, 공개 프로젝트가 생기면 저장소 주소로 바꾼다.
 SIDE_PROMO = ('AI 도구를 처음 쓰신다면 여기부터', 'https://jacks-aiblog.tistory.com/3')
 CSS = '<style id="learning-style">\n' + Path(__file__).with_suffix('.css').read_text().strip() + '\n</style>'
@@ -35,12 +37,16 @@ def start_here():
 
 
 def home():
-    chips = ''.join(f'<a href="/category/{quote(name)}">{name}</a>' for name in CHIP_CATEGORIES)
+    cards = ''.join(f'<a href="/category/{quote(name)}"><strong>{name}</strong><span>{note}</span></a>'
+                    for name, note in zip(CATEGORIES[:3], TOPIC_NOTES))
+    principles = ''.join(f'<li>{text}</li>' for text in PRINCIPLES)
     return f"""<!-- learning-home:start -->
 <section id="learning-home" class="learning-home" aria-labelledby="learning-title">
+  <p class="learning-eyebrow">AI 입문 개발노트</p>
   <h2 id="learning-title">AI를 처음 쓰는 개발자를 위한 설정·비교·적용 기록</h2>
-  <p>도구 설치와 설정, 에이전트·모델 고르는 기준, 직접 만든 프로젝트에 적용한 과정을<br>실행 결과와 함께 적습니다.</p>
-  <div class="learning-chips">{chips}</div>
+  <p class="learning-lead">도구 설치와 설정, 에이전트·모델 고르는 기준, 직접 만든 프로젝트에 적용한 과정을<br>실행 결과와 함께 적습니다.</p>
+  <ul class="learning-principles">{principles}</ul>
+  <nav class="learning-cards" aria-label="주제">{cards}</nav>
   {start_here()}
   <div class="learning-actions"><a href="{REPOSITORY}" target="_blank" rel="noopener">GitHub 실습 코드</a><a href="https://github.com/kwonseongjae" target="_blank" rel="noopener">GitHub 프로필</a></div>
 </section>
