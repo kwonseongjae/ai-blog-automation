@@ -593,5 +593,60 @@
       "role": "표를 스크롤 상자에 넣는 스킨 CSS를 두고 폭별로 측정",
       "result": "360·390px에서 표 11개가 상자 안에서만 스크롤되고 페이지 전체는 옆으로 밀리지 않음"
     }
+  },
+  {
+    "id": "dark-mode-contrast-guide",
+    "kind": "guide",
+    "category": "프로젝트 적용기",
+    "title": "블로그에 다크 모드를 넣고 글자 대비를 재어 고친 기록: 낮은 대비 17곳을 3곳으로",
+    "sources": [
+      "https://github.com/kwonseongjae/ai-blog-automation/blob/main/automation/technical_skin.css",
+      "https://github.com/kwonseongjae/ai-blog-automation/blob/main/docs/posts/evidence/dark-mode-contrast.json"
+    ],
+    "markdown": "docs/posts/dark-mode-contrast-guide.md",
+    "checked_on": "2026-11-15",
+    "verification": "Linux의 데스크톱 Chromium 145에서 어두운·밝은 화면 설정을 에뮬레이션해 공개 페이지 2개의 글자 대비를 네 차례 측정. 기준 3.5 미만을 낮은 대비로 표시. 실기기와 어두운 화면의 육안 확인은 하지 않음.",
+    "assets": {
+      "cover": "docs/posts/assets/dark-mode-contrast-guide-cover.png",
+      "flow": "docs/posts/assets/dark-mode-contrast-guide-flow.png"
+    },
+    "cover_text": [
+      "프로젝트 적용기",
+      "다크 모드 글자 대비",
+      "낮은 대비 17곳을",
+      "3곳으로 줄인 기록"
+    ],
+    "diagram_title": "다크 모드를 고치는 순서",
+    "diagram_steps": [
+      [
+        "규칙 적용",
+        "변수와 고정 색상 덮기"
+      ],
+      [
+        "대비 측정",
+        "글자 요소 전체"
+      ],
+      [
+        "다시 적용",
+        "낮은 곳부터 수정"
+      ]
+    ],
+    "tags": [
+      "다크 모드",
+      "글자 대비",
+      "CSS",
+      "접근성",
+      "프로젝트 적용기"
+    ],
+    "related": [
+      "mobile-table-guide",
+      "validator-cases-guide"
+    ],
+    "project": {
+      "name": "ai-blog-automation",
+      "url": "https://github.com/kwonseongjae/ai-blog-automation",
+      "role": "블로그 스킨에 다크 모드를 넣고 글자 대비를 측정해 고침",
+      "result": "어두운 화면 3번 글에서 낮은 대비 요소를 17곳에서 3곳으로 줄임(남은 곳은 티스토리 기본 위젯과 숨은 아이콘 글자)"
+    }
   }
 ]

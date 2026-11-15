@@ -1,0 +1,87 @@
+{
+ "checked_on": "2026-11-15",
+ "environment": "Linux, Playwright Chromium 145 데스크톱 브라우저, 화면 폭 1280×900, 어두운·밝은 화면 설정 에뮬레이션(실기기 아님)",
+ "method": "글자가 직접 들어 있고 보이는 모든 요소의 계산된 글자색과 가장 가까운 불투명 배경색으로 WCAG 상대 휘도 대비를 계산. 3.5 미만을 낮은 대비로 표시(WCAG 일반 글자 AA는 4.5, 기준 3.5는 작성자가 정함)",
+ "pages": [
+  "/",
+  "/3"
+ ],
+ "low_contrast_counts_by_apply": [
+  {
+   "apply": 1,
+   "dark_home": 4,
+   "dark_post3": 17
+  },
+  {
+   "apply": 2,
+   "dark_home": 2,
+   "dark_post3": 8
+  },
+  {
+   "apply": 3,
+   "dark_home": 2,
+   "dark_post3": 4
+  },
+  {
+   "apply": 4,
+   "dark_home": 1,
+   "dark_post3": 3
+  }
+ ],
+ "light_counts": {
+  "home": 0,
+  "post3": 4,
+  "note": "1차부터 최종까지 동일"
+ },
+ "first_apply_findings": [
+  "본문 h2·목록 글자 검정 1.17",
+  "공감·공유·구독 문구 #333 1.42",
+  "목차 링크 기본 파랑 3.27",
+  "코드 복사 버튼 2.14",
+  "검색 버튼 글자 2.31",
+  "분류 링크 3.08",
+  "선택된 페이지 번호 2.14"
+ ],
+ "final_run": {
+  "dark /": [
+   {
+    "class": "img_common_tistory ico_tistory_sign",
+    "ratio": 1
+   }
+  ],
+  "dark /3": [
+   {
+    "class": "tt_desc",
+    "ratio": 3.31
+   },
+   {
+    "class": "tt-btn_register",
+    "ratio": 1.26
+   },
+   {
+    "class": "img_common_tistory ico_tistory_sign",
+    "ratio": 1
+   }
+  ],
+  "light /": [],
+  "light /3": [
+   {
+    "class": "hljs-built_in",
+    "ratio": 2.95
+   },
+   {
+    "class": "hljs-string",
+    "ratio": 2.96
+   },
+   {
+    "class": "tt_desc",
+    "ratio": 3.31
+   },
+   {
+    "class": "tt-btn_register",
+    "ratio": 1.26
+   }
+  ]
+ },
+ "not_checked": "실기기, 어두운 화면의 육안 확인, 대문·3번 글 외 페이지"
+}
