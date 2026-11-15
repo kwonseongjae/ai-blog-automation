@@ -14,6 +14,8 @@ class TechnicalSkinTests(unittest.TestCase):
         self.assertIn('https://github.com/kwonseongjae/ai-blog-automation', result)
         self.assertNotIn('jack-0314', result)
         self.assertIn('prefers-reduced-motion', result)
+        self.assertEqual(result.count('google-site-verification'), 1)
+        self.assertEqual(result.count('naver-site-verification'), 1)
 
     def test_start_here_only_own_blog(self):
         self.assertIn('https://jacks-aiblog.tistory.com/3', start_here())

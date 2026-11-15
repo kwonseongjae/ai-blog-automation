@@ -13,6 +13,9 @@ TOPIC_NOTES = ('설치, 로그인, 지침 파일, 권한 같은 첫 설정', '�
 PRINCIPLES = ('하루 최대 한 편', '직접 실행해 확인한 내용', '확인일과 공식 출처 표기')
 # 사이드바 안내 상자: 입문 글 모음으로 보내고, 공개 프로젝트가 생기면 저장소 주소로 바꾼다.
 SIDE_PROMO = ('AI 도구를 처음 쓰신다면 여기부터', 'https://jacks-aiblog.tistory.com/3')
+# 검색엔진 소유 확인 태그(공개 값). 서치콘솔·서치어드바이저 확인이 끝난 뒤에도 지우지 않는다.
+VERIFY = ('<meta name="google-site-verification" content="kiT270Ci3IlqxFGJc5FkJyqgmk1WbyalXPzMM0uSE6E" />\n'
+          '<meta name="naver-site-verification" content="8e426f4aff52279727befdfbbe719b39b53f3cd4" />')
 CSS = '<style id="learning-style">\n' + Path(__file__).with_suffix('.css').read_text().strip() + '\n</style>'
 SCRIPT = '<script id="learning-widgets">\n' + Path(__file__).with_suffix('.js').read_text().strip() + '\n</script>'
 
@@ -74,6 +77,7 @@ def transform(source):
     source = re.sub(r'\n?<!-- learning-home:start -->.*?<!-- learning-home:end -->', '', source, flags=re.S)
     source = re.sub(r'\n?<!-- learning-navigation:start -->.*?<!-- learning-navigation:end -->', '', source, flags=re.S)
     source = re.sub(r'<script id="learning-widgets">.*?</script>\n?', '', source, flags=re.S)
+    source = re.sub(r'<meta name="(?:google|naver)-site-verification"[^>]*>\s*', '', source)
     if '</head>' not in source or '<div class="area-main">' not in source:
         raise ValueError('확인된 Odyssey 스킨 구조가 아닙니다')
     source = re.sub(r'<s_sidebar_element>(.*?)</s_sidebar_element>', _sidebar, source, flags=re.S)
@@ -85,7 +89,7 @@ def transform(source):
     footer = BLOG_TITLE + ' · 학습과 실습 기록'
     source = source.replace('[##_var_footerCopyright_##]', footer)
     source = source.replace('권성재의 기술노트 · 코드와 함께 쌓는 학습 기록', footer)
-    source = source.replace('</head>', CSS + '\n</head>', 1)
+    source = source.replace('</head>', VERIFY + '\n' + CSS + '\n</head>', 1)
     if '</h1>' in source and '</header>' in source:
         source = source.replace('</h1>', '</h1>\n' + navigation(), 1)
     elif '</header>' in source:
