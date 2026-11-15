@@ -48,6 +48,7 @@ def transform(source):
     if '</head>' not in source or '<div class="area-main">' not in source:
         raise ValueError('확인된 Odyssey 스킨 구조가 아닙니다')
     source = re.sub(r'<s_sidebar_element>(.*?)</s_sidebar_element>', _sidebar, source, flags=re.S)
+    source = source.replace('[##_var_footerCopyright_##]', '권성재의 기술노트 · 코드와 함께 쌓는 학습 기록')
     source = source.replace('</head>', CSS + '\n</head>', 1)
     if '</header>' in source:
         source = source.replace('</header>', '</header>\n' + navigation(), 1)
