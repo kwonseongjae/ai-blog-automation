@@ -232,6 +232,56 @@
     ]
   },
   {
+    "id": "agent-permissions-first-guide",
+    "kind": "guide",
+    "category": "AI 시작하기",
+    "title": "AI 코딩 도구 권한 처음 설정하기: 파일을 만들기 전에 물어보게 하는 법",
+    "sources": [
+      "https://learn.chatgpt.com/docs/agent-approvals-security",
+      "https://code.claude.com/docs/en/permissions"
+    ],
+    "markdown": "docs/posts/agent-permissions-first-guide.md",
+    "checked_on": "2026-11-15",
+    "verification": "Linux 한 환경에서 Codex CLI 0.167.2와 Claude Code 2.1.325를 임시 폴더로 실행해 파일 생성 허용·차단을 조건별 1회 확인. 규칙의 검사 순서는 공식 문서 설명이며 직접 시험하지 않음. Windows·macOS와 요금제별 차이는 미확인.",
+    "assets": {
+      "cover": "docs/posts/assets/agent-permissions-first-guide-cover.png",
+      "flow": "docs/posts/assets/agent-permissions-first-guide-flow.png"
+    },
+    "cover_text": [
+      "AI 시작하기",
+      "권한 설정",
+      "승인과 샌드박스",
+      "처음에는 어디까지 허용할까"
+    ],
+    "diagram_title": "권한 설정 확인 순서",
+    "diagram_steps": [
+      [
+        "권한 단계 고르기",
+        "읽기 전용 · 편집 허용"
+      ],
+      [
+        "같은 요청으로 시험",
+        "파일 만들기를 요청"
+      ],
+      [
+        "결과로 설정 확정",
+        "막힌 일과 허용한 일"
+      ]
+    ],
+    "tags": [
+      "AI 코딩 도구 권한",
+      "Codex 샌드박스",
+      "Claude Code 권한",
+      "승인 설정",
+      "AI 입문"
+    ],
+    "related": [
+      "agents-claude-md-first-guide",
+      "codex-first-settings",
+      "claude-code-first-settings"
+    ]
+  },
+  {
     "id": "daily-publish-state",
     "kind": "guide",
     "category": "프로젝트 적용기",
