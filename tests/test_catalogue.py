@@ -26,8 +26,8 @@ class CatalogueTests(unittest.TestCase):
         catalogue = load('catalogue.json')
         ids = [e['id'] for e in catalogue]
         self.assertEqual(ids[:3], ['python-kst-date', 'python-path-base', 'ai-agent-first-task'])
-        self.assertEqual(ids[-1], 'validator-cases-guide')
-        self.assertEqual(len(ids), 12)
+        self.assertEqual(ids[-1], 'mobile-table-guide')
+        self.assertEqual(len(ids), 13)
         validate_catalogue(catalogue, ROOT)
 
     def test_archive_not_in_catalogue(self):

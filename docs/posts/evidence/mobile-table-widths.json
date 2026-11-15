@@ -1,0 +1,490 @@
+{
+ "checked_on": "2026-11-15",
+ "environment": "Linux, Playwright Chromium 145 데스크톱 브라우저의 모바일 에뮬레이션(실기기 아님), 폭 360·390·768px",
+ "method": "실제 글 주소의 표를 재고, 발행 전 원고 3편은 블로그 표 변환 함수와 스킨 CSS를 넣은 임시 페이지로 같은 방식으로 측정. 표 래퍼의 scrollWidth·clientWidth, 문서 가로 폭, 완전히 보이는 열 수, 스크롤 힌트·고정 열 여부를 기록",
+ "live_post_3_note": "글 1·2번에는 표가 없어 실제 글 측정은 3번의 표 2개뿐. 4·5번은 선택자를 찾지 못해 측정 대상에서 제외",
+ "live_post_3": {
+  "3@360": {
+   "viewport": 360,
+   "docScroll": 360,
+   "pageOverflow": false,
+   "tables": [
+    {
+     "cols": 3,
+     "rows": 4,
+     "wrapper": 320,
+     "content": 462,
+     "scrolls": true,
+     "tabindex": "0",
+     "role": "region",
+     "label": "비교표"
+    },
+    {
+     "cols": 3,
+     "rows": 4,
+     "wrapper": 320,
+     "content": 462,
+     "scrolls": true,
+     "tabindex": "0",
+     "role": "region",
+     "label": "비교표"
+    }
+   ]
+  },
+  "3@390": {
+   "viewport": 390,
+   "docScroll": 390,
+   "pageOverflow": false,
+   "tables": [
+    {
+     "cols": 3,
+     "rows": 4,
+     "wrapper": 350,
+     "content": 462,
+     "scrolls": true,
+     "tabindex": "0",
+     "role": "region",
+     "label": "비교표"
+    },
+    {
+     "cols": 3,
+     "rows": 4,
+     "wrapper": 350,
+     "content": 462,
+     "scrolls": true,
+     "tabindex": "0",
+     "role": "region",
+     "label": "비교표"
+    }
+   ]
+  },
+  "3@768": {
+   "viewport": 768,
+   "docScroll": 768,
+   "pageOverflow": false,
+   "tables": [
+    {
+     "cols": 3,
+     "rows": 4,
+     "wrapper": 728,
+     "content": 726,
+     "scrolls": false,
+     "tabindex": "0",
+     "role": "region",
+     "label": "비교표"
+    },
+    {
+     "cols": 3,
+     "rows": 4,
+     "wrapper": 728,
+     "content": 726,
+     "scrolls": false,
+     "tabindex": "0",
+     "role": "region",
+     "label": "비교표"
+    }
+   ]
+  }
+ },
+ "local_pages": {
+  "model-selection-first-guide@360": {
+   "viewport": 360,
+   "docScroll": 360,
+   "pageOverflow": false,
+   "tables": [
+    {
+     "cols": 3,
+     "rows": 7,
+     "wrapper": 344,
+     "content": 462,
+     "scrolls": true,
+     "tabindex": "0",
+     "role": "region",
+     "label": "비교표"
+    },
+    {
+     "cols": 5,
+     "rows": 5,
+     "wrapper": 344,
+     "content": 770,
+     "scrolls": true,
+     "tabindex": "0",
+     "role": "region",
+     "label": "비교표"
+    },
+    {
+     "cols": 6,
+     "rows": 5,
+     "wrapper": 344,
+     "content": 924,
+     "scrolls": true,
+     "tabindex": "0",
+     "role": "region",
+     "label": "비교표"
+    },
+    {
+     "cols": 4,
+     "rows": 5,
+     "wrapper": 344,
+     "content": 630,
+     "scrolls": true,
+     "tabindex": "0",
+     "role": "region",
+     "label": "비교표"
+    }
+   ]
+  },
+  "model-selection-first-guide@390": {
+   "viewport": 390,
+   "docScroll": 390,
+   "pageOverflow": false,
+   "tables": [
+    {
+     "cols": 3,
+     "rows": 7,
+     "wrapper": 374,
+     "content": 462,
+     "scrolls": true,
+     "tabindex": "0",
+     "role": "region",
+     "label": "비교표"
+    },
+    {
+     "cols": 5,
+     "rows": 5,
+     "wrapper": 374,
+     "content": 770,
+     "scrolls": true,
+     "tabindex": "0",
+     "role": "region",
+     "label": "비교표"
+    },
+    {
+     "cols": 6,
+     "rows": 5,
+     "wrapper": 374,
+     "content": 924,
+     "scrolls": true,
+     "tabindex": "0",
+     "role": "region",
+     "label": "비교표"
+    },
+    {
+     "cols": 4,
+     "rows": 5,
+     "wrapper": 374,
+     "content": 630,
+     "scrolls": true,
+     "tabindex": "0",
+     "role": "region",
+     "label": "비교표"
+    }
+   ]
+  },
+  "model-selection-first-guide@768": {
+   "viewport": 768,
+   "docScroll": 768,
+   "pageOverflow": false,
+   "tables": [
+    {
+     "cols": 3,
+     "rows": 7,
+     "wrapper": 752,
+     "content": 750,
+     "scrolls": false,
+     "tabindex": "0",
+     "role": "region",
+     "label": "비교표"
+    },
+    {
+     "cols": 5,
+     "rows": 5,
+     "wrapper": 752,
+     "content": 770,
+     "scrolls": true,
+     "tabindex": "0",
+     "role": "region",
+     "label": "비교표"
+    },
+    {
+     "cols": 6,
+     "rows": 5,
+     "wrapper": 752,
+     "content": 924,
+     "scrolls": true,
+     "tabindex": "0",
+     "role": "region",
+     "label": "비교표"
+    },
+    {
+     "cols": 4,
+     "rows": 5,
+     "wrapper": 752,
+     "content": 750,
+     "scrolls": false,
+     "tabindex": "0",
+     "role": "region",
+     "label": "비교표"
+    }
+   ]
+  },
+  "tool-compare-guide@360": {
+   "viewport": 360,
+   "docScroll": 360,
+   "pageOverflow": false,
+   "tables": [
+    {
+     "cols": 3,
+     "rows": 4,
+     "wrapper": 344,
+     "content": 462,
+     "scrolls": true,
+     "tabindex": "0",
+     "role": "region",
+     "label": "비교표"
+    },
+    {
+     "cols": 3,
+     "rows": 6,
+     "wrapper": 344,
+     "content": 462,
+     "scrolls": true,
+     "tabindex": "0",
+     "role": "region",
+     "label": "비교표"
+    },
+    {
+     "cols": 3,
+     "rows": 8,
+     "wrapper": 344,
+     "content": 462,
+     "scrolls": true,
+     "tabindex": "0",
+     "role": "region",
+     "label": "비교표"
+    }
+   ]
+  },
+  "tool-compare-guide@390": {
+   "viewport": 390,
+   "docScroll": 390,
+   "pageOverflow": false,
+   "tables": [
+    {
+     "cols": 3,
+     "rows": 4,
+     "wrapper": 374,
+     "content": 462,
+     "scrolls": true,
+     "tabindex": "0",
+     "role": "region",
+     "label": "비교표"
+    },
+    {
+     "cols": 3,
+     "rows": 6,
+     "wrapper": 374,
+     "content": 462,
+     "scrolls": true,
+     "tabindex": "0",
+     "role": "region",
+     "label": "비교표"
+    },
+    {
+     "cols": 3,
+     "rows": 8,
+     "wrapper": 374,
+     "content": 462,
+     "scrolls": true,
+     "tabindex": "0",
+     "role": "region",
+     "label": "비교표"
+    }
+   ]
+  },
+  "tool-compare-guide@768": {
+   "viewport": 768,
+   "docScroll": 768,
+   "pageOverflow": false,
+   "tables": [
+    {
+     "cols": 3,
+     "rows": 4,
+     "wrapper": 752,
+     "content": 750,
+     "scrolls": false,
+     "tabindex": "0",
+     "role": "region",
+     "label": "비교표"
+    },
+    {
+     "cols": 3,
+     "rows": 6,
+     "wrapper": 752,
+     "content": 750,
+     "scrolls": false,
+     "tabindex": "0",
+     "role": "region",
+     "label": "비교표"
+    },
+    {
+     "cols": 3,
+     "rows": 8,
+     "wrapper": 752,
+     "content": 750,
+     "scrolls": false,
+     "tabindex": "0",
+     "role": "region",
+     "label": "비교표"
+    }
+   ]
+  },
+  "skills-first-guide@360": {
+   "viewport": 360,
+   "docScroll": 360,
+   "pageOverflow": false,
+   "tables": [
+    {
+     "cols": 3,
+     "rows": 3,
+     "wrapper": 344,
+     "content": 462,
+     "scrolls": true,
+     "tabindex": "0",
+     "role": "region",
+     "label": "비교표"
+    },
+    {
+     "cols": 3,
+     "rows": 4,
+     "wrapper": 344,
+     "content": 462,
+     "scrolls": true,
+     "tabindex": "0",
+     "role": "region",
+     "label": "비교표"
+    }
+   ]
+  },
+  "skills-first-guide@390": {
+   "viewport": 390,
+   "docScroll": 390,
+   "pageOverflow": false,
+   "tables": [
+    {
+     "cols": 3,
+     "rows": 3,
+     "wrapper": 374,
+     "content": 462,
+     "scrolls": true,
+     "tabindex": "0",
+     "role": "region",
+     "label": "비교표"
+    },
+    {
+     "cols": 3,
+     "rows": 4,
+     "wrapper": 374,
+     "content": 462,
+     "scrolls": true,
+     "tabindex": "0",
+     "role": "region",
+     "label": "비교표"
+    }
+   ]
+  },
+  "skills-first-guide@768": {
+   "viewport": 768,
+   "docScroll": 768,
+   "pageOverflow": false,
+   "tables": [
+    {
+     "cols": 3,
+     "rows": 3,
+     "wrapper": 752,
+     "content": 750,
+     "scrolls": false,
+     "tabindex": "0",
+     "role": "region",
+     "label": "비교표"
+    },
+    {
+     "cols": 3,
+     "rows": 4,
+     "wrapper": 752,
+     "content": 750,
+     "scrolls": false,
+     "tabindex": "0",
+     "role": "region",
+     "label": "비교표"
+    }
+   ]
+  }
+ },
+ "detail_360": {
+  "live-3": [
+   {
+    "cols": 3,
+    "fullyVisibleCols": 2,
+    "tableHeight": 343,
+    "overflowX": "auto",
+    "cellMinWidth": "120px",
+    "cellPadding": "15px 17px",
+    "hasShadowHint": false,
+    "stickyFirst": "static"
+   },
+   {
+    "cols": 3,
+    "fullyVisibleCols": 2,
+    "tableHeight": 314,
+    "overflowX": "auto",
+    "cellMinWidth": "120px",
+    "cellPadding": "15px 17px",
+    "hasShadowHint": false,
+    "stickyFirst": "static"
+   }
+  ],
+  "local-model": [
+   {
+    "cols": 3,
+    "fullyVisibleCols": 2,
+    "tableHeight": 518,
+    "overflowX": "auto",
+    "cellMinWidth": "120px",
+    "cellPadding": "15px 17px",
+    "hasShadowHint": false,
+    "stickyFirst": "static"
+   },
+   {
+    "cols": 5,
+    "fullyVisibleCols": 2,
+    "tableHeight": 456,
+    "overflowX": "auto",
+    "cellMinWidth": "120px",
+    "cellPadding": "15px 17px",
+    "hasShadowHint": false,
+    "stickyFirst": "static"
+   },
+   {
+    "cols": 6,
+    "fullyVisibleCols": 2,
+    "tableHeight": 381,
+    "overflowX": "auto",
+    "cellMinWidth": "120px",
+    "cellPadding": "15px 17px",
+    "hasShadowHint": false,
+    "stickyFirst": "static"
+   },
+   {
+    "cols": 4,
+    "fullyVisibleCols": 2,
+    "tableHeight": 305,
+    "overflowX": "auto",
+    "cellMinWidth": "120px",
+    "cellPadding": "15px 17px",
+    "hasShadowHint": false,
+    "stickyFirst": "static"
+   }
+  ]
+ }
+}

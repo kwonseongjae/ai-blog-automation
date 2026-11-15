@@ -538,5 +538,60 @@
       "role": "발행 전 원고 검증 규칙을 코드로 두고 테스트로 확인",
       "result": "어긋난 원고 13건과 발행 주소 4건이 모두 거절되고 정상 원고와 주소는 통과"
     }
+  },
+  {
+    "id": "mobile-table-guide",
+    "kind": "guide",
+    "category": "프로젝트 적용기",
+    "title": "긴 비교표를 휴대폰에서 읽게 하려면: 폭 360px에서 표 11개를 재어 본 기록",
+    "sources": [
+      "https://github.com/kwonseongjae/ai-blog-automation/blob/main/automation/technical_skin.css",
+      "https://github.com/kwonseongjae/ai-blog-automation/blob/main/docs/posts/evidence/mobile-table-widths.json"
+    ],
+    "markdown": "docs/posts/mobile-table-guide.md",
+    "checked_on": "2026-11-15",
+    "verification": "Linux의 데스크톱 Chromium 145 모바일 에뮬레이션으로 폭 360·390·768px에서 공개 글 표 2개와 발행 전 글 표 9개의 스크롤 여부와 보이는 열 수를 측정. 실기기·iOS·안드로이드·키보드·스크린리더는 확인하지 않음.",
+    "assets": {
+      "cover": "docs/posts/assets/mobile-table-guide-cover.png",
+      "flow": "docs/posts/assets/mobile-table-guide-flow.png"
+    },
+    "cover_text": [
+      "프로젝트 적용기",
+      "휴대폰에서 읽는 표",
+      "폭 360px에서 표 11개를",
+      "재어 본 기록"
+    ],
+    "diagram_title": "표를 폭별로 재는 순서",
+    "diagram_steps": [
+      [
+        "스크롤 상자",
+        "표를 래퍼 안에 둠"
+      ],
+      [
+        "폭별 측정",
+        "360 · 390 · 768px"
+      ],
+      [
+        "넘침 확인",
+        "스크롤 여부와 보이는 열"
+      ]
+    ],
+    "tags": [
+      "블로그 화면",
+      "모바일 표",
+      "CSS",
+      "반응형",
+      "프로젝트 적용기"
+    ],
+    "related": [
+      "validator-cases-guide",
+      "daily-publish-state"
+    ],
+    "project": {
+      "name": "ai-blog-automation",
+      "url": "https://github.com/kwonseongjae/ai-blog-automation",
+      "role": "표를 스크롤 상자에 넣는 스킨 CSS를 두고 폭별로 측정",
+      "result": "360·390px에서 표 11개가 상자 안에서만 스크롤되고 페이지 전체는 옆으로 밀리지 않음"
+    }
   }
 ]
