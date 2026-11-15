@@ -1,0 +1,177 @@
+{
+ "checked_on": "2026-11-16",
+ "environment": "Linux, Codex CLI 0.167.2, Claude Code 2.1.325, 조건별 1회 실행",
+ "server": {
+  "file": "samples/mcp_demo_server.py",
+  "transport": "stdio(줄 단위 JSON-RPC)",
+  "tools": [
+   "add",
+   "word_count"
+  ],
+  "log": "환경변수 MCP_DEMO_LOG 파일에 start와 도구 호출을 기록",
+  "note": "실행에는 같은 내용의 파일을 임시 폴더에 두고 절대 경로로 지정했다"
+ },
+ "prompt": "demo MCP 서버의 add 도구로 17과 25를 더하고 결과 숫자만 알려 주세요. 그 도구를 쓸 수 없으면 쓸 수 없다고만 답하세요.",
+ "direct_protocol_test": {
+  "steps": [
+   "initialize",
+   "notifications/initialized",
+   "tools/list",
+   "tools/call add(17,25)",
+   "tools/call word_count(\"hello mcp world\")"
+  ],
+  "results": {
+   "add": "42",
+   "word_count": "3"
+  },
+  "server_log": [
+   "start",
+   "call add {\"a\": 17, \"b\": 25}",
+   "call word_count {\"text\": \"hello mcp world\"}",
+   "stop"
+  ]
+ },
+ "claude_code": {
+  "setup": "claude mcp add --scope project demo -e MCP_DEMO_LOG=<로그> -- python3 <서버 파일 경로> (임시 프로젝트 폴더에서 실행, 사용자 설정 파일은 건드리지 않음)",
+  "mcp_json": {
+   "mcpServers": {
+    "demo": {
+     "type": "stdio",
+     "command": "python3",
+     "args": [
+      "<작업폴더>/demo_server.py"
+     ],
+     "env": {
+      "MCP_DEMO_LOG": "<작업폴더>/claude.log"
+     }
+    }
+   }
+  },
+  "mcp_list_status_for_demo": "⏸ Pending approval (run `claude` to approve)",
+  "runs": [
+   {
+    "case": "A: 설정 파일의 서버, --allowedTools mcp__demo__add",
+    "command_flags": "-p --model haiku --setting-sources project,local --allowedTools mcp__demo__add",
+    "result": "42",
+    "turns": 3,
+    "server_log": [
+     "start",
+     "call add {\"a\": 17, \"b\": 25}"
+    ]
+   },
+   {
+    "case": "B: --mcp-config .mcp.json --strict-mcp-config 추가",
+    "result": "42",
+    "turns": 3,
+    "server_log": [
+     "start",
+     "call add {\"a\": 17, \"b\": 25}"
+    ]
+   },
+   {
+    "case": "C: B에서 --allowedTools 제거",
+    "result": "이 도구는 사용할 수 없습니다.",
+    "turns": 3,
+    "permission_denials": [
+     "mcp__demo__add"
+    ],
+    "server_log": [
+     "start"
+    ]
+   },
+   {
+    "case": "D: 서버 경로가 틀린 설정",
+    "result": "쓸 수 없습니다.",
+    "turns": 2
+   }
+  ],
+  "stream_json_init": {
+   "normal": {
+    "mcp_servers": [
+     {
+      "name": "demo",
+      "status": "connected"
+     }
+    ],
+    "mcp_tools": [
+     "mcp__demo__add",
+     "mcp__demo__word_count"
+    ]
+   },
+   "bad_path": {
+    "mcp_servers": [
+     {
+      "name": "demo",
+      "status": "failed"
+     }
+    ],
+    "mcp_tools": []
+   }
+  }
+ },
+ "codex": {
+  "setup": "CODEX_HOME을 임시 폴더로 바꾸고 인증 파일만 링크한 뒤 codex mcp add demo --env MCP_DEMO_LOG=<로그> -- python3 <서버 파일 경로>",
+  "config_toml": "[mcp_servers.demo]\ncommand = \"python3\"\nargs = [\"<작업폴더>/demo_server.py\"]\n\n[mcp_servers.demo.env]\nMCP_DEMO_LOG = \"<작업폴더>/codex.log\"",
+  "mcp_list": "Status enabled, Auth Unsupported, 환경변수 값은 *****로 가려짐",
+  "runs": [
+   {
+    "case": "기본 설정, -s read-only",
+    "result": "쓸 수 없습니다.",
+    "tool_line": "mcp: demo/add (failed)",
+    "message": "MCP tool call requires approval, but approval policy is never",
+    "tokens": 7597,
+    "server_log": [
+     "start"
+    ]
+   },
+   {
+    "case": "기본 설정, -s workspace-write",
+    "result": "쓸 수 없습니다.",
+    "message": "MCP tool call requires approval, but approval policy is never",
+    "server_log": [
+     "start"
+    ]
+   },
+   {
+    "case": "default_tools_approval_mode=\"approve\"",
+    "result": "42",
+    "tool_line": "mcp: demo/add (completed)",
+    "tokens": 6845,
+    "server_log": [
+     "start",
+     "call add {\"a\": 17, \"b\": 25}"
+    ]
+   },
+   {
+    "case": "default_tools_approval_mode=\"auto\"",
+    "result": "쓸 수 없습니다.",
+    "message": "MCP tool call requires approval, but approval policy is never",
+    "tokens": 6841,
+    "server_log": [
+     "start"
+    ]
+   },
+   {
+    "case": "default_tools_approval_mode=\"writes\"",
+    "result": "쓸 수 없습니다.",
+    "message": "MCP tool call requires approval, but approval policy is never",
+    "server_log": [
+     "start"
+    ]
+   },
+   {
+    "case": "approve + 서버 경로가 틀린 설정",
+    "result": "쓸 수 없습니다.",
+    "visible_error": "출력에 서버 시작 실패를 알리는 줄이 없음",
+    "tokens": 7131
+   }
+  ],
+  "mcp_list_with_bad_path": "Status enabled로 그대로 표시(연결 상태를 확인하지 않음)"
+ },
+ "not_checked": [
+  "streamable HTTP 서버와 OAuth",
+  "대화형 화면의 /mcp와 승인 창",
+  "다른 모델·반복 실행",
+  "Windows·macOS"
+ ]
+}

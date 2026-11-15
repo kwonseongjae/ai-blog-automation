@@ -432,6 +432,56 @@
     ]
   },
   {
+    "id": "mcp-first-connect-guide",
+    "kind": "guide",
+    "category": "AI 시작하기",
+    "title": "MCP 서버 처음 연결하기: Codex와 Claude Code에 연습용 서버를 붙여 도구 호출까지 확인한 기록",
+    "sources": [
+      "https://learn.chatgpt.com/docs/extend/mcp",
+      "https://code.claude.com/docs/en/mcp"
+    ],
+    "markdown": "docs/posts/mcp-first-connect-guide.md",
+    "checked_on": "2026-11-16",
+    "verification": "Linux 한 환경에서 Codex CLI 0.167.2와 Claude Code 2.1.325에 직접 만든 stdio 연습용 서버를 연결하고 도구 호출·서버 로그·승인 설정별 결과를 조건별 1회 실행으로 기록. HTTP 서버, OAuth, 대화형 승인 창은 확인하지 않음.",
+    "assets": {
+      "cover": "docs/posts/assets/mcp-first-connect-guide-cover.png",
+      "flow": "docs/posts/assets/mcp-first-connect-guide-flow.png"
+    },
+    "cover_text": [
+      "AI 시작하기",
+      "MCP 서버 처음 연결",
+      "연습용 서버를 붙여",
+      "도구 호출까지 확인"
+    ],
+    "diagram_title": "MCP 연결을 확인하는 순서",
+    "diagram_steps": [
+      [
+        "서버 확인",
+        "프로토콜을 직접 넣어 보기"
+      ],
+      [
+        "도구에 등록",
+        "명령 한 줄과 설정 파일"
+      ],
+      [
+        "호출 대조",
+        "답변과 서버 로그 비교"
+      ]
+    ],
+    "tags": [
+      "MCP",
+      "Codex",
+      "Claude Code",
+      "MCP 서버 연결",
+      "AI 에이전트 설정"
+    ],
+    "related": [
+      "agent-permissions-first-guide",
+      "skills-first-guide",
+      "codex-vs-claude-code-compare"
+    ]
+  },
+  {
     "id": "daily-publish-state",
     "kind": "guide",
     "category": "프로젝트 적용기",
