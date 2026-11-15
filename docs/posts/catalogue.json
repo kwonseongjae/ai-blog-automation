@@ -182,6 +182,56 @@
     ]
   },
   {
+    "id": "agents-claude-md-first-guide",
+    "kind": "guide",
+    "category": "AI 시작하기",
+    "title": "AGENTS.md와 CLAUDE.md 처음 쓰기: 어떤 파일을 읽는지 직접 확인하는 법",
+    "sources": [
+      "https://learn.chatgpt.com/docs/agent-configuration/agents-md",
+      "https://code.claude.com/docs/en/memory"
+    ],
+    "markdown": "docs/posts/agents-claude-md-first-guide.md",
+    "checked_on": "2026-11-15",
+    "verification": "Linux 한 환경에서 Codex CLI 0.167.2와 Claude Code 2.1.325를 임시 폴더로 각각 실행해 문서의 읽기 규칙을 확인. 조건별 1회 실행이며 Windows·macOS와 요금제별 차이는 미확인.",
+    "assets": {
+      "cover": "docs/posts/assets/agents-claude-md-first-guide-cover.png",
+      "flow": "docs/posts/assets/agents-claude-md-first-guide-flow.png"
+    },
+    "cover_text": [
+      "AI 시작하기",
+      "지침 파일",
+      "AGENTS · CLAUDE",
+      "어떤 파일을 읽는지 확인하기"
+    ],
+    "diagram_title": "지침 파일 읽기 확인 순서",
+    "diagram_steps": [
+      [
+        "지침 파일 만들기",
+        "규칙이 다른 파일 두 개"
+      ],
+      [
+        "같은 질문으로 확인",
+        "도구마다 읽은 파일 묻기"
+      ],
+      [
+        "읽은 파일 대조",
+        "문서의 읽기 규칙과 비교"
+      ]
+    ],
+    "tags": [
+      "AGENTS.md",
+      "CLAUDE.md",
+      "지침 파일",
+      "AI 코딩 도구",
+      "Codex",
+      "Claude Code"
+    ],
+    "related": [
+      "codex-first-settings",
+      "claude-code-first-settings"
+    ]
+  },
+  {
     "id": "daily-publish-state",
     "kind": "guide",
     "category": "프로젝트 적용기",
