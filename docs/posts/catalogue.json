@@ -484,5 +484,59 @@
     "related": [
       "ai-agent-first-task"
     ]
+  },
+  {
+    "id": "validator-cases-guide",
+    "kind": "guide",
+    "category": "프로젝트 적용기",
+    "title": "블로그 발행기가 잘못된 원고를 발행 전에 막는 방법: 규칙 13가지를 일부러 어겨 본 기록",
+    "sources": [
+      "https://github.com/kwonseongjae/ai-blog-automation/blob/main/automation/learning_blog.py",
+      "https://github.com/kwonseongjae/ai-blog-automation/blob/main/docs/posts/evidence/validator-cases.json"
+    ],
+    "markdown": "docs/posts/validator-cases-guide.md",
+    "checked_on": "2026-11-15",
+    "verification": "Linux 한 환경에서 원고 항목을 한 가지씩 어긋나게 바꾼 13건과 발행 주소 5건을 검증 함수에 입력해 메시지를 기록. 저장 상태·원격 일치·본문 길이 검사는 코드만 읽었고 직접 어긴 입력은 넣지 않음.",
+    "assets": {
+      "cover": "docs/posts/assets/validator-cases-guide-cover.png",
+      "flow": "docs/posts/assets/validator-cases-guide-flow.png"
+    },
+    "cover_text": [
+      "프로젝트 적용기",
+      "발행 전 검사",
+      "어긋난 원고 13건을 넣어",
+      "메시지를 확인한 기록"
+    ],
+    "diagram_title": "발행 전 세 단계 검사",
+    "diagram_steps": [
+      [
+        "항목 검사",
+        "출처·표지·태그·분류"
+      ],
+      [
+        "저장소 확인",
+        "변경 저장과 원격 main 일치"
+      ],
+      [
+        "본문 확인",
+        "700자와 소제목 네 개"
+      ]
+    ],
+    "tags": [
+      "블로그 자동화",
+      "발행 자동화",
+      "입력 검증",
+      "Python",
+      "프로젝트 적용기"
+    ],
+    "related": [
+      "daily-publish-state"
+    ],
+    "project": {
+      "name": "ai-blog-automation",
+      "url": "https://github.com/kwonseongjae/ai-blog-automation",
+      "role": "발행 전 원고 검증 규칙을 코드로 두고 테스트로 확인",
+      "result": "어긋난 원고 13건과 발행 주소 4건이 모두 거절되고 정상 원고와 주소는 통과"
+    }
   }
 ]

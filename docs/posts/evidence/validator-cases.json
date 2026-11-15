@@ -1,0 +1,83 @@
+{
+  "checked_on": "2026-11-15",
+  "environment": "Linux 한 환경, 단위 테스트 50개 통과",
+  "method": "스킬 입문 글(skills-first-guide)의 카탈로그 항목을 복사해 한 가지씩만 바꾼 뒤 validate_article에 입력, 발행 주소는 validate_url에 입력",
+  "cases": [
+    {
+      "case": "원래 원고",
+      "result": "통과"
+    },
+    {
+      "case": "공식 출처 1개만",
+      "result": "ValueError: 안내 원고에는 확인 범위·공식 출처 두 개·표지가 필요합니다"
+    },
+    {
+      "case": "허용 밖 출처 주소",
+      "result": "ValueError: 허용된 공식 문서 주소가 아닙니다"
+    },
+    {
+      "case": "http 주소 출처",
+      "result": "ValueError: 허용된 공식 문서 주소가 아닙니다"
+    },
+    {
+      "case": "표지 없음",
+      "result": "ValueError: 안내 원고에는 확인 범위·공식 출처 두 개·표지가 필요합니다"
+    },
+    {
+      "case": "확인일 형식 오류",
+      "result": "ValueError: Invalid isoformat string: '2026/11/15'"
+    },
+    {
+      "case": "확인 범위 비움",
+      "result": "ValueError: 안내 원고에는 확인 범위·공식 출처 두 개·표지가 필요합니다"
+    },
+    {
+      "case": "태그 2개",
+      "result": "ValueError: 태그는 비어 있지 않은 3~6개가 필요합니다"
+    },
+    {
+      "case": "태그 7개",
+      "result": "ValueError: 태그는 비어 있지 않은 3~6개가 필요합니다"
+    },
+    {
+      "case": "관련 글 4개",
+      "result": "ValueError: 관련 글은 식별자 3개 이하의 목록이어야 합니다"
+    },
+    {
+      "case": "없는 분류",
+      "result": "ValueError: 허용되지 않은 카테고리입니다"
+    },
+    {
+      "case": "원고 경로가 저장소 밖",
+      "result": "ValueError: 저장소 내부 원고가 필요합니다"
+    },
+    {
+      "case": "식별자에 대문자",
+      "result": "ValueError: 원고 식별자가 올바르지 않습니다"
+    },
+    {
+      "case": "남의 저장소를 프로젝트로 지정",
+      "result": "ValueError: 프로젝트 주소는 본인 저장소여야 합니다"
+    },
+    {
+      "case": "발행 주소 https://jacks-aiblog.tistory.com/3",
+      "result": "통과"
+    },
+    {
+      "case": "발행 주소 https://jacks-aiblog.tistory.com/3?x=1",
+      "result": "대상 블로그의 공개 글 주소가 아닙니다"
+    },
+    {
+      "case": "발행 주소 https://jack-0314.tistory.com/3",
+      "result": "대상 블로그의 공개 글 주소가 아닙니다"
+    },
+    {
+      "case": "발행 주소 http://jacks-aiblog.tistory.com/3",
+      "result": "대상 블로그의 공개 글 주소가 아닙니다"
+    },
+    {
+      "case": "발행 주소 https://jacks-aiblog.tistory.com/manage",
+      "result": "대상 블로그의 공개 글 주소가 아닙니다"
+    }
+  ]
+}
