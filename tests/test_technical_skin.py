@@ -1,6 +1,7 @@
 import unittest
 
-from automation.technical_skin import transform
+from automation import technical_skin
+from automation.technical_skin import start_here, transform
 
 
 class TechnicalSkinTests(unittest.TestCase):
@@ -13,6 +14,19 @@ class TechnicalSkinTests(unittest.TestCase):
         self.assertIn('https://github.com/kwonseongjae/ai-blog-automation', result)
         self.assertNotIn('jack-0314', result)
         self.assertIn('prefers-reduced-motion', result)
+
+    def test_start_here_only_own_blog(self):
+        self.assertIn('https://jacks-aiblog.tistory.com/3', start_here())
+        original = technical_skin.START_HERE
+        try:
+            technical_skin.START_HERE = (('외부', 'https://evil.test/3'),)
+            with self.assertRaises(ValueError):
+                start_here()
+        finally:
+            technical_skin.START_HERE = original
+
+    def test_cover_stays_under_thumbnail(self):
+        self.assertNotIn('.thumbnail[has-thumbnail="1"] .learning-cover{display:none}', technical_skin.CSS)
 
     def test_unrecognized_template_is_not_silently_overwritten(self):
         with self.assertRaises(ValueError):
@@ -33,7 +47,11 @@ class TechnicalSkinTests(unittest.TestCase):
         self.assertIn('<s_search>검색</s_search>', result)
         self.assertEqual(result.count('<s_sidebar_element>'), 3)
         self.assertNotIn('default_L.png', result)
-        self.assertIn('개발하면서 배운 것들을 적습니다.', result)
+        self.assertIn('AI를 처음 쓰는 개발자', result)
+        for chip in ('시작하기', '에이전트·모델 비교', '프로젝트 적용'):
+            self.assertIn(chip, result.split('class="learning-chips"')[1].split('</div>')[0])
+        self.assertNotIn('자동화 실습</a></div>', result.split('class="learning-chips"')[1].split('</div>')[0])
+        self.assertIn('먼저 읽을 글', result)
         self.assertIn('GitHub 실습 코드', result)
         self.assertIn('GitHub 프로필', result)
         self.assertNotIn('class="learning-topics"', result)

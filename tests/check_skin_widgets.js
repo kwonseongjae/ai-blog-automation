@@ -20,6 +20,9 @@ for (const bodyId of ['tt-body-index', 'tt-body-category']) {
     closest() { return this; },
     setAttribute() {},
   }));
+  const makeThumb = (complete, naturalWidth) => ({complete, naturalWidth, hidden: false, listeners: {},
+    addEventListener(name, fn) { this.listeners[name] = fn; }});
+  const thumbs = [makeThumb(true, 0), makeThumb(true, 640), makeThumb(false, 0)];
   const document = {
     body: {id: bodyId},
     querySelector: selector => selector === '.title-search .archives' ? title : null,
@@ -27,6 +30,7 @@ for (const bodyId of ['tt-body-index', 'tt-body-category']) {
       if (selector === '.tt_category .link_item') return rows;
       if (selector === '.learning-menu a') return menu;
       if (selector === '.learning-cover strong') return covers;
+      if (selector === '.img-thumbnail') return thumbs;
       return [];
     },
   };
@@ -37,6 +41,10 @@ for (const bodyId of ['tt-body-index', 'tt-body-category']) {
   vm.runInContext(source, context);
   assert.deepEqual(rows.map(row => row.hidden), [true, false, false, false, true, false]);
   assert.deepEqual(menu.map(row => row.hidden), [true, false, false, false, true, false]);
+  assert.deepEqual(thumbs.map(t => t.hidden), [true, false, false]);
+  thumbs[2].listeners.error();
+  assert.equal(thumbs[2].hidden, true);
+  assert.equal(thumbs[1].hidden, false);
   assert.equal(title.textContent, bodyId === 'tt-body-index' ? '최근 기록' : '전체 글');
   assert.deepEqual(covers.map(cover => cover.textContent), ['한국 시간\n날짜 기준', '파일 경로\n실행 위치', '새 학습 기록']);
 }

@@ -3,9 +3,12 @@ import re
 from pathlib import Path
 from urllib.parse import quote
 
-from automation.learning_blog import CATEGORIES, REPOSITORY
+from automation.learning_blog import CATEGORIES, REPOSITORY, validate_url
 
 BLOG_TITLE = 'Jack의 AI 개발노트'
+# 먼저 읽을 글: 입문 순서대로 직접 고른다. 새 입문 글이 발행되면 한 줄 추가한다.
+START_HERE = (('AI 에이전트란? 챗봇과 다른 점과 처음 맡길 일 3가지', 'https://jacks-aiblog.tistory.com/3'),)
+CHIP_CATEGORIES = CATEGORIES[:3]
 CSS = '<style id="learning-style">\n' + Path(__file__).with_suffix('.css').read_text().strip() + '\n</style>'
 SCRIPT = '<script id="learning-widgets">\n' + Path(__file__).with_suffix('.js').read_text().strip() + '\n</script>'
 
@@ -17,11 +20,19 @@ def navigation():
 <!-- learning-navigation:end -->"""
 
 
+def start_here():
+    items = ''.join(f'<li><a href="{validate_url(url)}">{title}</a></li>' for title, url in START_HERE)
+    return f'<div class="learning-start"><h3>먼저 읽을 글</h3><ol>{items}</ol></div>'
+
+
 def home():
+    chips = ''.join(f'<a href="/category/{quote(name)}">{name}</a>' for name in CHIP_CATEGORIES)
     return f"""<!-- learning-home:start -->
 <section id="learning-home" class="learning-home" aria-labelledby="learning-title">
-  <h2 id="learning-title">개발하면서 배운 것들을 적습니다.</h2>
-  <p>AI 도구를 직접 써보고, Python으로 자동화를 만듭니다.<br>설정 방법부터 프로젝트에서 막힌 이유까지 코드와 그림으로 정리합니다.</p>
+  <h2 id="learning-title">AI를 처음 쓰는 개발자를 위한 설정·비교·적용 기록</h2>
+  <p>도구 설치와 설정, 에이전트·모델 고르는 기준, 직접 만든 프로젝트에 적용한 과정을<br>실행 결과와 함께 적습니다.</p>
+  <div class="learning-chips">{chips}</div>
+  {start_here()}
   <div class="learning-actions"><a href="{REPOSITORY}" target="_blank" rel="noopener">GitHub 실습 코드</a><a href="https://github.com/kwonseongjae" target="_blank" rel="noopener">GitHub 프로필</a></div>
 </section>
 <!-- learning-home:end -->"""

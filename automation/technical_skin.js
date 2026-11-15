@@ -29,6 +29,10 @@
     var title=document.querySelector('.title-search .archives');
     if(title)title.textContent='최근 기록';
   }
+  document.querySelectorAll('.img-thumbnail').forEach(function(img){
+    var hide=function(){img.hidden=true;};
+    if(img.complete&&img.naturalWidth===0)hide();else img.addEventListener('error',hide);
+  });
   document.querySelectorAll('.learning-cover strong').forEach(function(cover){
     var title=cover.textContent;
     if(title.includes('한국 시간'))cover.textContent='한국 시간\n날짜 기준';
