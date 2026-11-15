@@ -1,13 +1,14 @@
 """저장된 세션으로 지정한 블로그의 편집기만 사용한다. 재로그인은 하지 않는다."""
 import os
 import html
+import hashlib
 import json
 import re
 import time
 from pathlib import Path
 from urllib.parse import urlsplit
 
-from automation.learning_blog import BLOG, validate_url
+from automation.learning_blog import BLOG, ROOT, read_assets, validate_url
 
 
 def normalize_cookies(saved):
@@ -55,16 +56,59 @@ def verify(url, article):
     r = httpx.get(url, follow_redirects=False, timeout=25, trust_env=False)
     if r.status_code != 200 or article['title'] not in html.unescape(r.text):
         return False
-    actual = BeautifulSoup(r.text, 'html.parser').find(id=article['marker'])
-    if actual is None or actual.find('pre') is None:
+    document = BeautifulSoup(r.text, 'html.parser')
+    actual = document.find(id=article['marker'])
+    if actual is None or (article.get('kind', 'lab') == 'lab' and actual.find('pre') is None):
+        return False
+    expected_signature = article.get('expected_body') or (
+        body_signature(article['html'], article['marker']) if article.get('html') else None)
+    if expected_signature and body_signature(str(actual), article['marker']) != expected_signature:
+        return False
+    images = actual.find_all('img')
+    if any(not valid_image_url(image.get('src', '')) for image in images):
         return False
     if article.get('html'):
         expected = BeautifulSoup(article['html'], 'html.parser').find(id=article['marker'])
-        if re.sub(r'\s+', '', actual.get_text()) != re.sub(r'\s+', '', expected.get_text()):
+        for image, original in zip(images, expected.find_all('img')):
+            if urlsplit(image['src']).path != urlsplit(original['src']).path:
+                return False
+    if images:
+        cover = document.find('meta', property='og:image')
+        if not cover or not valid_image_url(cover.get('content', '')):
             return False
-        if [c.get_text().strip() for c in actual.find_all('pre')] != [c.get_text().strip() for c in expected.find_all('pre')]:
+        from urllib.parse import parse_qs
+        cover_url = cover['content']
+        cover_url = parse_qs(urlsplit(cover_url).query).get('fname', [cover_url])[0]
+        if urlsplit(cover_url).path != urlsplit(images[0]['src']).path:
             return False
     return True
+
+
+def body_signature(body, marker):
+    from bs4 import BeautifulSoup
+    node = BeautifulSoup(body, 'html.parser').find(id=marker)
+    if node is None:
+        raise ValueError('본문 식별자가 없습니다')
+    return {'text': hashlib.sha256(re.sub(r'\s+', '', node.get_text()).encode()).hexdigest(),
+            'code': [pre.get_text().strip() for pre in node.find_all('pre')],
+            'tables': [[[cell.name, cell.get_text().strip()] for cell in row.select('th,td')]
+                       for table in node.find_all('table') for row in table.find_all('tr')],
+            'images': [image.get('alt', '') for image in node.find_all('img')]}
+
+
+def valid_image_url(url):
+    p = urlsplit(url)
+    return (p.scheme == 'https' and not p.username and not p.password
+            and (p.netloc.endswith('.kakaocdn.net') or p.netloc.endswith('.daumcdn.net')
+                 or p.netloc == 'cfile.tistory.com'))
+
+
+def new_image_url(previous, current):
+    old_paths = {urlsplit(url).path for url in previous}
+    uploaded = [url for url in current if valid_image_url(url) and urlsplit(url).path not in old_paths]
+    if len(uploaded) != 1:
+        raise RuntimeError('새로 업로드한 이미지 하나를 구분하지 못했습니다')
+    return uploaded[0]
 
 
 def validate_posts(result):
@@ -85,6 +129,33 @@ def read_posts(cookies):
                   follow_redirects=False, timeout=25, trust_env=False)
     r.raise_for_status()
     return validate_posts(r.json())
+
+
+def upload_article_images(page, article):
+    from bs4 import BeautifulSoup
+    assets = read_assets(article, ROOT)
+    if not assets:
+        return
+    # 표지부터 올려 편집기가 첫 이미지를 대표 이미지 후보로 등록하게 한다.
+    page.evaluate('tinyMCE.activeEditor.setContent("")')
+    body = article['html']
+    for name in sorted(assets, key=lambda key: (key != 'cover', key)):
+        previous = page.evaluate('[...tinyMCE.activeEditor.getBody().querySelectorAll("img")].map(i=>i.src)')
+        page.locator('#mceu_0-open').evaluate('(el) => el.click()')
+        with page.expect_file_chooser(timeout=15000) as chooser:
+            page.get_by_text('사진', exact=True).evaluate('(el) => el.click()')
+        chooser.value.set_files(str(ROOT / article['assets'][name]))
+        page.wait_for_function('''(previous) => {
+            const images = tinyMCE.activeEditor.getBody().querySelectorAll('img');
+            return [...images].some(i => i.src.startsWith('https://') && !previous.includes(i.src));
+        }''', arg=previous, polling=100, timeout=45000)
+        current = page.evaluate('[...tinyMCE.activeEditor.getBody().querySelectorAll("img")].map(i=>i.src)')
+        url = new_image_url(previous, current)
+        body = body.replace(assets[name], html.escape(url, quote=True))
+    images = BeautifulSoup(body, 'html.parser').find_all('img')
+    if not images or any(not valid_image_url(image.get('src', '')) for image in images):
+        raise RuntimeError('업로드되지 않은 이미지가 남아 있습니다')
+    article['html'] = body
 
 
 def publish(article):
@@ -110,10 +181,12 @@ def publish(article):
             page.get_by_role('option', name=article['category'], exact=True).evaluate('(el) => el.click()')
             page.wait_for_function('(name) => document.querySelector("#category-btn").textContent.includes(name)',
                                    arg=article['category'], polling=100)
+            upload_article_images(page, article)
             page.evaluate('(body) => { tinyMCE.activeEditor.setContent(body); tinyMCE.activeEditor.save(); }', article['html'])
             page.wait_for_function('(marker) => tinyMCE.activeEditor.getContent().includes(marker)', arg=article['marker'], polling=100)
-            page.locator('#tagText').fill('Python')
-            page.locator('#tagText').press('Enter')
+            for tag in article.get('tags', ['AI 활용'] if article['category'] == 'AI·데이터' else ['Python', '자동화']):
+                page.locator('#tagText').fill(tag)
+                page.locator('#tagText').press('Enter')
             check_management_url(page.url)
             page.locator('#publish-layer-btn').evaluate('(el) => el.click()')
             page.locator('#open20').evaluate('(el) => el.click()')

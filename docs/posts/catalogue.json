@@ -8,7 +8,16 @@
       "https://docs.python.org/3.12/library/zoneinfo.html",
       "https://docs.python.org/3.12/library/datetime.html"
     ],
-    "markdown": "docs/posts/python-kst-date.md"
+    "markdown": "docs/posts/python-kst-date.md",
+    "cover_text": [
+      "Python·자동화",
+      "한국 시간",
+      "날짜 기준",
+      "UTC와 한국 날짜의 차이"
+    ],
+    "assets": {
+      "cover": "docs/posts/assets/python-kst-date-cover.png"
+    }
   },
   {
     "id": "python-path-base",
@@ -18,7 +27,172 @@
     "sources": [
       "https://docs.python.org/3.12/library/pathlib.html"
     ],
-    "markdown": "docs/posts/python-path-base.md"
+    "markdown": "docs/posts/python-path-base.md",
+    "cover_text": [
+      "Python·자동화",
+      "파일 경로",
+      "실행 위치",
+      "예약 실행의 기준 폴더"
+    ],
+    "assets": {
+      "cover": "docs/posts/assets/python-path-base-cover.png"
+    }
+  },
+  {
+    "id": "ai-agent-first-task",
+    "kind": "guide",
+    "category": "AI·데이터",
+    "title": "AI 에이전트란? 챗봇과 다른 점과 처음 맡길 일 3가지",
+    "sources": [
+      "https://learn.chatgpt.com/docs/working-with-agents.md",
+      "https://www.anthropic.com/research/building-effective-agents",
+      "https://code.claude.com/docs/en/permissions"
+    ],
+    "markdown": "docs/posts/ai-agent-first-task.md",
+    "checked_on": "2026-11-15",
+    "verification": "읽기 도구만 제공한 실행의 세 값을 원문과 대조. 다단계 자율 작업 성능은 측정하지 않음.",
+    "assets": {
+      "cover": "docs/posts/assets/ai-agent-first-task-cover.png",
+      "flow": "docs/posts/assets/ai-agent-first-task-flow.png"
+    },
+    "cover_text": [
+      "AI 기초",
+      "AI 에이전트",
+      "어디까지 맡길까",
+      "챗봇과의 차이 · 첫 요청 예시"
+    ],
+    "diagram_title": "처음 맡긴 읽기 작업",
+    "diagram_steps": [
+      [
+        "요청 범위 정하기",
+        "README 한 장 · 읽기 도구만 허용"
+      ],
+      [
+        "문서에서 값 찾기",
+        "주소 · 실습 경로 · 테스트 명령"
+      ],
+      [
+        "원문과 비교하기",
+        "반환한 세 값을 직접 대조"
+      ]
+    ]
+  },
+  {
+    "id": "codex-first-settings",
+    "kind": "guide",
+    "category": "AI·데이터",
+    "title": "Codex 처음 쓸 때: 설치·로그인·작업 폴더부터 확인하는 법",
+    "sources": [
+      "https://learn.chatgpt.com/docs/codex/cli.md",
+      "https://learn.chatgpt.com/docs/permission-modes.md",
+      "https://github.com/openai/codex"
+    ],
+    "markdown": "docs/posts/codex-first-settings.md",
+    "checked_on": "2026-11-15",
+    "verification": "WSL의 기존 설치 버전 0.167.2와 도움말 확인. 새 Windows 설치와 예시 요청의 응답은 미수행.",
+    "assets": {
+      "cover": "docs/posts/assets/codex-first-settings-cover.png",
+      "flow": "docs/posts/assets/codex-first-settings-flow.png"
+    },
+    "cover_text": [
+      "Codex 사용법",
+      "Codex",
+      "처음 쓰는 설정",
+      "설치 · 로그인 · 작업 폴더"
+    ],
+    "diagram_title": "Codex 첫 실행 순서",
+    "diagram_steps": [
+      [
+        "터미널 환경 선택",
+        "PowerShell 또는 WSL 한 곳"
+      ],
+      [
+        "설치와 계정 확인",
+        "버전 · 로그인 · 권한 범위"
+      ],
+      [
+        "작은 설명부터 시작",
+        "README를 읽고 근거 확인"
+      ]
+    ]
+  },
+  {
+    "id": "claude-code-first-settings",
+    "kind": "guide",
+    "category": "AI·데이터",
+    "title": "Claude Code 처음 설정하기: Windows와 WSL 명령을 섞지 않는 법",
+    "sources": [
+      "https://code.claude.com/docs/en/quickstart",
+      "https://code.claude.com/docs/en/setup",
+      "https://code.claude.com/docs/en/permissions"
+    ],
+    "markdown": "docs/posts/claude-code-first-settings.md",
+    "checked_on": "2026-11-15",
+    "verification": "WSL의 기존 설치 버전 2.1.322 확인. 새 Windows 설치와 본문 첫 요청 예시 응답은 미수행.",
+    "assets": {
+      "cover": "docs/posts/assets/claude-code-first-settings-cover.png",
+      "flow": "docs/posts/assets/claude-code-first-settings-flow.png"
+    },
+    "cover_text": [
+      "Claude Code 사용법",
+      "Claude Code",
+      "Windows · WSL",
+      "설치할 터미널부터 확인하기"
+    ],
+    "diagram_title": "Claude Code 첫 실행 순서",
+    "diagram_steps": [
+      [
+        "설치할 환경 선택",
+        "PowerShell과 WSL 명령 구분"
+      ],
+      [
+        "계정과 권한 확인",
+        "버전 · 로그인 · 상태 확인"
+      ],
+      [
+        "README 한 장 읽기",
+        "변경 없이 설명을 원문과 비교"
+      ]
+    ]
+  },
+  {
+    "id": "daily-publish-state",
+    "kind": "guide",
+    "category": "Python·자동화",
+    "title": "블로그 자동화에서 하루 한 번 발행을 지키는 방법",
+    "sources": [
+      "https://docs.python.org/3/library/fcntl.html",
+      "https://docs.python.org/3/library/os.html#os.replace",
+      "https://github.com/kwonseongjae/ai-blog-automation/blob/main/automation/learning_blog.py"
+    ],
+    "markdown": "docs/posts/daily-publish-state.md",
+    "checked_on": "2026-11-15",
+    "verification": "공개 구현과 상태 전이 테스트 확인. 복수 서버·장기 가용성·검색 성과는 미검증.",
+    "assets": {
+      "cover": "docs/posts/assets/daily-publish-state-cover.png",
+      "flow": "docs/posts/assets/daily-publish-state-flow.png"
+    },
+    "cover_text": [
+      "프로젝트 기록",
+      "하루 한 번 발행",
+      "상태를 먼저 저장",
+      "잠금 · 확인 대기 · 공개 검증"
+    ],
+    "diagram_title": "발행 결과를 모를 때의 처리",
+    "diagram_steps": [
+      [
+        "발행 전 기록",
+        "잠금 획득 · 확인 대기 저장"
+      ],
+      [
+        "발행 후 대조",
+        "공개 주소 · 원고 · 이미지 확인"
+      ],
+      [
+        "검증 뒤 완료",
+        "확인 실패는 대기 상태 유지"
+      ]
+    ]
   },
   {
     "id": "python-json-boundary",
@@ -29,7 +203,16 @@
       "https://docs.python.org/3.12/library/json.html",
       "https://docs.python.org/3.12/library/stdtypes.html#dict.get"
     ],
-    "markdown": "docs/posts/python-json-boundary.md"
+    "markdown": "docs/posts/python-json-boundary.md",
+    "cover_text": [
+      "API·백엔드",
+      "JSON 입력",
+      "먼저 검증하기",
+      "외부 응답의 형식과 값"
+    ],
+    "assets": {
+      "cover": "docs/posts/assets/python-json-boundary-cover.png"
+    }
   },
   {
     "id": "python-atomic-state",
@@ -40,7 +223,16 @@
       "https://docs.python.org/3.12/library/os.html#os.replace",
       "https://docs.python.org/3.12/library/tempfile.html"
     ],
-    "markdown": "docs/posts/python-atomic-state.md"
+    "markdown": "docs/posts/python-atomic-state.md",
+    "cover_text": [
+      "Python·자동화",
+      "상태 파일",
+      "안전하게 교체",
+      "임시 파일과 원자적 교체"
+    ],
+    "assets": {
+      "cover": "docs/posts/assets/python-atomic-state-cover.png"
+    }
   },
   {
     "id": "python-request-id",
@@ -50,7 +242,16 @@
     "sources": [
       "https://docs.python.org/3.12/library/sqlite3.html"
     ],
-    "markdown": "docs/posts/python-request-id.md"
+    "markdown": "docs/posts/python-request-id.md",
+    "cover_text": [
+      "API·백엔드",
+      "중복 요청",
+      "한 번만 저장",
+      "SQLite 고유 키"
+    ],
+    "assets": {
+      "cover": "docs/posts/assets/python-request-id-cover.png"
+    }
   },
   {
     "id": "python-subprocess-timeout",
@@ -60,7 +261,16 @@
     "sources": [
       "https://docs.python.org/3.12/library/subprocess.html#subprocess.run"
     ],
-    "markdown": "docs/posts/python-subprocess-timeout.md"
+    "markdown": "docs/posts/python-subprocess-timeout.md",
+    "cover_text": [
+      "오류 해결",
+      "실행 시간",
+      "기다림에 제한",
+      "subprocess 제한 시간"
+    ],
+    "assets": {
+      "cover": "docs/posts/assets/python-subprocess-timeout-cover.png"
+    }
   },
   {
     "id": "python-url-target",
@@ -70,6 +280,15 @@
     "sources": [
       "https://docs.python.org/3.12/library/urllib.parse.html#urllib.parse.urlsplit"
     ],
-    "markdown": "docs/posts/python-url-target.md"
+    "markdown": "docs/posts/python-url-target.md",
+    "cover_text": [
+      "API·백엔드",
+      "발행 대상",
+      "주소부터 확인",
+      "호스트와 경로 대조"
+    ],
+    "assets": {
+      "cover": "docs/posts/assets/python-url-target-cover.png"
+    }
   }
 ]

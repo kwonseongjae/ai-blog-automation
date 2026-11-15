@@ -2,7 +2,7 @@
 
 ## 기술 학습 블로그
 
-[Jack의 AI 개발노트](https://jacks-aiblog.tistory.com/)에서 Python·API·자동화를 작은 실습으로 기록합니다. 원고와 실행 코드, 테스트, 공식 문서를 연결합니다.
+[Jack의 AI 개발노트](https://jacks-aiblog.tistory.com/)에서 AI 도구 사용법과 Python 자동화를 기록합니다. 짧은 설명에 비교표·흐름 그림·실제 입력과 결과를 연결하고, 직접 만든 프로젝트의 선택 이유와 다른 작업에 적용할 방법을 정리합니다.
 
 - [학습 글과 원본](docs/posts/)
 - [독립 실행 예제 7개](labs/learning_basics.py)

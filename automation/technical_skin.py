@@ -21,13 +21,13 @@ def home():
     return f"""<!-- learning-home:start -->
 <section id="learning-home" class="learning-home" aria-labelledby="learning-title">
   <h2 id="learning-title">개발하면서 배운 것들을 적습니다.</h2>
-  <p>Python과 자동화를 공부하고 있습니다.<br>실습 코드와 막혔던 부분을 함께 정리합니다.</p>
+  <p>AI 도구를 직접 써보고, Python으로 자동화를 만듭니다.<br>설정 방법부터 프로젝트에서 막힌 이유까지 코드와 그림으로 정리합니다.</p>
   <div class="learning-actions"><a href="{REPOSITORY}" target="_blank" rel="noopener">GitHub 실습 코드</a><a href="https://github.com/kwonseongjae" target="_blank" rel="noopener">GitHub 프로필</a></div>
 </section>
 <!-- learning-home:end -->"""
 
 
-PROFILE = """<section class="learning-profile" aria-label="블로그 소개"><h3 class="title-sidebar">Jack</h3><p>Python과 자동화에서 시작해<br>AI 활용으로 공부를 넓혀갑니다.</p><p>글에 사용한 코드는 GitHub에,<br>참고한 문서는 본문에 남깁니다.</p></section>"""
+PROFILE = """<section class="learning-profile" aria-label="블로그 소개"><h3 class="title-sidebar">Jack</h3><p>AI 도구 활용과 Python 자동화.<br>직접 만든 프로젝트를 이해하고<br>다른 작업에도 적용해봅니다.</p><p>실행한 내용과 예시를 구분하고,<br>코드와 참고 문서를 남깁니다.</p></section>"""
 
 COVER = '<span class="learning-cover" aria-hidden="true"><span class="learning-cover-category">[##_list_rep_category_##]</span><strong>[##_list_rep_title_text_##]</strong></span>'
 

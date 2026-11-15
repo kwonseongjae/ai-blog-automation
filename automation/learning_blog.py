@@ -1,5 +1,6 @@
 """검증된 학습 원고를 한국 날짜 기준 하루 한 편 배포한다."""
 import argparse
+import base64
 import fcntl
 import hashlib
 import html
@@ -8,7 +9,7 @@ import os
 import re
 import subprocess
 import tempfile
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from pathlib import Path
 from urllib.parse import urlsplit
 from zoneinfo import ZoneInfo
@@ -34,23 +35,55 @@ def validate_url(url):
 
 
 def validate_article(article, root):
-    for key in ('id', 'title', 'category', 'markdown', 'lab', 'sources'):
+    for key in ('id', 'title', 'category', 'markdown', 'sources'):
         if not article.get(key):
             raise ValueError(f'원고 필수 항목 누락: {key}')
     if not re.fullmatch(r'[a-z][a-z0-9-]{1,70}', article['id']):
         raise ValueError('원고 식별자가 올바르지 않습니다')
     if article['category'] not in CATEGORIES:
         raise ValueError('허용되지 않은 카테고리입니다')
+    if not isinstance(article['sources'], list):
+        raise ValueError('공식 출처 목록이 필요합니다')
+    kind = article.get('kind', 'lab')
+    if kind not in {'lab', 'guide'} or (kind == 'lab' and not article.get('lab')):
+        raise ValueError('실습 또는 안내 원고 형식이 필요합니다')
+    if kind == 'guide':
+        date.fromisoformat(article.get('checked_on', ''))
+        if (not article.get('verification') or len(article['sources']) < 2
+                or not article.get('assets', {}).get('cover')):
+            raise ValueError('안내 원고에는 확인 범위·공식 출처 두 개·표지가 필요합니다')
     path = (root / article['markdown']).resolve()
     if not path.is_relative_to(root.resolve()) or not path.is_file():
         raise ValueError('저장소 내부 원고가 필요합니다')
-    if not isinstance(article['sources'], list):
-        raise ValueError('공식 출처 목록이 필요합니다')
     for source in article['sources']:
         p = urlsplit(source)
-        if p.scheme != 'https' or p.netloc not in {'docs.python.org', 'www.sqlite.org'}:
+        official = p.netloc in {'docs.python.org', 'www.sqlite.org', 'learn.chatgpt.com',
+                               'developers.openai.com', 'code.claude.com', 'www.anthropic.com'}
+        official_repo = p.netloc == 'github.com' and any(
+            p.path == repo or p.path.startswith(repo + '/') for repo in
+            ('/openai/codex', '/anthropics/claude-code', '/kwonseongjae/ai-blog-automation'))
+        if p.scheme != 'https' or not (official or official_repo):
             raise ValueError('허용된 공식 문서 주소가 아닙니다')
+    read_assets(article, root)
     return path
+
+
+def read_assets(article, root):
+    assets = article.get('assets', {})
+    if not isinstance(assets, dict):
+        raise ValueError('이미지 목록 형식이 올바르지 않습니다')
+    result = {}
+    for name, relative in assets.items():
+        if not re.fullmatch(r'[a-z][a-z0-9-]*', name) or not isinstance(relative, str):
+            raise ValueError('이미지 식별자와 경로가 올바르지 않습니다')
+        path = (root / relative).resolve()
+        if not path.is_relative_to(root.resolve()) or not path.is_file() or path.stat().st_size > 2_000_000:
+            raise ValueError('저장소 내부 2MB 이하 PNG가 필요합니다')
+        data = path.read_bytes()
+        if not data.startswith(b'\x89PNG\r\n\x1a\n'):
+            raise ValueError('PNG 이미지가 아닙니다')
+        result[name] = 'data:image/png;base64,' + base64.b64encode(data).decode('ascii')
+    return result
 
 
 def validate_catalogue(catalogue, root):
@@ -70,12 +103,17 @@ def _inline(text):
         raise ValueError('실행 태그와 HTTPS 이외의 링크는 허용하지 않습니다')
     text = html.escape(text)
     text = re.sub(r'`([^`]+)`', r'<code>\1</code>', text)
+    text = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', text)
     return re.sub(r'\[([^\]]+)\]\((https://[^\s)]+)\)', r'<a href="\2" rel="noopener">\1</a>', text)
 
 
-def render_markdown(source):
+def render_markdown(source, assets=None):
     parts, code, in_code, in_list = [], [], False, False
-    for line in source.splitlines():
+    lines = source.splitlines()
+    index = 0
+    while index < len(lines):
+        line = lines[index]
+        index += 1
         if line.startswith('```'):
             if in_list:
                 parts.append('</ul>')
@@ -104,6 +142,32 @@ def render_markdown(source):
         if in_list:
             parts.append('</ul>')
             in_list = False
+        image = re.fullmatch(r'!\[([^\]]+)\]\(asset:([a-z][a-z0-9-]*)\)', line)
+        if image:
+            if image[2] not in (assets or {}):
+                raise ValueError('등록되지 않은 이미지입니다')
+            alt = html.escape(image[1], quote=True)
+            parts.append(f'<figure class="learning-figure"><img src="{assets[image[2]]}" alt="{alt}"><figcaption>{alt}</figcaption></figure>')
+            continue
+        if '![' in line:
+            raise ValueError('등록된 내부 이미지만 사용할 수 있습니다')
+        if line.startswith('|') and index < len(lines) and re.fullmatch(r'\|\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?', lines[index]):
+            def cells(row):
+                return [cell.strip().replace(r'\|', '|') for cell in re.split(r'(?<!\\)\|', row.strip().strip('|'))]
+            headers = cells(line)
+            if len(cells(lines[index])) != len(headers):
+                raise ValueError('표의 열 개수가 다릅니다')
+            index += 1
+            parts.append('<div class="learning-table" role="region" aria-label="비교표" tabindex="0"><table><thead><tr>'
+                         + ''.join('<th scope="col">' + _inline(cell) + '</th>' for cell in headers) + '</tr></thead><tbody>')
+            while index < len(lines) and lines[index].startswith('|'):
+                values = cells(lines[index])
+                if len(values) != len(headers):
+                    raise ValueError('표의 열 개수가 다릅니다')
+                parts.append('<tr>' + ''.join('<td>' + _inline(cell) + '</td>' for cell in values) + '</tr>')
+                index += 1
+            parts.append('</tbody></table></div>')
+            continue
         heading = re.match(r'^(#{2,3}) (.+)$', line)
         tag, text = (f'h{len(heading[1])}', heading[2]) if heading else ('p', line)
         parts.append(f'<{tag}>' + _inline(text) + f'</{tag}>')
@@ -157,23 +221,34 @@ def publish_daily(state_dir, catalogue, *, root, publish, verify, now=None, dry_
         if article is None:
             return {'status': 'empty'}
         source = validate_article(article, root).read_text(encoding='utf-8')
-        digest = hashlib.sha256(source.encode()).hexdigest()
+        assets = read_assets(article, root)
+        digest = hashlib.sha256((source + (json.dumps(assets, sort_keys=True) if assets else '')).encode()).hexdigest()
         if digest in {x.get('hash') for x in state['posted']}:
             raise ValueError('이미 발행한 본문입니다')
         marker = f'learning-{article["id"]}-{digest[:12]}'
-        body = f'<div id="{marker}">\n{render_markdown(source)}\n</div>'
+        illustrated = source
+        if 'cover' in assets:
+            cover = f'![{article["title"]}](asset:cover)\n\n'
+            illustrated = source.replace('\n## ', '\n' + cover + '## ', 1) if '\n## ' in source else cover + source
+        body = f'<div id="{marker}">\n{render_markdown(illustrated, assets)}\n</div>'
         revision = article.get('revision')
         if revision:
             if not re.fullmatch(r'[0-9a-f]{40}', revision):
                 raise ValueError('공개 코드 버전이 올바르지 않습니다')
-            body += (f'<h2>이 글의 코드 버전</h2><p><a href="{REPOSITORY}/blob/{revision}/labs/learning_basics.py">'
-                     f'실습 코드 고정 버전</a> · <a href="{REPOSITORY}/blob/{revision}/tests/test_learning_labs.py">'
-                     '검증 테스트 고정 버전</a></p>')
+            if article.get('kind', 'lab') == 'lab':
+                body += (f'<h2>이 글의 코드 버전</h2><p><a href="{REPOSITORY}/blob/{revision}/labs/learning_basics.py">'
+                         f'실습 코드 고정 버전</a> · <a href="{REPOSITORY}/blob/{revision}/tests/test_learning_labs.py">'
+                         '검증 테스트 고정 버전</a></p>')
+            else:
+                body += f'<p><a href="{REPOSITORY}/blob/{revision}/{article["markdown"]}">이 글의 원문 고정 버전</a></p>'
         payload = article | {'html': body, 'marker': marker, 'hash': digest}
         if dry_run:
             return {'status': 'ready', 'id': article['id'], 'category': article['category']}
         state['pending'] = {'id': article['id'], 'title': article['title'], 'date': today,
                             'target': BLOG, 'hash': digest, 'marker': marker}
+        from automation.tistory_publisher import body_signature
+        state['pending']['kind'] = article.get('kind', 'lab')
+        state['pending']['expected_body'] = body_signature(body, marker)
         save_json(path, state)
         url = validate_url(publish(payload))
         state['pending']['url'] = url
@@ -242,11 +317,12 @@ def main():
     from labs.learning_basics import LABS, run_lab
     for article in catalogue:
         source = validate_article(article, ROOT).read_text(encoding='utf-8')
-        if inspect.getsource(LABS[article['lab']]).rstrip() not in source:
-            raise ValueError('실습 코드와 원고의 코드가 다릅니다. 원고를 다시 준비해야 합니다')
         if len(source) < 700 or source.count('\n## ') < 4:
             raise ValueError('실행 방법과 결과·한계를 갖춘 원고가 필요합니다')
-        run_lab(article['lab'])
+        if article.get('kind', 'lab') == 'lab':
+            if inspect.getsource(LABS[article['lab']]).rstrip() not in source:
+                raise ValueError('실습 코드와 원고의 코드가 다릅니다. 원고를 다시 준비해야 합니다')
+            run_lab(article['lab'])
     result = publish_daily(state_dir, catalogue, root=ROOT, publish=publish, verify=verify,
                            dry_run=args.dry_run)
     save_json(state_dir / 'status.json', result | {'checked_at': datetime.now(timezone.utc).isoformat()})

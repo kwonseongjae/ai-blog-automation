@@ -86,6 +86,8 @@ TOPICS = [
 def main():
     directory = ROOT / 'docs/posts'
     directory.mkdir(parents=True, exist_ok=True)
+    catalogue_path = directory / 'catalogue.json'
+    existing = json.loads(catalogue_path.read_text()) if catalogue_path.exists() else []
     for topic in TOPICS:
         name = topic['lab']
         output = '\n'.join(run_lab(name))
@@ -105,9 +107,11 @@ def main():
         path = directory / f'{topic["id"]}.md'
         path.write_text(text, encoding='utf-8')
         print(f'{topic["id"]}: 실습 통과 / 원고 {len(text)}자')
-    catalogue = [{k: t[k] for k in ('id', 'lab', 'category', 'title', 'sources')} |
-                 {'markdown': f'docs/posts/{t["id"]}.md'} for t in TOPICS]
-    (directory / 'catalogue.json').write_text(json.dumps(catalogue, ensure_ascii=False, indent=2), encoding='utf-8')
+    generated = {t['id']: {k: t[k] for k in ('id', 'lab', 'category', 'title', 'sources')} |
+                 {'markdown': f'docs/posts/{t["id"]}.md'} for t in TOPICS}
+    catalogue = [entry | generated.pop(entry['id'], {}) for entry in existing]
+    catalogue.extend(generated.values())
+    catalogue_path.write_text(json.dumps(catalogue, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
 
 
 if __name__ == '__main__':
