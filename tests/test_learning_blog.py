@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from automation.tistory_publisher import default_tags
-from automation.learning_blog import project_box, BLOG, kst_day, publish_daily, render_markdown, resolve_pending, validate_article, validate_catalogue, validate_url
+from automation.learning_blog import project_box, reading_minutes, related_box, BLOG, kst_day, publish_daily, render_markdown, resolve_pending, validate_article, validate_catalogue, validate_url
 
 
 class LearningBlogTests(unittest.TestCase):
@@ -71,6 +71,36 @@ class LearningBlogTests(unittest.TestCase):
         self.article = self.article | {'project': self.project()}
         self.publish(publish=lambda payload: captured.update(payload) or f'https://{BLOG}/2')
         self.assertIn('이 글의 프로젝트', captured['html'])
+
+    def test_reading_minutes(self):
+        self.assertEqual(reading_minutes(''), 1)
+        self.assertEqual(reading_minutes('가' * 500), 1)
+        self.assertEqual(reading_minutes('가' * 501), 2)
+
+    def test_related_links_only_posted(self):
+        posted = [{'id': 'a', 'title': '첫 글 <b>', 'url': f'https://{BLOG}/1'}]
+        html = related_box(['a'], posted)
+        self.assertIn('관련 글', html)
+        self.assertIn(f'https://{BLOG}/1', html)
+        self.assertIn('&lt;b&gt;', html)
+        self.assertEqual(related_box([], posted), '')
+
+    def test_related_unknown_id_rejected(self):
+        with self.assertRaises(ValueError):
+            related_box(['missing'], [{'id': 'a', 'title': 'A', 'url': f'https://{BLOG}/1'}])
+        with self.assertRaises(ValueError):
+            validate_article(self.article | {'related': ['a', 'b', 'c', 'd']}, self.root)
+        with self.assertRaises(ValueError):
+            publish_daily(self.root, [self.article | {'related': ['missing']}], root=self.root,
+                          publish=lambda _: self.fail('must not publish'), verify=lambda *_: True, now=self.now)
+
+    def test_reading_time_and_correction_in_body(self):
+        captured = {}
+        self.article = self.article | {'correction': '<i>표현</i>을 바로잡았습니다.'}
+        self.publish(publish=lambda payload: captured.update(payload) or f'https://{BLOG}/2')
+        self.assertIn('읽는 시간 약 1분', captured['html'])
+        self.assertIn('정정 안내: &lt;i&gt;표현&lt;/i&gt;', captured['html'])
+        self.assertNotIn('<i>', captured['html'])
 
     def test_kst_midnight_uses_local_date(self):
         self.assertEqual(kst_day(datetime(2026, 11, 12, 15, 1, tzinfo=timezone.utc)), '2026-11-13')

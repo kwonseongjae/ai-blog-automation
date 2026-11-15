@@ -28,6 +28,7 @@ class RichPostTests(unittest.TestCase):
                         'verification': 'README 읽기 결과 대조. 새 설치는 수행하지 않음.',
                         'sources': ['https://learn.chatgpt.com/docs/working-with-agents.md',
                                     'https://code.claude.com/docs/en/permissions'],
+                        'tags': ['AI 에이전트', 'AI 입문', '첫 작업'],
                         'assets': {'cover': 'cover.png', 'flow': 'cover.png'}}
 
     def test_guide_does_not_require_fake_lab_and_rejects_invalid_evidence_assets_sources(self):
@@ -41,6 +42,14 @@ class RichPostTests(unittest.TestCase):
         (self.root / 'cover.png').write_bytes(b'not a PNG')
         with self.assertRaises(ValueError):
             validate_article(self.article, self.root)
+
+    def test_guide_tags_3_to_6(self):
+        for tags in ([], ['a', 'b'], ['a', 'b', 'c', 'd', 'e', 'f', 'g'], ['a', 'b', ''], ['a', 'b', 3]):
+            with self.subTest(tags=tags), self.assertRaises(ValueError):
+                validate_article(self.article | {'tags': tags}, self.root)
+        with self.assertRaises(ValueError):
+            validate_article({k: v for k, v in self.article.items() if k != 'tags'}, self.root)
+        validate_article(self.article | {'tags': list('abcdef')}, self.root)
 
     def test_table_escapes_cells_and_requires_complete_rows(self):
         result = render_markdown('| 項目 | 値 |\n| --- | --- |\n| `<img>` | A \\| B |')

@@ -64,6 +64,14 @@ def validate_article(article, root):
             ('/openai/codex', '/anthropics/claude-code', '/kwonseongjae/ai-blog-automation'))
         if p.scheme != 'https' or not (official or official_repo):
             raise ValueError('허용된 공식 문서 주소가 아닙니다')
+    tags = article.get('tags')
+    if (tags is not None or kind == 'guide') and not (
+            isinstance(tags, list) and 3 <= len(tags) <= 6
+            and all(isinstance(t, str) and t.strip() for t in tags)):
+        raise ValueError('태그는 비어 있지 않은 3~6개가 필요합니다')
+    related = article.get('related', [])
+    if not (isinstance(related, list) and len(related) <= 3 and all(isinstance(r, str) for r in related)):
+        raise ValueError('관련 글은 식별자 3개 이하의 목록이어야 합니다')
     if article.get('project') is not None:
         validate_project(article['project'])
     read_assets(article, root)
@@ -101,6 +109,23 @@ def project_box(project):
     e = html.escape
     return (f'<h2>이 글의 프로젝트</h2><p><a href="{e(project["url"], quote=True)}">{e(project["name"])}</a></p>'
             f'<ul><li>내가 한 일: {e(project["role"])}</li><li>확인한 결과: {e(project["result"])}</li></ul>')
+
+
+def reading_minutes(source):
+    return max(1, -(-len(source) // 500))
+
+
+def related_box(related_ids, posted):
+    if not related_ids:
+        return ''
+    by_id = {x['id']: x for x in posted}
+    items = []
+    for rid in related_ids:
+        if rid not in by_id:
+            raise ValueError('아직 발행하지 않은 글은 관련 글로 연결할 수 없습니다')
+        items.append(f'<li><a href="{html.escape(validate_url(by_id[rid]["url"]), quote=True)}">'
+                     f'{html.escape(by_id[rid]["title"])}</a></li>')
+    return '<h2>관련 글</h2><ul>' + ''.join(items) + '</ul>'
 
 
 def validate_catalogue(catalogue, root):
@@ -247,7 +272,11 @@ def publish_daily(state_dir, catalogue, *, root, publish, verify, now=None, dry_
         if 'cover' in assets:
             cover = f'![{article["title"]}](asset:cover)\n\n'
             illustrated = source.replace('\n## ', '\n' + cover + '## ', 1) if '\n## ' in source else cover + source
-        body = f'<div id="{marker}">\n{render_markdown(illustrated, assets)}\n</div>'
+        head = f'<p class="learning-meta">읽는 시간 약 {reading_minutes(source)}분</p>'
+        if article.get('correction'):
+            head += f'<p class="learning-correction">정정 안내: {html.escape(article["correction"])}</p>'
+        body = f'<div id="{marker}">\n{head}{render_markdown(illustrated, assets)}\n</div>'
+        body += related_box(article.get('related', []), state['posted'])
         if article.get('project'):
             body += project_box(article['project'])
         revision = article.get('revision')

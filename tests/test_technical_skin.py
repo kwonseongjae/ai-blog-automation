@@ -1,7 +1,7 @@
 import unittest
 
 from automation import technical_skin
-from automation.technical_skin import start_here, transform
+from automation.technical_skin import side_promo, start_here, transform
 
 
 class TechnicalSkinTests(unittest.TestCase):
@@ -24,6 +24,22 @@ class TechnicalSkinTests(unittest.TestCase):
                 start_here()
         finally:
             technical_skin.START_HERE = original
+
+    def test_side_promo_only_own_urls(self):
+        self.assertIn('https://jacks-aiblog.tistory.com/3', side_promo())
+        original = technical_skin.SIDE_PROMO
+        try:
+            for url in ('https://evil.test/3', 'https://github.com/other/repo'):
+                technical_skin.SIDE_PROMO = ('문구', url)
+                with self.assertRaises(ValueError):
+                    side_promo()
+            technical_skin.SIDE_PROMO = ('문구', 'https://github.com/kwonseongjae/ai-blog-automation')
+            self.assertIn('ai-blog-automation', side_promo())
+        finally:
+            technical_skin.SIDE_PROMO = original
+
+    def test_popular_tab_stays_hidden(self):
+        self.assertIn('.area-aside .list-recent.list-tab{display:none!important}', technical_skin.CSS)
 
     def test_cover_stays_under_thumbnail(self):
         self.assertNotIn('.thumbnail[has-thumbnail="1"] .learning-cover{display:none}', technical_skin.CSS)

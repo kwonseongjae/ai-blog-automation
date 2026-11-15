@@ -75,6 +75,12 @@
         "원문과 비교하기",
         "반환한 세 값을 직접 대조"
       ]
+    ],
+    "tags": [
+      "AI 에이전트",
+      "AI 입문",
+      "챗봇 차이",
+      "에이전트 첫 작업"
     ]
   },
   {
@@ -114,6 +120,15 @@
         "작은 설명부터 시작",
         "README를 읽고 근거 확인"
       ]
+    ],
+    "tags": [
+      "Codex",
+      "Codex 설치",
+      "AI 코딩 도구",
+      "로그인 설정"
+    ],
+    "related": [
+      "ai-agent-first-task"
     ]
   },
   {
@@ -153,6 +168,17 @@
         "README 한 장 읽기",
         "변경 없이 설명을 원문과 비교"
       ]
+    ],
+    "tags": [
+      "Claude Code",
+      "Claude Code 설치",
+      "WSL",
+      "Windows",
+      "AI 코딩 도구"
+    ],
+    "related": [
+      "ai-agent-first-task",
+      "codex-first-settings"
     ]
   },
   {
@@ -198,6 +224,15 @@
       "url": "https://github.com/kwonseongjae/ai-blog-automation",
       "role": "하루 한 번 발행 상태 기록, 실행 잠금, 공개 본문 검증을 직접 구현했습니다.",
       "result": "중복 발행 방지와 공개 본문 대조를 테스트로 확인했습니다."
-    }
+    },
+    "tags": [
+      "블로그 자동화",
+      "중복 발행 방지",
+      "Python 자동화",
+      "발행 검증"
+    ],
+    "related": [
+      "ai-agent-first-task"
+    ]
   }
 ]

@@ -9,6 +9,8 @@ BLOG_TITLE = 'Jack의 AI 개발노트'
 # 먼저 읽을 글: 입문 순서대로 직접 고른다. 새 입문 글이 발행되면 한 줄 추가한다.
 START_HERE = (('AI 에이전트란? 챗봇과 다른 점과 처음 맡길 일 3가지', 'https://jacks-aiblog.tistory.com/3'),)
 CHIP_CATEGORIES = CATEGORIES[:3]
+# 사이드바 안내 상자: 입문 글 모음으로 보내고, 공개 프로젝트가 생기면 저장소 주소로 바꾼다.
+SIDE_PROMO = ('AI 도구를 처음 쓰신다면 여기부터', 'https://jacks-aiblog.tistory.com/3')
 CSS = '<style id="learning-style">\n' + Path(__file__).with_suffix('.css').read_text().strip() + '\n</style>'
 SCRIPT = '<script id="learning-widgets">\n' + Path(__file__).with_suffix('.js').read_text().strip() + '\n</script>'
 
@@ -18,6 +20,13 @@ def navigation():
     return f"""<!-- learning-navigation:start -->
 <nav class="learning-navigation" aria-label="블로그 메뉴"><a href="/">전체 글</a><details class="learning-menu"><summary>주제별 보기</summary><ul>{topics}</ul></details><a href="{REPOSITORY}" target="_blank" rel="noopener">GitHub 코드</a><a href="/rss">RSS</a></nav>
 <!-- learning-navigation:end -->"""
+
+
+def side_promo():
+    text, url = SIDE_PROMO
+    if not url.startswith(REPOSITORY):
+        validate_url(url)
+    return f'<section class="learning-promo"><a href="{url}">{text} →</a></section>'
 
 
 def start_here():
@@ -46,7 +55,7 @@ COVER = '<span class="learning-cover" aria-hidden="true"><span class="learning-c
 def _sidebar(match):
     body = match[1]
     if 'class="box-profile' in body or 'class="learning-profile"' in body:
-        body = '<!-- 프로필 -->\n' + PROFILE
+        body = '<!-- 프로필 -->\n' + PROFILE + side_promo()
     if 'class="box-category' in body and 'learning-category-title' not in body:
         body = re.sub(r'(<div class="box-category[^\"]*">)', r'\1<h3 class="title-sidebar learning-category-title">주제별 기록</h3>', body, count=1)
     body = body.replace('>학습 주제</h3>', '>주제별 기록</h3>')
