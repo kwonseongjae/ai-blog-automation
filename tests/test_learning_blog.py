@@ -4,6 +4,7 @@ import unittest
 from datetime import datetime, timezone
 from pathlib import Path
 
+from automation.tistory_publisher import default_tags
 from automation.learning_blog import BLOG, kst_day, publish_daily, render_markdown, resolve_pending, validate_article, validate_catalogue, validate_url
 
 
@@ -15,7 +16,7 @@ class LearningBlogTests(unittest.TestCase):
         self.now = datetime(2026, 11, 13, 12, 0, tzinfo=timezone.utc)
         self.article = {
             'id': 'timezone', 'title': '한국 날짜 기준으로 하루 한 번 실행하기',
-            'category': 'Python·자동화', 'markdown': 'docs/posts/timezone.md',
+            'category': '자동화 실습', 'markdown': 'docs/posts/timezone.md',
             'lab': 'timezone', 'sources': ['https://docs.python.org/3/library/zoneinfo.html'],
         }
         self.source = self.root / 'docs/posts/timezone.md'
@@ -31,6 +32,15 @@ class LearningBlogTests(unittest.TestCase):
                              publish=kwargs.pop('publish', lambda _: f'https://{BLOG}/2'),
                              verify=kwargs.pop('verify', lambda *_: True),
                              now=kwargs.pop('now', self.now), **kwargs)
+
+    def test_old_category_is_rejected(self):
+        with self.assertRaises(ValueError):
+            validate_article(self.article | {'category': 'Python·자동화'}, self.root)
+
+    def test_default_tags(self):
+        self.assertEqual(default_tags('자동화 실습'), ['Python', '자동화'])
+        for name in ('시작하기', '에이전트·모델 비교', '프로젝트 적용', '미등록'):
+            self.assertEqual(default_tags(name), ['AI 활용'])
 
     def test_kst_midnight_uses_local_date(self):
         self.assertEqual(kst_day(datetime(2026, 11, 12, 15, 1, tzinfo=timezone.utc)), '2026-11-13')

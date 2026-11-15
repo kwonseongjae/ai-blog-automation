@@ -1,0 +1,99 @@
+[
+  {
+    "id": "python-json-boundary",
+    "lab": "input",
+    "category": "자동화 실습",
+    "title": "JSON에 title이 있어도 바로 쓰면 안 되는 이유: 입력 검증 실습",
+    "sources": [
+      "https://docs.python.org/3.12/library/json.html",
+      "https://docs.python.org/3.12/library/stdtypes.html#dict.get"
+    ],
+    "markdown": "docs/posts/python-json-boundary.md",
+    "cover_text": [
+      "API·백엔드",
+      "JSON 입력",
+      "먼저 검증하기",
+      "외부 응답의 형식과 값"
+    ],
+    "assets": {
+      "cover": "docs/posts/assets/python-json-boundary-cover.png"
+    }
+  },
+  {
+    "id": "python-atomic-state",
+    "lab": "atomic",
+    "category": "자동화 실습",
+    "title": "JSON 상태 파일을 덮어쓰다 멈추면: 임시 파일과 원자적 교체",
+    "sources": [
+      "https://docs.python.org/3.12/library/os.html#os.replace",
+      "https://docs.python.org/3.12/library/tempfile.html"
+    ],
+    "markdown": "docs/posts/python-atomic-state.md",
+    "cover_text": [
+      "Python·자동화",
+      "상태 파일",
+      "안전하게 교체",
+      "임시 파일과 원자적 교체"
+    ],
+    "assets": {
+      "cover": "docs/posts/assets/python-atomic-state-cover.png"
+    }
+  },
+  {
+    "id": "python-request-id",
+    "lab": "duplicate",
+    "category": "자동화 실습",
+    "title": "같은 요청이 두 번 왔을 때: SQLite 고유 키로 중복 저장 막기",
+    "sources": [
+      "https://docs.python.org/3.12/library/sqlite3.html"
+    ],
+    "markdown": "docs/posts/python-request-id.md",
+    "cover_text": [
+      "API·백엔드",
+      "중복 요청",
+      "한 번만 저장",
+      "SQLite 고유 키"
+    ],
+    "assets": {
+      "cover": "docs/posts/assets/python-request-id-cover.png"
+    }
+  },
+  {
+    "id": "python-subprocess-timeout",
+    "lab": "timeout",
+    "category": "자동화 실습",
+    "title": "끝나지 않는 작업을 기다리지 않도록 subprocess 제한 시간 두기",
+    "sources": [
+      "https://docs.python.org/3.12/library/subprocess.html#subprocess.run"
+    ],
+    "markdown": "docs/posts/python-subprocess-timeout.md",
+    "cover_text": [
+      "오류 해결",
+      "실행 시간",
+      "기다림에 제한",
+      "subprocess 제한 시간"
+    ],
+    "assets": {
+      "cover": "docs/posts/assets/python-subprocess-timeout-cover.png"
+    }
+  },
+  {
+    "id": "python-url-target",
+    "lab": "url",
+    "category": "자동화 실습",
+    "title": "URL에 블로그 이름이 들어 있으면 안전할까: 정확한 발행 대상 확인",
+    "sources": [
+      "https://docs.python.org/3.12/library/urllib.parse.html#urllib.parse.urlsplit"
+    ],
+    "markdown": "docs/posts/python-url-target.md",
+    "cover_text": [
+      "API·백엔드",
+      "발행 대상",
+      "주소부터 확인",
+      "호스트와 경로 대조"
+    ],
+    "assets": {
+      "cover": "docs/posts/assets/python-url-target-cover.png"
+    }
+  }
+]

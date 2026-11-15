@@ -24,7 +24,7 @@ class RichPostTests(unittest.TestCase):
         (self.root / 'guide.md').write_text('# 안내\n## 비교\n| A | B |\n| --- | --- |\n| 입력 | 결과 |\n\n![흐름](asset:flow)\n')
         (self.root / 'cover.png').write_bytes(PNG)
         self.article = {'id': 'agent-guide', 'kind': 'guide', 'title': '에이전트 첫 작업',
-                        'category': 'AI·데이터', 'markdown': 'guide.md', 'checked_on': '2026-11-15',
+                        'category': '시작하기', 'markdown': 'guide.md', 'checked_on': '2026-11-15',
                         'verification': 'README 읽기 결과 대조. 새 설치는 수행하지 않음.',
                         'sources': ['https://learn.chatgpt.com/docs/working-with-agents.md',
                                     'https://code.claude.com/docs/en/permissions'],

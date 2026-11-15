@@ -2,7 +2,7 @@
   {
     "id": "python-kst-date",
     "lab": "timezone",
-    "category": "Python·자동화",
+    "category": "자동화 실습",
     "title": "Python 자동화의 하루 기준을 한국 시간으로 정하는 방법",
     "sources": [
       "https://docs.python.org/3.12/library/zoneinfo.html",
@@ -22,7 +22,7 @@
   {
     "id": "python-path-base",
     "lab": "paths",
-    "category": "Python·자동화",
+    "category": "자동화 실습",
     "title": "터미널에서는 되는데 예약 실행에서는 파일을 못 찾는 이유",
     "sources": [
       "https://docs.python.org/3.12/library/pathlib.html"
@@ -41,7 +41,7 @@
   {
     "id": "ai-agent-first-task",
     "kind": "guide",
-    "category": "AI·데이터",
+    "category": "시작하기",
     "title": "AI 에이전트란? 챗봇과 다른 점과 처음 맡길 일 3가지",
     "sources": [
       "https://learn.chatgpt.com/docs/working-with-agents.md",
@@ -80,7 +80,7 @@
   {
     "id": "codex-first-settings",
     "kind": "guide",
-    "category": "AI·데이터",
+    "category": "시작하기",
     "title": "Codex 처음 쓸 때: 설치·로그인·작업 폴더부터 확인하는 법",
     "sources": [
       "https://learn.chatgpt.com/docs/codex/cli.md",
@@ -119,7 +119,7 @@
   {
     "id": "claude-code-first-settings",
     "kind": "guide",
-    "category": "AI·데이터",
+    "category": "시작하기",
     "title": "Claude Code 처음 설정하기: Windows와 WSL 명령을 섞지 않는 법",
     "sources": [
       "https://code.claude.com/docs/en/quickstart",
@@ -158,7 +158,7 @@
   {
     "id": "daily-publish-state",
     "kind": "guide",
-    "category": "Python·자동화",
+    "category": "프로젝트 적용",
     "title": "블로그 자동화에서 하루 한 번 발행을 지키는 방법",
     "sources": [
       "https://docs.python.org/3/library/fcntl.html",
@@ -193,102 +193,5 @@
         "확인 실패는 대기 상태 유지"
       ]
     ]
-  },
-  {
-    "id": "python-json-boundary",
-    "lab": "input",
-    "category": "API·백엔드",
-    "title": "JSON에 title이 있어도 바로 쓰면 안 되는 이유: 입력 검증 실습",
-    "sources": [
-      "https://docs.python.org/3.12/library/json.html",
-      "https://docs.python.org/3.12/library/stdtypes.html#dict.get"
-    ],
-    "markdown": "docs/posts/python-json-boundary.md",
-    "cover_text": [
-      "API·백엔드",
-      "JSON 입력",
-      "먼저 검증하기",
-      "외부 응답의 형식과 값"
-    ],
-    "assets": {
-      "cover": "docs/posts/assets/python-json-boundary-cover.png"
-    }
-  },
-  {
-    "id": "python-atomic-state",
-    "lab": "atomic",
-    "category": "Python·자동화",
-    "title": "JSON 상태 파일을 덮어쓰다 멈추면: 임시 파일과 원자적 교체",
-    "sources": [
-      "https://docs.python.org/3.12/library/os.html#os.replace",
-      "https://docs.python.org/3.12/library/tempfile.html"
-    ],
-    "markdown": "docs/posts/python-atomic-state.md",
-    "cover_text": [
-      "Python·자동화",
-      "상태 파일",
-      "안전하게 교체",
-      "임시 파일과 원자적 교체"
-    ],
-    "assets": {
-      "cover": "docs/posts/assets/python-atomic-state-cover.png"
-    }
-  },
-  {
-    "id": "python-request-id",
-    "lab": "duplicate",
-    "category": "API·백엔드",
-    "title": "같은 요청이 두 번 왔을 때: SQLite 고유 키로 중복 저장 막기",
-    "sources": [
-      "https://docs.python.org/3.12/library/sqlite3.html"
-    ],
-    "markdown": "docs/posts/python-request-id.md",
-    "cover_text": [
-      "API·백엔드",
-      "중복 요청",
-      "한 번만 저장",
-      "SQLite 고유 키"
-    ],
-    "assets": {
-      "cover": "docs/posts/assets/python-request-id-cover.png"
-    }
-  },
-  {
-    "id": "python-subprocess-timeout",
-    "lab": "timeout",
-    "category": "오류 해결",
-    "title": "끝나지 않는 작업을 기다리지 않도록 subprocess 제한 시간 두기",
-    "sources": [
-      "https://docs.python.org/3.12/library/subprocess.html#subprocess.run"
-    ],
-    "markdown": "docs/posts/python-subprocess-timeout.md",
-    "cover_text": [
-      "오류 해결",
-      "실행 시간",
-      "기다림에 제한",
-      "subprocess 제한 시간"
-    ],
-    "assets": {
-      "cover": "docs/posts/assets/python-subprocess-timeout-cover.png"
-    }
-  },
-  {
-    "id": "python-url-target",
-    "lab": "url",
-    "category": "API·백엔드",
-    "title": "URL에 블로그 이름이 들어 있으면 안전할까: 정확한 발행 대상 확인",
-    "sources": [
-      "https://docs.python.org/3.12/library/urllib.parse.html#urllib.parse.urlsplit"
-    ],
-    "markdown": "docs/posts/python-url-target.md",
-    "cover_text": [
-      "API·백엔드",
-      "발행 대상",
-      "주소부터 확인",
-      "호스트와 경로 대조"
-    ],
-    "assets": {
-      "cover": "docs/posts/assets/python-url-target-cover.png"
-    }
   }
 ]

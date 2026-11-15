@@ -11,6 +11,10 @@ from urllib.parse import urlsplit
 from automation.learning_blog import BLOG, ROOT, read_assets, validate_url
 
 
+def default_tags(category):
+    return ['Python', '자동화'] if category == '자동화 실습' else ['AI 활용']
+
+
 def normalize_cookies(saved):
     result = []
     for c in saved or []:
@@ -184,7 +188,7 @@ def publish(article):
             upload_article_images(page, article)
             page.evaluate('(body) => { tinyMCE.activeEditor.setContent(body); tinyMCE.activeEditor.save(); }', article['html'])
             page.wait_for_function('(marker) => tinyMCE.activeEditor.getContent().includes(marker)', arg=article['marker'], polling=100)
-            for tag in article.get('tags', ['AI 활용'] if article['category'] == 'AI·데이터' else ['Python', '자동화']):
+            for tag in article.get('tags', default_tags(article['category'])):
                 page.locator('#tagText').fill(tag)
                 page.locator('#tagText').press('Enter')
             check_management_url(page.url)

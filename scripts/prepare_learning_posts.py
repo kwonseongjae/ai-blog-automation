@@ -83,11 +83,19 @@ TOPICS = [
 ]
 
 
+def merge_catalogue(existing, generated, archived_ids):
+    generated = {k: v for k, v in generated.items() if k not in archived_ids}
+    merged = [entry | generated.pop(entry['id'], {}) for entry in existing if entry['id'] not in archived_ids]
+    return merged + list(generated.values())
+
+
 def main():
     directory = ROOT / 'docs/posts'
     directory.mkdir(parents=True, exist_ok=True)
     catalogue_path = directory / 'catalogue.json'
     existing = json.loads(catalogue_path.read_text()) if catalogue_path.exists() else []
+    archive_path = directory / 'archive.json'
+    archived_ids = {e['id'] for e in json.loads(archive_path.read_text())} if archive_path.exists() else set()
     for topic in TOPICS:
         name = topic['lab']
         output = '\n'.join(run_lab(name))
@@ -109,8 +117,7 @@ def main():
         print(f'{topic["id"]}: 실습 통과 / 원고 {len(text)}자')
     generated = {t['id']: {k: t[k] for k in ('id', 'lab', 'category', 'title', 'sources')} |
                  {'markdown': f'docs/posts/{t["id"]}.md'} for t in TOPICS}
-    catalogue = [entry | generated.pop(entry['id'], {}) for entry in existing]
-    catalogue.extend(generated.values())
+    catalogue = merge_catalogue(existing, generated, archived_ids)
     catalogue_path.write_text(json.dumps(catalogue, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
 
 
