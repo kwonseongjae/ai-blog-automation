@@ -1,0 +1,108 @@
+{
+ "checked": "2026-11-16",
+ "env": "Linux, Claude Code 2.1.325, 설치된 플러그인 폴더를 직접 열어 센 값",
+ "repos": {
+  "superpowers": {
+   "repo": "https://github.com/obra/superpowers",
+   "license": "MIT",
+   "pushed": "2026-11-03T23:24:58Z",
+   "stars": 318143
+  },
+  "ponytail": {
+   "repo": "https://github.com/DietrichGebert/ponytail",
+   "license": "MIT",
+   "pushed": "2026-10-29T11:59:31Z",
+   "stars": 191555
+  },
+  "humanize-korean": {
+   "repo": "https://github.com/epoko77-ai/im-not-ai",
+   "license": "MIT",
+   "pushed": "2026-11-15T16:28:34Z",
+   "stars": 6580
+  },
+  "frontend-design": {
+   "repo": "https://github.com/anthropics/claude-plugins-official",
+   "license": "Apache-2.0",
+   "pushed": "2026-11-14T07:27:28Z",
+   "stars": 47409
+  }
+ },
+ "installed": {
+  "superpowers": {
+   "version": "7.0.0",
+   "skills": [
+    "brainstorming",
+    "diagnosing-superpowers",
+    "dispatching-parallel-agents",
+    "executing-plans",
+    "finishing-a-development-branch",
+    "receiving-code-review",
+    "requesting-code-review",
+    "subagent-driven-development",
+    "systematic-debugging",
+    "test-driven-development",
+    "using-git-worktrees",
+    "using-superpowers",
+    "verification-before-completion",
+    "writing-plans",
+    "writing-skills"
+   ],
+   "commands": [],
+   "agents": []
+  },
+  "ponytail": {
+   "version": "4.8.4",
+   "skills": [
+    "ponytail",
+    "ponytail-audit",
+    "ponytail-debt",
+    "ponytail-gain",
+    "ponytail-help",
+    "ponytail-review"
+   ],
+   "commands": [
+    "ponytail-audit.toml",
+    "ponytail-debt.toml",
+    "ponytail-gain.toml",
+    "ponytail-help.toml",
+    "ponytail-review.toml",
+    "ponytail.toml"
+   ],
+   "agents": []
+  },
+  "humanize-korean": {
+   "version": "2.3.2",
+   "skills": [
+    "humanize",
+    "humanize-korean",
+    "humanize-redo",
+    "humanize-scan"
+   ],
+   "commands": [
+    "humanize-korean.toml",
+    "humanize-redo.toml",
+    "humanize-scan.toml",
+    "humanize.toml"
+   ],
+   "agents": [
+    "humanize-diagnostician",
+    "humanize-finalizer",
+    "humanize-monolith",
+    "korean-ai-tell-taxonomist",
+    "korean-translation-scholar",
+    "post-editese-metric-engineer",
+    "quick-rules-integrator",
+    "taxonomy-gap-analyzer",
+    "translationese-research-distiller"
+   ]
+  },
+  "frontend-design": {
+   "version": "1.1.1",
+   "skills": [
+    "frontend-design"
+   ],
+   "commands": [],
+   "agents": []
+  }
+ }
+}

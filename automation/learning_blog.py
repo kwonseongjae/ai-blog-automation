@@ -61,7 +61,8 @@ def validate_article(article, root):
                                'developers.openai.com', 'code.claude.com', 'www.anthropic.com'}
         official_repo = p.netloc == 'github.com' and any(
             p.path == repo or p.path.startswith(repo + '/') for repo in
-            ('/openai/codex', '/anthropics/claude-code', '/kwonseongjae/ai-blog-automation'))
+            ('/openai/codex', '/anthropics/claude-code', '/anthropics/skills',
+             '/anthropics/claude-plugins-official', '/kwonseongjae/ai-blog-automation'))
         if p.scheme != 'https' or not (official or official_repo):
             raise ValueError('허용된 공식 문서 주소가 아닙니다')
     tags = article.get('tags')

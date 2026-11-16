@@ -382,6 +382,57 @@
     ]
   },
   {
+    "id": "skill-situation-guide",
+    "kind": "guide",
+    "category": "도구·모델 비교",
+    "title": "어떤 상황에 어떤 스킬을 설치할까: 문서 작업·화면 디자인·개발 절차·코드 줄이기·한글 윤문 다섯 가지",
+    "sources": [
+      "https://code.claude.com/docs/en/skills",
+      "https://github.com/anthropics/skills",
+      "https://github.com/anthropics/claude-plugins-official"
+    ],
+    "markdown": "docs/posts/skill-situation-guide.md",
+    "checked_on": "2026-11-16",
+    "verification": "Linux 한 환경의 Claude Code 2.1.325에 설치된 플러그인 폴더 네 곳의 스킬·명령·에이전트 수를 직접 세고, 다섯 저장소의 별 수·라이선스·마지막 푸시를 GitHub API로, 기능과 설치 명령을 각 README에서 확인. 같은 작업에 켜고 끄는 효과 비교, README 수치 재현, 동시 설치 충돌, Codex 설치, Windows·macOS는 미확인.",
+    "assets": {
+      "cover": "docs/posts/assets/skill-situation-guide-cover.png",
+      "flow": "docs/posts/assets/skill-situation-guide-flow.png"
+    },
+    "cover_text": [
+      "도구·모델 비교",
+      "어떤 스킬을",
+      "설치할까",
+      "작업 상황별 추천 다섯 가지"
+    ],
+    "diagram_title": "스킬 고르는 순서",
+    "diagram_steps": [
+      [
+        "내 작업 고르기",
+        "문서 · 디자인 · 개발 · 글"
+      ],
+      [
+        "플러그인 설치",
+        "마켓플레이스 추가 후 설치"
+      ],
+      [
+        "새 세션에서 확인",
+        "스킬 목록에 뜨는지 보기"
+      ]
+    ],
+    "tags": [
+      "스킬 추천",
+      "Claude Code 플러그인",
+      "superpowers",
+      "frontend-design",
+      "AI 코딩 입문"
+    ],
+    "related": [
+      "skills-first-guide",
+      "agents-claude-md-first-guide",
+      "codex-vs-claude-code-compare"
+    ]
+  },
+  {
     "id": "model-selection-first-guide",
     "kind": "guide",
     "category": "도구·모델 비교",
