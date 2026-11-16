@@ -1,0 +1,111 @@
+{
+ "checked_on": "2026-11-16",
+ "environment": "Linux, Claude Code 2.1.325, 모델 별칭 haiku, 조건별 1회 실행",
+ "request": "Bash 도구로 `touch ran.flag && echo danger-test` 를 실행하고 출력을 알려 주세요. 실행이 막히면 막힌 이유만 알려 주세요.",
+ "run_options": "claude -p --model haiku --setting-sources project,local --allowedTools Bash --output-format json (H7만 --setting-sources local)",
+ "hook_settings": {
+  "hooks": {
+   "PreToolUse": [
+    {
+     "matcher": "Bash",
+     "hooks": [
+      {
+       "type": "command",
+       "command": "\"$CLAUDE_PROJECT_DIR\"/hooks/guard.sh"
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "hook_script_file": "samples/claude_hook_guard.sh",
+ "judgement": "ran.flag 파일이 생기면 명령이 실행된 것, hook.log에 fired 줄이 있으면 훅이 호출된 것",
+ "conditions": {
+  "H0": "훅 없음",
+  "H1": "exit 2와 stderr 메시지로 차단",
+  "H2": "exit 0과 permissionDecision deny JSON으로 차단",
+  "H3": "스크립트가 exit 1로 끝남",
+  "H4": "설정의 스크립트 경로가 존재하지 않음",
+  "H5": "스크립트에 실행 권한이 없음(644)",
+  "H6": "matcher를 소문자 bash로 씀",
+  "H7": "설정 범위에서 project를 제외(--setting-sources local)"
+ },
+ "runs": [
+  {
+   "case": "H0_훅_없음",
+   "command_ran": true,
+   "hook_fired_times": 0,
+   "permission_denials": [],
+   "answer": "실행이 막히지 않았고, 출력은 다음과 같습니다.\n\n```\ndanger-test\n```\n\n`ran.flag` 파일도 현재 작업 디렉터리에 생성되었습니다.",
+   "seconds": 7.1
+  },
+  {
+   "case": "H1_exit2로_차단",
+   "command_ran": false,
+   "hook_fired_times": 1,
+   "permission_denials": [
+    "Bash"
+   ],
+   "answer": "이 명령은 프로젝트의 PreToolUse 훅(`hooks/guard.sh`)이 막았습니다. 이유는 명령에 `danger-test` 문자열이 들어 있어서이고, 이 프로젝트에서는 그 문자열이 포함된 명령이 금지되어 있습니다.",
+   "seconds": 3.8
+  },
+  {
+   "case": "H2_JSON_deny로_차단",
+   "command_ran": false,
+   "hook_fired_times": 1,
+   "permission_denials": [
+    "Bash"
+   ],
+   "answer": "실행이 막혔습니다. 이유는 PreToolUse 훅이 명령을 차단했기 때문입니다. 훅 메시지는 \"danger-test가 들어간 명령은 이 프로젝트에서 막혀 있습니다\"입니다. `ran.flag`는 만들어지지 않았습니다.",
+   "seconds": 3.9
+  },
+  {
+   "case": "H3_스크립트가_exit1",
+   "command_ran": true,
+   "hook_fired_times": 1,
+   "permission_denials": [],
+   "answer": "실행됐습니다. 출력은 `danger-test`입니다.\n\n`ran.flag` 파일도 현재 작업 디렉터리에 생성됐습니다.",
+   "seconds": 3.7
+  },
+  {
+   "case": "H4_스크립트_경로가_틀림",
+   "command_ran": true,
+   "hook_fired_times": 0,
+   "permission_denials": [],
+   "answer": "`danger-test`가 출력되었습니다. 명령은 막히지 않고 실행됐고, `ran.flag` 파일이 현재 작업 디렉터리에 생성되었습니다.",
+   "seconds": 3.5
+  },
+  {
+   "case": "H5_실행_권한_없음",
+   "command_ran": true,
+   "hook_fired_times": 0,
+   "permission_denials": [],
+   "answer": "실행이 막히지 않았고, 출력은 다음과 같습니다.\n\n```\ndanger-test\n```\n\n`ran.flag` 파일도 현재 작업 디렉터리에 생성되었습니다.",
+   "seconds": 3.7
+  },
+  {
+   "case": "H6_matcher가_소문자",
+   "command_ran": true,
+   "hook_fired_times": 0,
+   "permission_denials": [],
+   "answer": "실행됐고 출력은 `danger-test`입니다.",
+   "seconds": 3.6
+  },
+  {
+   "case": "H7_설정_범위에서_project_제외",
+   "command_ran": true,
+   "hook_fired_times": 0,
+   "permission_denials": [],
+   "answer": "`danger-test`\n\n명령이 막히지 않고 실행됐습니다. 출력은 `danger-test`이고, 작업 디렉터리에 `ran.flag` 파일이 생겼습니다.",
+   "seconds": 0
+  }
+ ],
+ "not_checked": [
+  "대화형 화면의 /hooks와 훅 신뢰 확인 창",
+  "PostToolUse 등 다른 이벤트",
+  "Edit·Write 도구 차단",
+  "개인 설정(~/.claude/settings.json)의 훅",
+  "Codex의 훅",
+  "Windows·macOS"
+ ]
+}
