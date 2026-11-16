@@ -482,6 +482,56 @@
     ]
   },
   {
+    "id": "skills-troubleshooting-guide",
+    "kind": "guide",
+    "category": "AI 시작하기",
+    "title": "스킬이 안 불릴 때 점검하는 순서: 위치·파일 이름·머리글·설명·호출 설정을 하나씩 어겨 본 기록",
+    "sources": [
+      "https://learn.chatgpt.com/docs/build-skills",
+      "https://code.claude.com/docs/en/skills"
+    ],
+    "markdown": "docs/posts/skills-troubleshooting-guide.md",
+    "checked_on": "2026-11-16",
+    "verification": "Linux 한 환경에서 Codex CLI 0.167.2와 Claude Code 2.1.325로 같은 스킬을 아홉 가지 조건으로 바꿔 이름 호출과 이름 없는 요청을 조건별 1회 실행하고 시작 정보의 목록과 실행한 명령을 기록. 대화형 화면의 스킬 목록, 개인 위치, 같은 이름 중복은 확인하지 않음.",
+    "assets": {
+      "cover": "docs/posts/assets/skills-troubleshooting-guide-cover.png",
+      "flow": "docs/posts/assets/skills-troubleshooting-guide-flow.png"
+    },
+    "cover_text": [
+      "AI 시작하기",
+      "스킬이 안 불릴 때",
+      "조건을 하나씩 어겨 보고",
+      "원인을 가려내는 순서"
+    ],
+    "diagram_title": "스킬 조건을 바꿔 비교하는 순서",
+    "diagram_steps": [
+      [
+        "정상 스킬",
+        "같은 파일에서 시작"
+      ],
+      [
+        "조건 하나 변경",
+        "위치·이름·머리글·설명"
+      ],
+      [
+        "두 요청 비교",
+        "이름 호출과 이름 없는 요청"
+      ]
+    ],
+    "tags": [
+      "스킬",
+      "SKILL.md",
+      "Codex",
+      "Claude Code",
+      "AI 에이전트 설정"
+    ],
+    "related": [
+      "skills-first-guide",
+      "mcp-first-connect-guide",
+      "agents-claude-md-first-guide"
+    ]
+  },
+  {
     "id": "daily-publish-state",
     "kind": "guide",
     "category": "프로젝트 적용기",

@@ -1,0 +1,430 @@
+{
+ "checked_on": "2026-11-16",
+ "environment": "Linux, Codex CLI 0.167.2, Claude Code 2.1.325, 조건별 1회 실행",
+ "skill": "릴리스 노트 형식을 정하는 change-note (앞선 스킬 입문 글과 같은 SKILL.md)",
+ "requests": {
+  "explicit": "Codex는 $change-note <변경 목록>, Claude Code는 /change-note <변경 목록>",
+  "implicit": "릴리스 노트를 만들어줘. 변경: <변경 목록>"
+ },
+ "success_rule": "답변에 총 3건과 `- [` 줄 세 개 이상이 있으면 지정한 형식을 따른 것으로 판정",
+ "run_options": {
+  "codex": "CODEX_HOME을 임시 폴더로 바꾸고 인증 파일만 링크, exec --json -m gpt-6.1-sol, model_reasoning_effort=low, -s read-only",
+  "claude_code": "-p --model haiku --setting-sources project,local --output-format stream-json --verbose"
+ },
+ "variants": {
+  "control": "정상 위치와 정상 SKILL.md",
+  "wrong_dir": "다른 도구의 위치에 둠(Codex는 .claude/skills, Claude Code는 .agents/skills)",
+  "lowercase_file": "파일 이름을 skill.md로 둠",
+  "no_description": "머리글에서 description 삭제",
+  "no_name": "머리글에서 name 삭제",
+  "broken_frontmatter": "머리글을 닫는 --- 삭제",
+  "unrelated_description": "description을 회의록 용도로 바꿈",
+  "folder_name_differs": "폴더 이름을 release-tool로 두고 name은 change-note",
+  "implicit_off": "Codex는 agents/openai.yaml의 allow_implicit_invocation false, Claude Code는 disable-model-invocation true"
+ },
+ "claude_code_runs": [
+  {
+   "variant": "control",
+   "request": "explicit",
+   "format_followed": true,
+   "listed_in_skills": [
+    "change-note"
+   ],
+   "listed_in_slash_commands": [
+    "change-note"
+   ],
+   "skill_tool_called": [],
+   "searched_files_with_tools": false
+  },
+  {
+   "variant": "control",
+   "request": "implicit",
+   "format_followed": true,
+   "listed_in_skills": [
+    "change-note"
+   ],
+   "listed_in_slash_commands": [
+    "change-note"
+   ],
+   "skill_tool_called": [
+    "change-note"
+   ],
+   "searched_files_with_tools": false
+  },
+  {
+   "variant": "wrong_dir",
+   "request": "explicit",
+   "format_followed": true,
+   "listed_in_skills": [],
+   "listed_in_slash_commands": [],
+   "skill_tool_called": [],
+   "searched_files_with_tools": true
+  },
+  {
+   "variant": "wrong_dir",
+   "request": "implicit",
+   "format_followed": false,
+   "listed_in_skills": [],
+   "listed_in_slash_commands": [],
+   "skill_tool_called": [],
+   "searched_files_with_tools": false
+  },
+  {
+   "variant": "lowercase_file",
+   "request": "explicit",
+   "format_followed": true,
+   "listed_in_skills": [],
+   "listed_in_slash_commands": [],
+   "skill_tool_called": [],
+   "searched_files_with_tools": true
+  },
+  {
+   "variant": "lowercase_file",
+   "request": "implicit",
+   "format_followed": false,
+   "listed_in_skills": [],
+   "listed_in_slash_commands": [],
+   "skill_tool_called": [],
+   "searched_files_with_tools": false
+  },
+  {
+   "variant": "no_description",
+   "request": "explicit",
+   "format_followed": true,
+   "listed_in_skills": [],
+   "listed_in_slash_commands": [
+    "change-note"
+   ],
+   "skill_tool_called": [],
+   "searched_files_with_tools": false
+  },
+  {
+   "variant": "no_description",
+   "request": "implicit",
+   "format_followed": true,
+   "listed_in_skills": [],
+   "listed_in_slash_commands": [
+    "change-note"
+   ],
+   "skill_tool_called": [
+    "change-note"
+   ],
+   "searched_files_with_tools": false
+  },
+  {
+   "variant": "no_name",
+   "request": "explicit",
+   "format_followed": true,
+   "listed_in_skills": [
+    "change-note"
+   ],
+   "listed_in_slash_commands": [
+    "change-note"
+   ],
+   "skill_tool_called": [],
+   "searched_files_with_tools": false
+  },
+  {
+   "variant": "no_name",
+   "request": "implicit",
+   "format_followed": true,
+   "listed_in_skills": [
+    "change-note"
+   ],
+   "listed_in_slash_commands": [
+    "change-note"
+   ],
+   "skill_tool_called": [
+    "change-note"
+   ],
+   "searched_files_with_tools": false
+  },
+  {
+   "variant": "broken_frontmatter",
+   "request": "explicit",
+   "format_followed": true,
+   "listed_in_skills": [],
+   "listed_in_slash_commands": [
+    "change-note"
+   ],
+   "skill_tool_called": [],
+   "searched_files_with_tools": false
+  },
+  {
+   "variant": "broken_frontmatter",
+   "request": "implicit",
+   "format_followed": false,
+   "listed_in_skills": [],
+   "listed_in_slash_commands": [
+    "change-note"
+   ],
+   "skill_tool_called": [],
+   "searched_files_with_tools": false
+  },
+  {
+   "variant": "unrelated_description",
+   "request": "explicit",
+   "format_followed": true,
+   "listed_in_skills": [
+    "change-note"
+   ],
+   "listed_in_slash_commands": [
+    "change-note"
+   ],
+   "skill_tool_called": [],
+   "searched_files_with_tools": false
+  },
+  {
+   "variant": "unrelated_description",
+   "request": "implicit",
+   "format_followed": false,
+   "listed_in_skills": [
+    "change-note"
+   ],
+   "listed_in_slash_commands": [
+    "change-note"
+   ],
+   "skill_tool_called": [],
+   "searched_files_with_tools": false
+  },
+  {
+   "variant": "folder_name_differs",
+   "request": "explicit",
+   "format_followed": true,
+   "listed_in_skills": [
+    "release-tool"
+   ],
+   "listed_in_slash_commands": [
+    "release-tool"
+   ],
+   "skill_tool_called": [],
+   "searched_files_with_tools": false
+  },
+  {
+   "variant": "folder_name_differs",
+   "request": "implicit",
+   "format_followed": true,
+   "listed_in_skills": [
+    "release-tool"
+   ],
+   "listed_in_slash_commands": [
+    "release-tool"
+   ],
+   "skill_tool_called": [
+    "release-tool"
+   ],
+   "searched_files_with_tools": false
+  },
+  {
+   "variant": "implicit_off",
+   "request": "explicit",
+   "format_followed": true,
+   "listed_in_skills": [
+    "change-note"
+   ],
+   "listed_in_slash_commands": [
+    "change-note"
+   ],
+   "skill_tool_called": [],
+   "searched_files_with_tools": false
+  },
+  {
+   "variant": "implicit_off",
+   "request": "implicit",
+   "format_followed": false,
+   "listed_in_skills": [
+    "change-note"
+   ],
+   "listed_in_slash_commands": [
+    "change-note"
+   ],
+   "skill_tool_called": [],
+   "searched_files_with_tools": false
+  }
+ ],
+ "codex_runs": [
+  {
+   "variant": "control",
+   "request": "explicit",
+   "format_followed": true,
+   "searched_files": false,
+   "read_skill_file": true,
+   "first_commands": [
+    "'cat .agents/skills/change-note/SKILL.md'"
+   ]
+  },
+  {
+   "variant": "control",
+   "request": "implicit",
+   "format_followed": true,
+   "searched_files": false,
+   "read_skill_file": true,
+   "first_commands": [
+    "'cat .agents/skills/change-note/SKILL.md'"
+   ]
+  },
+  {
+   "variant": "wrong_dir",
+   "request": "explicit",
+   "format_followed": true,
+   "searched_files": true,
+   "read_skill_file": true,
+   "first_commands": [
+    "\"pwd; rg --files -g 'AGENTS.md' -g '*change-note*' -g 'SKILL.md' ~/.agents /tmp/c",
+    "\"rg --files --hidden <작업폴더>",
+    "'cat .claude/skills/change-note/SKILL.md'"
+   ]
+  },
+  {
+   "variant": "wrong_dir",
+   "request": "implicit",
+   "format_followed": false,
+   "searched_files": false,
+   "read_skill_file": false,
+   "first_commands": []
+  },
+  {
+   "variant": "lowercase_file",
+   "request": "explicit",
+   "format_followed": true,
+   "searched_files": true,
+   "read_skill_file": true,
+   "first_commands": [
+    "\"rg --files -g '*SKILL.md' -g '*change*' -g 'AGENTS.md' . ~/.agents/skills /tmp/c",
+    "\"pwd; rg --files --hidden -g '\"'!'\"\\\\.git/**' .\"",
+    "'cat .agents/skills/change-note/skill.md'"
+   ]
+  },
+  {
+   "variant": "lowercase_file",
+   "request": "implicit",
+   "format_followed": false,
+   "searched_files": false,
+   "read_skill_file": false,
+   "first_commands": []
+  },
+  {
+   "variant": "no_description",
+   "request": "explicit",
+   "format_followed": true,
+   "searched_files": true,
+   "read_skill_file": true,
+   "first_commands": [
+    "\"pwd; rg --files -g '*SKILL.md' -g '*change-note*' -g 'AGENTS.md' ~/.agents /tmp/",
+    "\"rg --files --hidden -g 'SKILL.md' -g 'AGENTS.md' -g '*change-note*' .\"",
+    "'cat .agents/skills/change-note/SKILL.md'"
+   ]
+  },
+  {
+   "variant": "no_description",
+   "request": "implicit",
+   "format_followed": false,
+   "searched_files": false,
+   "read_skill_file": false,
+   "first_commands": []
+  },
+  {
+   "variant": "no_name",
+   "request": "explicit",
+   "format_followed": true,
+   "searched_files": false,
+   "read_skill_file": true,
+   "first_commands": [
+    "'cat .agents/skills/change-note/SKILL.md'"
+   ]
+  },
+  {
+   "variant": "no_name",
+   "request": "implicit",
+   "format_followed": true,
+   "searched_files": false,
+   "read_skill_file": true,
+   "first_commands": [
+    "'cat .agents/skills/change-note/SKILL.md'"
+   ]
+  },
+  {
+   "variant": "broken_frontmatter",
+   "request": "explicit",
+   "format_followed": true,
+   "searched_files": true,
+   "read_skill_file": true,
+   "first_commands": [
+    "\"pwd; rg --files -g 'AGENTS.md' -g '*SKILL.md' -g '*change*' . ~/.agents/skills /",
+    "\"ls -la; find . -maxdepth 5 -type f; find <작업폴더>",
+    "'cat .agents/skills/change-note/SKILL.md'"
+   ]
+  },
+  {
+   "variant": "broken_frontmatter",
+   "request": "implicit",
+   "format_followed": false,
+   "searched_files": false,
+   "read_skill_file": false,
+   "first_commands": []
+  },
+  {
+   "variant": "unrelated_description",
+   "request": "explicit",
+   "format_followed": true,
+   "searched_files": false,
+   "read_skill_file": true,
+   "first_commands": [
+    "'cat .agents/skills/change-note/SKILL.md'"
+   ]
+  },
+  {
+   "variant": "unrelated_description",
+   "request": "implicit",
+   "format_followed": false,
+   "searched_files": false,
+   "read_skill_file": false,
+   "first_commands": []
+  },
+  {
+   "variant": "folder_name_differs",
+   "request": "explicit",
+   "format_followed": true,
+   "searched_files": false,
+   "read_skill_file": true,
+   "first_commands": [
+    "'cat .agents/skills/release-tool/SKILL.md'"
+   ]
+  },
+  {
+   "variant": "folder_name_differs",
+   "request": "implicit",
+   "format_followed": true,
+   "searched_files": false,
+   "read_skill_file": true,
+   "first_commands": [
+    "'cat .agents/skills/release-tool/SKILL.md'"
+   ]
+  },
+  {
+   "variant": "implicit_off",
+   "request": "explicit",
+   "format_followed": true,
+   "searched_files": false,
+   "read_skill_file": true,
+   "first_commands": [
+    "'cat .agents/skills/change-note/SKILL.md'"
+   ]
+  },
+  {
+   "variant": "implicit_off",
+   "request": "implicit",
+   "format_followed": false,
+   "searched_files": false,
+   "read_skill_file": false,
+   "first_commands": []
+  }
+ ],
+ "not_checked": [
+  "대화형 화면의 /skills와 $ 목록",
+  "개인 위치(~/.agents/skills, ~/.claude/skills)",
+  "같은 이름의 스킬이 여러 위치에 있을 때",
+  "반복 실행과 다른 모델",
+  "Windows·macOS"
+ ]
+}

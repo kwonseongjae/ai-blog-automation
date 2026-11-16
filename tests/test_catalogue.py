@@ -27,7 +27,7 @@ class CatalogueTests(unittest.TestCase):
         ids = [e['id'] for e in catalogue]
         self.assertEqual(ids[:3], ['python-kst-date', 'python-path-base', 'ai-agent-first-task'])
         self.assertEqual(ids[-1], 'dark-mode-contrast-guide')
-        self.assertEqual(len(ids), 15)
+        self.assertEqual(len(ids), 16)
         validate_catalogue(catalogue, ROOT)
 
     def test_archive_not_in_catalogue(self):
