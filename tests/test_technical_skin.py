@@ -20,6 +20,12 @@ class TechnicalSkinTests(unittest.TestCase):
         self.assertIn('data-count-for', result.split('class="learning-topics"')[1])
         self.assertEqual(result.count('naver-site-verification'), 1)
 
+    def test_login_menu_navigates_in_same_window(self):
+        result = transform('<html><head></head><body><main class="main"><div class="area-main"></div></main></body></html>')
+        extras = result.split('id="learning-extras"')[1]
+        self.assertIn('auth/login', extras)
+        self.assertIn('stopImmediatePropagation', extras)
+
     def test_start_here_only_own_blog(self):
         self.assertIn('https://jacks-aiblog.tistory.com/3', start_here())
         original = technical_skin.START_HERE

@@ -44,5 +44,12 @@
     box.appendChild(makeToggle(true));box.appendChild(top);document.body.appendChild(box);
     window.addEventListener('scroll',function(){top.hidden=window.scrollY<400;},{passive:true});
   }
+  document.addEventListener('click',function(e){
+    var a=e.target&&e.target.closest&&e.target.closest('.layer_tool a.link_list');
+    if(!a||a.textContent.trim()!=='로그인')return;
+    e.preventDefault();e.stopImmediatePropagation();
+    var base=(window.appInfo&&window.appInfo.loginUrl)||'https://www.tistory.com/auth/login';
+    location.href=base+'/?redirectUrl='+encodeURIComponent(location.href.split('#')[0]);
+  },true);
   apply();
 })();
