@@ -1,905 +1,1103 @@
 [
-  {
-    "id": "python-kst-date",
-    "lab": "timezone",
-    "category": "Python·자동화",
-    "title": "Python 자동화의 하루 기준을 한국 시간으로 정하는 방법",
-    "sources": [
-      "https://docs.python.org/3.12/library/zoneinfo.html",
-      "https://docs.python.org/3.12/library/datetime.html"
-    ],
-    "markdown": "docs/posts/python-kst-date.md",
-    "cover_text": [
-      "Python·자동화",
-      "한국 시간",
-      "날짜 기준",
-      "UTC와 한국 날짜의 차이"
-    ],
-    "assets": {
-      "cover": "docs/posts/assets/python-kst-date-cover.png"
-    }
-  },
-  {
-    "id": "python-path-base",
-    "lab": "paths",
-    "category": "Python·자동화",
-    "title": "터미널에서는 되는데 예약 실행에서는 파일을 못 찾는 이유",
-    "sources": [
-      "https://docs.python.org/3.12/library/pathlib.html"
-    ],
-    "markdown": "docs/posts/python-path-base.md",
-    "cover_text": [
-      "Python·자동화",
-      "파일 경로",
-      "실행 위치",
-      "예약 실행의 기준 폴더"
-    ],
-    "assets": {
-      "cover": "docs/posts/assets/python-path-base-cover.png"
-    }
-  },
-  {
-    "id": "ai-agent-first-task",
-    "kind": "guide",
-    "category": "AI 시작하기",
-    "title": "AI 에이전트란? 챗봇과 다른 점과 처음 맡길 일 3가지",
-    "sources": [
-      "https://learn.chatgpt.com/docs/working-with-agents.md",
-      "https://www.anthropic.com/research/building-effective-agents",
-      "https://code.claude.com/docs/en/permissions"
-    ],
-    "markdown": "docs/posts/ai-agent-first-task.md",
-    "checked_on": "2026-11-15",
-    "verification": "읽기 도구만 제공한 실행의 세 값을 원문과 대조. 다단계 자율 작업 성능은 측정하지 않음.",
-    "assets": {
-      "cover": "docs/posts/assets/ai-agent-first-task-cover.png",
-      "flow": "docs/posts/assets/ai-agent-first-task-flow.png"
-    },
-    "cover_text": [
-      "AI 기초",
-      "AI 에이전트",
-      "어디까지 맡길까",
-      "챗봇과의 차이 · 첫 요청 예시"
-    ],
-    "diagram_title": "처음 맡긴 읽기 작업",
-    "diagram_steps": [
-      [
-        "요청 범위 정하기",
-        "README 한 장 · 읽기 도구만 허용"
-      ],
-      [
-        "문서에서 값 찾기",
-        "주소 · 실습 경로 · 테스트 명령"
-      ],
-      [
-        "원문과 비교하기",
-        "반환한 세 값을 직접 대조"
-      ]
-    ],
-    "tags": [
-      "AI 에이전트",
-      "AI 입문",
-      "챗봇 차이",
-      "에이전트 첫 작업"
-    ]
-  },
-  {
-    "id": "codex-first-settings",
-    "kind": "guide",
-    "category": "AI 시작하기",
-    "title": "Codex 처음 쓸 때: 설치·로그인·작업 폴더부터 확인하는 법",
-    "sources": [
-      "https://learn.chatgpt.com/docs/codex/cli.md",
-      "https://learn.chatgpt.com/docs/permission-modes.md",
-      "https://github.com/openai/codex"
-    ],
-    "markdown": "docs/posts/codex-first-settings.md",
-    "checked_on": "2026-11-15",
-    "verification": "WSL의 기존 설치 버전 0.167.2와 도움말 확인. 새 Windows 설치와 예시 요청의 응답은 미수행.",
-    "assets": {
-      "cover": "docs/posts/assets/codex-first-settings-cover.png",
-      "flow": "docs/posts/assets/codex-first-settings-flow.png"
-    },
-    "cover_text": [
-      "Codex 사용법",
-      "Codex",
-      "처음 쓰는 설정",
-      "설치 · 로그인 · 작업 폴더"
-    ],
-    "diagram_title": "Codex 첫 실행 순서",
-    "diagram_steps": [
-      [
-        "터미널 환경 선택",
-        "PowerShell 또는 WSL 한 곳"
-      ],
-      [
-        "설치와 계정 확인",
-        "버전 · 로그인 · 권한 범위"
-      ],
-      [
-        "작은 설명부터 시작",
-        "README를 읽고 근거 확인"
-      ]
-    ],
-    "tags": [
-      "Codex",
-      "Codex 설치",
-      "AI 코딩 도구",
-      "로그인 설정"
-    ],
-    "related": [
-      "ai-agent-first-task"
-    ]
-  },
-  {
-    "id": "claude-code-first-settings",
-    "kind": "guide",
-    "category": "AI 시작하기",
-    "title": "Claude Code 처음 설정하기: Windows와 WSL 명령을 섞지 않는 법",
-    "sources": [
-      "https://code.claude.com/docs/en/quickstart",
-      "https://code.claude.com/docs/en/setup",
-      "https://code.claude.com/docs/en/permissions"
-    ],
-    "markdown": "docs/posts/claude-code-first-settings.md",
-    "checked_on": "2026-11-15",
-    "verification": "WSL의 기존 설치 버전 2.1.322 확인. 새 Windows 설치와 본문 첫 요청 예시 응답은 미수행.",
-    "assets": {
-      "cover": "docs/posts/assets/claude-code-first-settings-cover.png",
-      "flow": "docs/posts/assets/claude-code-first-settings-flow.png"
-    },
-    "cover_text": [
-      "Claude Code 사용법",
-      "Claude Code",
-      "Windows · WSL",
-      "설치할 터미널부터 확인하기"
-    ],
-    "diagram_title": "Claude Code 첫 실행 순서",
-    "diagram_steps": [
-      [
-        "설치할 환경 선택",
-        "PowerShell과 WSL 명령 구분"
-      ],
-      [
-        "계정과 권한 확인",
-        "버전 · 로그인 · 상태 확인"
-      ],
-      [
-        "README 한 장 읽기",
-        "변경 없이 설명을 원문과 비교"
-      ]
-    ],
-    "tags": [
-      "Claude Code",
-      "Claude Code 설치",
-      "WSL",
-      "Windows",
-      "AI 코딩 도구"
-    ],
-    "related": [
-      "ai-agent-first-task",
-      "codex-first-settings"
-    ]
-  },
-  {
-    "id": "agents-claude-md-first-guide",
-    "kind": "guide",
-    "category": "AI 시작하기",
-    "title": "AGENTS.md와 CLAUDE.md 처음 쓰기: 어떤 파일을 읽는지 직접 확인하는 법",
-    "sources": [
-      "https://learn.chatgpt.com/docs/agent-configuration/agents-md",
-      "https://code.claude.com/docs/en/memory"
-    ],
-    "markdown": "docs/posts/agents-claude-md-first-guide.md",
-    "checked_on": "2026-11-15",
-    "verification": "Linux 한 환경에서 Codex CLI 0.167.2와 Claude Code 2.1.325를 임시 폴더로 각각 실행해 문서의 읽기 규칙을 확인. 조건별 1회 실행이며 Windows·macOS와 요금제별 차이는 미확인.",
-    "assets": {
-      "cover": "docs/posts/assets/agents-claude-md-first-guide-cover.png",
-      "flow": "docs/posts/assets/agents-claude-md-first-guide-flow.png"
-    },
-    "cover_text": [
-      "AI 시작하기",
-      "지침 파일",
-      "AGENTS · CLAUDE",
-      "어떤 파일을 읽는지 확인하기"
-    ],
-    "diagram_title": "지침 파일 읽기 확인 순서",
-    "diagram_steps": [
-      [
-        "지침 파일 만들기",
-        "규칙이 다른 파일 두 개"
-      ],
-      [
-        "같은 질문으로 확인",
-        "도구마다 읽은 파일 묻기"
-      ],
-      [
-        "읽은 파일 대조",
-        "문서의 읽기 규칙과 비교"
-      ]
-    ],
-    "tags": [
-      "AGENTS.md",
-      "CLAUDE.md",
-      "지침 파일",
-      "AI 코딩 도구",
-      "Codex",
-      "Claude Code"
-    ],
-    "related": [
-      "codex-first-settings",
-      "claude-code-first-settings"
-    ]
-  },
-  {
-    "id": "agent-permissions-first-guide",
-    "kind": "guide",
-    "category": "AI 시작하기",
-    "title": "AI 코딩 도구 권한 처음 설정하기: 파일을 만들기 전에 물어보게 하는 법",
-    "sources": [
-      "https://learn.chatgpt.com/docs/agent-approvals-security",
-      "https://code.claude.com/docs/en/permissions"
-    ],
-    "markdown": "docs/posts/agent-permissions-first-guide.md",
-    "checked_on": "2026-11-15",
-    "verification": "Linux 한 환경에서 Codex CLI 0.167.2와 Claude Code 2.1.325를 임시 폴더로 실행해 파일 생성 허용·차단을 조건별 1회 확인. 규칙의 검사 순서는 공식 문서 설명이며 직접 시험하지 않음. Windows·macOS와 요금제별 차이는 미확인.",
-    "assets": {
-      "cover": "docs/posts/assets/agent-permissions-first-guide-cover.png",
-      "flow": "docs/posts/assets/agent-permissions-first-guide-flow.png"
-    },
-    "cover_text": [
-      "AI 시작하기",
-      "권한 설정",
-      "승인과 샌드박스",
-      "처음에는 어디까지 허용할까"
-    ],
-    "diagram_title": "권한 설정 확인 순서",
-    "diagram_steps": [
-      [
-        "권한 단계 고르기",
-        "읽기 전용 · 편집 허용"
-      ],
-      [
-        "같은 요청으로 시험",
-        "파일 만들기를 요청"
-      ],
-      [
-        "결과로 설정 확정",
-        "막힌 일과 허용한 일"
-      ]
-    ],
-    "tags": [
-      "AI 코딩 도구 권한",
-      "Codex 샌드박스",
-      "Claude Code 권한",
-      "승인 설정",
-      "AI 입문"
-    ],
-    "related": [
-      "agents-claude-md-first-guide",
-      "codex-first-settings",
-      "claude-code-first-settings"
-    ]
-  },
-  {
-    "id": "codex-vs-claude-code-compare",
-    "kind": "guide",
-    "category": "도구·모델 비교",
-    "title": "Codex와 Claude Code 비교: 같은 버그 수정을 맡겨 보고 설정 차이까지 정리",
-    "sources": [
-      "https://learn.chatgpt.com/docs/agent-approvals-security",
-      "https://code.claude.com/docs/en/permissions"
-    ],
-    "markdown": "docs/posts/codex-vs-claude-code-compare.md",
-    "checked_on": "2026-11-15",
-    "verification": "Linux 한 환경에서 Codex CLI 0.167.2와 Claude Code 2.1.325로 같은 버그 수정을 각 1회 실행해 통과 여부·시간·표시된 사용량을 기록. 설정은 공식 문서와 임시 폴더 실행으로 확인. 개인 설정 범위와 모델이 달라 속도·사용량은 직접 비교하지 않음.",
-    "assets": {
-      "cover": "docs/posts/assets/codex-vs-claude-code-compare-cover.png",
-      "flow": "docs/posts/assets/codex-vs-claude-code-compare-flow.png"
-    },
-    "cover_text": [
-      "도구·모델 비교",
-      "Codex",
-      "vs Claude Code",
-      "같은 버그를 맡겨 보고 설정 차이 정리"
-    ],
-    "diagram_title": "같은 과제로 비교한 순서",
-    "diagram_steps": [
-      [
-        "폴더 복사",
-        "같은 시작 폴더 두 개"
-      ],
-      [
-        "같은 요청 전송",
-        "요청 문장과 성공 기준 동일"
-      ],
-      [
-        "결과 대조",
-        "통과 · 시간 · 수정 방식"
-      ]
-    ],
-    "tags": [
-      "Codex",
-      "Claude Code",
-      "Codex Claude Code 비교",
-      "AI 코딩 도구 비교",
-      "AI 코딩 입문"
-    ],
-    "related": [
-      "agents-claude-md-first-guide",
-      "agent-permissions-first-guide",
-      "codex-first-settings"
-    ]
-  },
-  {
-    "id": "skills-first-guide",
-    "kind": "guide",
-    "category": "AI 시작하기",
-    "title": "스킬(SKILL.md) 처음 만들기: Codex와 Claude Code에서 같은 파일로 써 본 결과",
-    "sources": [
-      "https://learn.chatgpt.com/docs/build-skills",
-      "https://code.claude.com/docs/en/skills"
-    ],
-    "markdown": "docs/posts/skills-first-guide.md",
-    "checked_on": "2026-11-15",
-    "verification": "Linux 한 환경에서 같은 SKILL.md를 Codex CLI 0.167.2와 Claude Code 2.1.325에 넣고 이름 호출·이름 없는 요청·스킬 없는 폴더를 각 1회 실행해 출력 형식을 확인. 개인용 위치와 우선순위, 경계 요청, 스킬 없이 규칙을 직접 적은 경우는 미확인.",
-    "assets": {
-      "cover": "docs/posts/assets/skills-first-guide-cover.png",
-      "flow": "docs/posts/assets/skills-first-guide-flow.png"
-    },
-    "cover_text": [
-      "AI 시작하기",
-      "스킬 만들기",
-      "SKILL.md",
-      "같은 파일을 두 도구에서 써 보기"
-    ],
-    "diagram_title": "스킬 확인 순서",
-    "diagram_steps": [
-      [
-        "스킬 폴더 만들기",
-        "SKILL.md 한 개, 두 위치에 복사"
-      ],
-      [
-        "두 방식으로 호출",
-        "이름으로 부르기 · 이름 없이 요청"
-      ],
-      [
-        "빈 폴더와 비교",
-        "출력 형식과 덧붙인 문장 확인"
-      ]
-    ],
-    "tags": [
-      "스킬",
-      "SKILL.md",
-      "Codex 스킬",
-      "Claude Code 스킬",
-      "AI 코딩 입문"
-    ],
-    "related": [
-      "agents-claude-md-first-guide",
-      "agent-permissions-first-guide",
-      "codex-vs-claude-code-compare"
-    ]
-  },
-  {
-    "id": "skill-situation-guide",
-    "kind": "guide",
-    "category": "도구·모델 비교",
-    "title": "어떤 상황에 어떤 스킬을 설치할까: 문서 작업·화면 디자인·개발 절차·코드 줄이기·한글 윤문 다섯 가지",
-    "sources": [
-      "https://code.claude.com/docs/en/skills",
-      "https://github.com/anthropics/skills",
-      "https://github.com/anthropics/claude-plugins-official"
-    ],
-    "markdown": "docs/posts/skill-situation-guide.md",
-    "checked_on": "2026-11-16",
-    "verification": "Linux 한 환경의 Claude Code 2.1.325에 설치된 플러그인 폴더 네 곳의 스킬·명령·에이전트 수를 직접 세고, 다섯 저장소의 별 수·라이선스·마지막 푸시를 GitHub API로, 기능과 설치 명령을 각 README에서 확인. 같은 작업에 켜고 끄는 효과 비교, README 수치 재현, 동시 설치 충돌, Codex 설치, Windows·macOS는 미확인.",
-    "assets": {
-      "cover": "docs/posts/assets/skill-situation-guide-cover.png",
-      "flow": "docs/posts/assets/skill-situation-guide-flow.png"
-    },
-    "cover_text": [
-      "도구·모델 비교",
-      "어떤 스킬을",
-      "설치할까",
-      "작업 상황별 추천 다섯 가지"
-    ],
-    "diagram_title": "스킬 고르는 순서",
-    "diagram_steps": [
-      [
-        "내 작업 고르기",
-        "문서 · 디자인 · 개발 · 글"
-      ],
-      [
-        "플러그인 설치",
-        "마켓플레이스 추가 후 설치"
-      ],
-      [
-        "새 세션에서 확인",
-        "스킬 목록에 뜨는지 보기"
-      ]
-    ],
-    "tags": [
-      "스킬 추천",
-      "Claude Code 플러그인",
-      "superpowers",
-      "frontend-design",
-      "AI 코딩 입문"
-    ],
-    "related": [
-      "skills-first-guide",
-      "agents-claude-md-first-guide",
-      "codex-vs-claude-code-compare"
-    ]
-  },
-  {
-    "id": "model-selection-first-guide",
-    "kind": "guide",
-    "category": "도구·모델 비교",
-    "title": "AI 코딩 도구 모델 고르는 기준: 같은 버그 수정을 여러 모델로 돌려 본 결과",
-    "sources": [
-      "https://learn.chatgpt.com/docs/models",
-      "https://code.claude.com/docs/en/model-config"
-    ],
-    "markdown": "docs/posts/model-selection-first-guide.md",
-    "checked_on": "2026-11-15",
-    "verification": "Linux 한 환경에서 Codex CLI 0.167.2와 Claude Code 2.1.325로 같은 버그 수정을 모델·강도 조건별 1회 실행해 통과 여부·시간·표시된 사용량을 기록. 가격과 사용 한도는 확인하지 않음.",
-    "assets": {
-      "cover": "docs/posts/assets/model-selection-first-guide-cover.png",
-      "flow": "docs/posts/assets/model-selection-first-guide-flow.png"
-    },
-    "cover_text": [
-      "도구·모델 비교",
-      "모델 고르는 기준",
-      "같은 버그를 여러 모델로",
-      "돌려 본 시간과 사용량 기록"
-    ],
-    "diagram_title": "모델별로 한 번씩 돌린 순서",
-    "diagram_steps": [
-      [
-        "폴더 복사",
-        "실행마다 같은 시작 폴더"
-      ],
-      [
-        "같은 요청 전송",
-        "모델과 강도만 변경"
-      ],
-      [
-        "기록 대조",
-        "통과 · 시간 · 사용량"
-      ]
-    ],
-    "tags": [
-      "Codex",
-      "Claude Code",
-      "AI 모델 선택",
-      "추론 강도",
-      "AI 코딩 입문"
-    ],
-    "related": [
-      "codex-vs-claude-code-compare",
-      "skills-first-guide",
-      "agent-permissions-first-guide"
-    ]
-  },
-  {
-    "id": "claude-model-traits-guide",
-    "kind": "guide",
-    "category": "도구·모델 비교",
-    "title": "Claude Code 모델별 특징 비교: 같은 작업 세 가지를 haiku·sonnet·opus·fable로 두 번씩 돌린 기록",
-    "sources": [
-      "https://code.claude.com/docs/en/model-config",
-      "https://github.com/kwonseongjae/ai-blog-automation/blob/main/docs/posts/evidence/claude-model-traits.json"
-    ],
-    "markdown": "docs/posts/claude-model-traits-guide.md",
-    "checked_on": "2026-11-16",
-    "verification": "Linux 한 환경의 Claude Code 2.1.325에서 별칭 haiku·sonnet·opus·fable로 작은 Python 프로젝트의 버그 수정·리뷰·모호한 요청 세 작업을 각 2회씩 실행하고 테스트 통과, 변경 범위, 턴·표시된 비용·시간을 기록. Codex 모델, 추론 강도 변경, 큰 프로젝트, 3회 이상 반복, 지적 타당성 전수 검증은 미확인.",
-    "assets": {
-      "cover": "docs/posts/assets/claude-model-traits-guide-cover.png",
-      "flow": "docs/posts/assets/claude-model-traits-guide-flow.png"
-    },
-    "cover_text": [
-      "도구·모델 비교",
-      "모델별 특징",
-      "haiku · sonnet",
-      "opus · fable 두 번씩 비교"
-    ],
-    "diagram_title": "모델 비교 순서",
-    "diagram_steps": [
-      [
-        "같은 폴더 복사",
-        "실행마다 새로 시작"
-      ],
-      [
-        "별칭만 바꿔 실행",
-        "작업 3가지를 2회씩"
-      ],
-      [
-        "결과와 범위 기록",
-        "통과 · 턴 · 변경된 줄"
-      ]
-    ],
-    "tags": [
-      "Claude Code 모델",
-      "haiku",
-      "sonnet",
-      "opus",
-      "fable",
-      "모델 비교"
-    ],
-    "related": [
-      "model-selection-first-guide",
-      "codex-vs-claude-code-compare",
-      "skills-first-guide"
-    ]
-  },
-  {
-    "id": "mcp-first-connect-guide",
-    "kind": "guide",
-    "category": "AI 시작하기",
-    "title": "MCP 서버 처음 연결하기: Codex와 Claude Code에 연습용 서버를 붙여 도구 호출까지 확인한 기록",
-    "sources": [
-      "https://learn.chatgpt.com/docs/extend/mcp",
-      "https://code.claude.com/docs/en/mcp"
-    ],
-    "markdown": "docs/posts/mcp-first-connect-guide.md",
-    "checked_on": "2026-11-16",
-    "verification": "Linux 한 환경에서 Codex CLI 0.167.2와 Claude Code 2.1.325에 직접 만든 stdio 연습용 서버를 연결하고 도구 호출·서버 로그·승인 설정별 결과를 조건별 1회 실행으로 기록. HTTP 서버, OAuth, 대화형 승인 창은 확인하지 않음.",
-    "assets": {
-      "cover": "docs/posts/assets/mcp-first-connect-guide-cover.png",
-      "flow": "docs/posts/assets/mcp-first-connect-guide-flow.png"
-    },
-    "cover_text": [
-      "AI 시작하기",
-      "MCP 서버 처음 연결",
-      "연습용 서버를 붙여",
-      "도구 호출까지 확인"
-    ],
-    "diagram_title": "MCP 연결을 확인하는 순서",
-    "diagram_steps": [
-      [
-        "서버 확인",
-        "프로토콜을 직접 넣어 보기"
-      ],
-      [
-        "도구에 등록",
-        "명령 한 줄과 설정 파일"
-      ],
-      [
-        "호출 대조",
-        "답변과 서버 로그 비교"
-      ]
-    ],
-    "tags": [
-      "MCP",
-      "Codex",
-      "Claude Code",
-      "MCP 서버 연결",
-      "AI 에이전트 설정"
-    ],
-    "related": [
-      "agent-permissions-first-guide",
-      "skills-first-guide",
-      "codex-vs-claude-code-compare"
-    ]
-  },
-  {
-    "id": "skills-troubleshooting-guide",
-    "kind": "guide",
-    "category": "AI 시작하기",
-    "title": "스킬이 안 불릴 때 점검하는 순서: 위치·파일 이름·머리글·설명·호출 설정을 하나씩 어겨 본 기록",
-    "sources": [
-      "https://learn.chatgpt.com/docs/build-skills",
-      "https://code.claude.com/docs/en/skills"
-    ],
-    "markdown": "docs/posts/skills-troubleshooting-guide.md",
-    "checked_on": "2026-11-16",
-    "verification": "Linux 한 환경에서 Codex CLI 0.167.2와 Claude Code 2.1.325로 같은 스킬을 아홉 가지 조건으로 바꿔 이름 호출과 이름 없는 요청을 조건별 1회 실행하고 시작 정보의 목록과 실행한 명령을 기록. 대화형 화면의 스킬 목록, 개인 위치, 같은 이름 중복은 확인하지 않음.",
-    "assets": {
-      "cover": "docs/posts/assets/skills-troubleshooting-guide-cover.png",
-      "flow": "docs/posts/assets/skills-troubleshooting-guide-flow.png"
-    },
-    "cover_text": [
-      "AI 시작하기",
-      "스킬이 안 불릴 때",
-      "조건을 하나씩 어겨 보고",
-      "원인을 가려내는 순서"
-    ],
-    "diagram_title": "스킬 조건을 바꿔 비교하는 순서",
-    "diagram_steps": [
-      [
-        "정상 스킬",
-        "같은 파일에서 시작"
-      ],
-      [
-        "조건 하나 변경",
-        "위치·이름·머리글·설명"
-      ],
-      [
-        "두 요청 비교",
-        "이름 호출과 이름 없는 요청"
-      ]
-    ],
-    "tags": [
-      "스킬",
-      "SKILL.md",
-      "Codex",
-      "Claude Code",
-      "AI 에이전트 설정"
-    ],
-    "related": [
-      "skills-first-guide",
-      "mcp-first-connect-guide",
-      "agents-claude-md-first-guide"
-    ]
-  },
-  {
-    "id": "instruction-files-troubleshooting-guide",
-    "kind": "guide",
-    "category": "AI 시작하기",
-    "title": "지침 파일이 안 먹힐 때 점검하는 순서: 이름·위치·크기·요청을 하나씩 바꿔 표식 한 줄로 확인한 기록",
-    "sources": [
-      "https://learn.chatgpt.com/docs/agent-configuration/agents-md",
-      "https://code.claude.com/docs/en/memory"
-    ],
-    "markdown": "docs/posts/instruction-files-troubleshooting-guide.md",
-    "checked_on": "2026-11-16",
-    "verification": "Linux 한 환경에서 Codex CLI 0.167.2와 Claude Code 2.1.325로 지침 파일의 이름·위치·크기·요청을 바꿔 답변 마지막 줄의 표식을 조건별 1회 실행으로 확인. 대화형 확인 명령, 개인 위치, 다른 운영체제는 확인하지 않음.",
-    "assets": {
-      "cover": "docs/posts/assets/instruction-files-troubleshooting-guide-cover.png",
-      "flow": "docs/posts/assets/instruction-files-troubleshooting-guide-flow.png"
-    },
-    "cover_text": [
-      "AI 시작하기",
-      "지침 파일이 안 먹힐 때",
-      "표식 한 줄로 읽혔는지",
-      "원인을 가려내는 순서"
-    ],
-    "diagram_title": "지침이 읽혔는지 확인하는 순서",
-    "diagram_steps": [
-      [
-        "표식 규칙 작성",
-        "지침에 한 줄 적기"
-      ],
-      [
-        "조건 하나 변경",
-        "이름·위치·크기·요청"
-      ],
-      [
-        "마지막 줄 확인",
-        "표식이 나오는지 비교"
-      ]
-    ],
-    "tags": [
-      "AGENTS.md",
-      "CLAUDE.md",
-      "지침 파일",
-      "Codex",
-      "Claude Code",
-      "AI 에이전트 설정"
-    ],
-    "related": [
-      "agents-claude-md-first-guide",
-      "skills-troubleshooting-guide",
-      "mcp-first-connect-guide"
-    ]
-  },
-  {
-    "id": "daily-publish-state",
-    "kind": "guide",
-    "category": "프로젝트 적용기",
-    "title": "블로그 자동화에서 하루 한 번 발행을 지키는 방법",
-    "sources": [
-      "https://docs.python.org/3/library/fcntl.html",
-      "https://docs.python.org/3/library/os.html#os.replace",
-      "https://github.com/kwonseongjae/ai-blog-automation/blob/main/automation/learning_blog.py"
-    ],
-    "markdown": "docs/posts/daily-publish-state.md",
-    "checked_on": "2026-11-15",
-    "verification": "공개 구현과 상태 전이 테스트 확인. 복수 서버·장기 가용성·검색 성과는 미검증.",
-    "assets": {
-      "cover": "docs/posts/assets/daily-publish-state-cover.png",
-      "flow": "docs/posts/assets/daily-publish-state-flow.png"
-    },
-    "cover_text": [
-      "프로젝트 기록",
-      "하루 한 번 발행",
-      "상태를 먼저 저장",
-      "잠금 · 확인 대기 · 공개 검증"
-    ],
-    "diagram_title": "발행 결과를 모를 때의 처리",
-    "diagram_steps": [
-      [
-        "발행 전 기록",
-        "잠금 획득 · 확인 대기 저장"
-      ],
-      [
-        "발행 후 대조",
-        "공개 주소 · 원고 · 이미지 확인"
-      ],
-      [
-        "검증 뒤 완료",
-        "확인 실패는 대기 상태 유지"
-      ]
-    ],
-    "project": {
-      "name": "기술블로그 발행기",
-      "url": "https://github.com/kwonseongjae/ai-blog-automation",
-      "role": "하루 한 번 발행 상태 기록, 실행 잠금, 공개 본문 검증을 직접 구현했습니다.",
-      "result": "중복 발행 방지와 공개 본문 대조를 테스트로 확인했습니다."
-    },
-    "tags": [
-      "블로그 자동화",
-      "중복 발행 방지",
-      "Python 자동화",
-      "발행 검증"
-    ],
-    "related": [
-      "ai-agent-first-task"
-    ]
-  },
-  {
-    "id": "validator-cases-guide",
-    "kind": "guide",
-    "category": "프로젝트 적용기",
-    "title": "블로그 발행기가 잘못된 원고를 발행 전에 막는 방법: 규칙 13가지를 일부러 어겨 본 기록",
-    "sources": [
-      "https://github.com/kwonseongjae/ai-blog-automation/blob/main/automation/learning_blog.py",
-      "https://github.com/kwonseongjae/ai-blog-automation/blob/main/docs/posts/evidence/validator-cases.json"
-    ],
-    "markdown": "docs/posts/validator-cases-guide.md",
-    "checked_on": "2026-11-15",
-    "verification": "Linux 한 환경에서 원고 항목을 한 가지씩 어긋나게 바꾼 13건과 발행 주소 5건을 검증 함수에 입력해 메시지를 기록. 저장 상태·원격 일치·본문 길이 검사는 코드만 읽었고 직접 어긴 입력은 넣지 않음.",
-    "assets": {
-      "cover": "docs/posts/assets/validator-cases-guide-cover.png",
-      "flow": "docs/posts/assets/validator-cases-guide-flow.png"
-    },
-    "cover_text": [
-      "프로젝트 적용기",
-      "발행 전 검사",
-      "어긋난 원고 13건을 넣어",
-      "메시지를 확인한 기록"
-    ],
-    "diagram_title": "발행 전 세 단계 검사",
-    "diagram_steps": [
-      [
-        "항목 검사",
-        "출처·표지·태그·분류"
-      ],
-      [
-        "저장소 확인",
-        "변경 저장과 원격 main 일치"
-      ],
-      [
-        "본문 확인",
-        "700자와 소제목 네 개"
-      ]
-    ],
-    "tags": [
-      "블로그 자동화",
-      "발행 자동화",
-      "입력 검증",
-      "Python",
-      "프로젝트 적용기"
-    ],
-    "related": [
-      "daily-publish-state"
-    ],
-    "project": {
-      "name": "ai-blog-automation",
-      "url": "https://github.com/kwonseongjae/ai-blog-automation",
-      "role": "발행 전 원고 검증 규칙을 코드로 두고 테스트로 확인",
-      "result": "어긋난 원고 13건과 발행 주소 4건이 모두 거절되고 정상 원고와 주소는 통과"
-    }
-  },
-  {
-    "id": "mobile-table-guide",
-    "kind": "guide",
-    "category": "프로젝트 적용기",
-    "title": "긴 비교표를 휴대폰에서 읽게 하려면: 폭 360px에서 표 11개를 재어 본 기록",
-    "sources": [
-      "https://github.com/kwonseongjae/ai-blog-automation/blob/main/automation/technical_skin.css",
-      "https://github.com/kwonseongjae/ai-blog-automation/blob/main/docs/posts/evidence/mobile-table-widths.json"
-    ],
-    "markdown": "docs/posts/mobile-table-guide.md",
-    "checked_on": "2026-11-15",
-    "verification": "Linux의 데스크톱 Chromium 145 모바일 에뮬레이션으로 폭 360·390·768px에서 공개 글 표 2개와 발행 전 글 표 9개의 스크롤 여부와 보이는 열 수를 측정. 실기기·iOS·안드로이드·키보드·스크린리더는 확인하지 않음.",
-    "assets": {
-      "cover": "docs/posts/assets/mobile-table-guide-cover.png",
-      "flow": "docs/posts/assets/mobile-table-guide-flow.png"
-    },
-    "cover_text": [
-      "프로젝트 적용기",
-      "휴대폰에서 읽는 표",
-      "폭 360px에서 표 11개를",
-      "재어 본 기록"
-    ],
-    "diagram_title": "표를 폭별로 재는 순서",
-    "diagram_steps": [
-      [
-        "스크롤 상자",
-        "표를 래퍼 안에 둠"
-      ],
-      [
-        "폭별 측정",
-        "360 · 390 · 768px"
-      ],
-      [
-        "넘침 확인",
-        "스크롤 여부와 보이는 열"
-      ]
-    ],
-    "tags": [
-      "블로그 화면",
-      "모바일 표",
-      "CSS",
-      "반응형",
-      "프로젝트 적용기"
-    ],
-    "related": [
-      "validator-cases-guide",
-      "daily-publish-state"
-    ],
-    "project": {
-      "name": "ai-blog-automation",
-      "url": "https://github.com/kwonseongjae/ai-blog-automation",
-      "role": "표를 스크롤 상자에 넣는 스킨 CSS를 두고 폭별로 측정",
-      "result": "360·390px에서 표 11개가 상자 안에서만 스크롤되고 페이지 전체는 옆으로 밀리지 않음"
-    }
-  },
-  {
-    "id": "dark-mode-contrast-guide",
-    "kind": "guide",
-    "category": "프로젝트 적용기",
-    "title": "블로그에 다크 모드를 넣고 글자 대비를 재어 고친 기록: 낮은 대비 17곳을 3곳으로",
-    "sources": [
-      "https://github.com/kwonseongjae/ai-blog-automation/blob/main/automation/technical_skin.css",
-      "https://github.com/kwonseongjae/ai-blog-automation/blob/main/docs/posts/evidence/dark-mode-contrast.json"
-    ],
-    "markdown": "docs/posts/dark-mode-contrast-guide.md",
-    "checked_on": "2026-11-15",
-    "verification": "Linux의 데스크톱 Chromium 145에서 어두운·밝은 화면 설정을 에뮬레이션해 공개 페이지 2개의 글자 대비를 네 차례 측정. 기준 3.5 미만을 낮은 대비로 표시. 실기기와 어두운 화면의 육안 확인은 하지 않음.",
-    "assets": {
-      "cover": "docs/posts/assets/dark-mode-contrast-guide-cover.png",
-      "flow": "docs/posts/assets/dark-mode-contrast-guide-flow.png"
-    },
-    "cover_text": [
-      "프로젝트 적용기",
-      "다크 모드 글자 대비",
-      "낮은 대비 17곳을",
-      "3곳으로 줄인 기록"
-    ],
-    "diagram_title": "다크 모드를 고치는 순서",
-    "diagram_steps": [
-      [
-        "규칙 적용",
-        "변수와 고정 색상 덮기"
-      ],
-      [
-        "대비 측정",
-        "글자 요소 전체"
-      ],
-      [
-        "다시 적용",
-        "낮은 곳부터 수정"
-      ]
-    ],
-    "tags": [
-      "다크 모드",
-      "글자 대비",
-      "CSS",
-      "접근성",
-      "프로젝트 적용기"
-    ],
-    "related": [
-      "mobile-table-guide",
-      "validator-cases-guide"
-    ],
-    "project": {
-      "name": "ai-blog-automation",
-      "url": "https://github.com/kwonseongjae/ai-blog-automation",
-      "role": "블로그 스킨에 다크 모드를 넣고 글자 대비를 측정해 고침",
-      "result": "어두운 화면 3번 글에서 낮은 대비 요소를 17곳에서 3곳으로 줄임(남은 곳은 티스토리 기본 위젯과 숨은 아이콘 글자)"
-    }
+ {
+  "id": "python-kst-date",
+  "lab": "timezone",
+  "category": "Python·자동화",
+  "title": "Python 자동화의 하루 기준을 한국 시간으로 정하는 방법",
+  "sources": [
+   "https://docs.python.org/3.12/library/zoneinfo.html",
+   "https://docs.python.org/3.12/library/datetime.html"
+  ],
+  "markdown": "docs/posts/python-kst-date.md",
+  "cover_text": [
+   "Python·자동화",
+   "한국 시간",
+   "날짜 기준",
+   "UTC와 한국 날짜의 차이"
+  ],
+  "assets": {
+   "cover": "docs/posts/assets/python-kst-date-cover.png"
   }
+ },
+ {
+  "id": "python-path-base",
+  "lab": "paths",
+  "category": "Python·자동화",
+  "title": "터미널에서는 되는데 예약 실행에서는 파일을 못 찾는 이유",
+  "sources": [
+   "https://docs.python.org/3.12/library/pathlib.html"
+  ],
+  "markdown": "docs/posts/python-path-base.md",
+  "cover_text": [
+   "Python·자동화",
+   "파일 경로",
+   "실행 위치",
+   "예약 실행의 기준 폴더"
+  ],
+  "assets": {
+   "cover": "docs/posts/assets/python-path-base-cover.png"
+  }
+ },
+ {
+  "id": "ai-agent-first-task",
+  "kind": "guide",
+  "category": "AI 시작하기",
+  "title": "AI 에이전트란? 챗봇과 다른 점과 처음 맡길 일 3가지",
+  "sources": [
+   "https://learn.chatgpt.com/docs/working-with-agents.md",
+   "https://www.anthropic.com/research/building-effective-agents",
+   "https://code.claude.com/docs/en/permissions"
+  ],
+  "markdown": "docs/posts/ai-agent-first-task.md",
+  "checked_on": "2026-11-15",
+  "verification": "읽기 도구만 제공한 실행의 세 값을 원문과 대조. 다단계 자율 작업 성능은 측정하지 않음.",
+  "assets": {
+   "cover": "docs/posts/assets/ai-agent-first-task-cover.png",
+   "flow": "docs/posts/assets/ai-agent-first-task-flow.png"
+  },
+  "cover_text": [
+   "AI 기초",
+   "AI 에이전트",
+   "어디까지 맡길까",
+   "챗봇과의 차이 · 첫 요청 예시"
+  ],
+  "diagram_title": "처음 맡긴 읽기 작업",
+  "diagram_steps": [
+   [
+    "요청 범위 정하기",
+    "README 한 장 · 읽기 도구만 허용"
+   ],
+   [
+    "문서에서 값 찾기",
+    "주소 · 실습 경로 · 테스트 명령"
+   ],
+   [
+    "원문과 비교하기",
+    "반환한 세 값을 직접 대조"
+   ]
+  ],
+  "tags": [
+   "AI 에이전트",
+   "AI 입문",
+   "챗봇 차이",
+   "에이전트 첫 작업"
+  ]
+ },
+ {
+  "id": "codex-first-settings",
+  "kind": "guide",
+  "category": "AI 시작하기",
+  "title": "Codex 처음 쓸 때: 설치·로그인·작업 폴더부터 확인하는 법",
+  "sources": [
+   "https://learn.chatgpt.com/docs/codex/cli.md",
+   "https://learn.chatgpt.com/docs/permission-modes.md",
+   "https://github.com/openai/codex"
+  ],
+  "markdown": "docs/posts/codex-first-settings.md",
+  "checked_on": "2026-11-15",
+  "verification": "WSL의 기존 설치 버전 0.167.2와 도움말 확인. 새 Windows 설치와 예시 요청의 응답은 미수행.",
+  "assets": {
+   "cover": "docs/posts/assets/codex-first-settings-cover.png",
+   "flow": "docs/posts/assets/codex-first-settings-flow.png"
+  },
+  "cover_text": [
+   "Codex 사용법",
+   "Codex",
+   "처음 쓰는 설정",
+   "설치 · 로그인 · 작업 폴더"
+  ],
+  "diagram_title": "Codex 첫 실행 순서",
+  "diagram_steps": [
+   [
+    "터미널 환경 선택",
+    "PowerShell 또는 WSL 한 곳"
+   ],
+   [
+    "설치와 계정 확인",
+    "버전 · 로그인 · 권한 범위"
+   ],
+   [
+    "작은 설명부터 시작",
+    "README를 읽고 근거 확인"
+   ]
+  ],
+  "tags": [
+   "Codex",
+   "Codex 설치",
+   "AI 코딩 도구",
+   "로그인 설정"
+  ],
+  "related": [
+   "ai-agent-first-task"
+  ]
+ },
+ {
+  "id": "claude-code-first-settings",
+  "kind": "guide",
+  "category": "AI 시작하기",
+  "title": "Claude Code 처음 설정하기: Windows와 WSL 명령을 섞지 않는 법",
+  "sources": [
+   "https://code.claude.com/docs/en/quickstart",
+   "https://code.claude.com/docs/en/setup",
+   "https://code.claude.com/docs/en/permissions"
+  ],
+  "markdown": "docs/posts/claude-code-first-settings.md",
+  "checked_on": "2026-11-15",
+  "verification": "WSL의 기존 설치 버전 2.1.322 확인. 새 Windows 설치와 본문 첫 요청 예시 응답은 미수행.",
+  "assets": {
+   "cover": "docs/posts/assets/claude-code-first-settings-cover.png",
+   "flow": "docs/posts/assets/claude-code-first-settings-flow.png"
+  },
+  "cover_text": [
+   "Claude Code 사용법",
+   "Claude Code",
+   "Windows · WSL",
+   "설치할 터미널부터 확인하기"
+  ],
+  "diagram_title": "Claude Code 첫 실행 순서",
+  "diagram_steps": [
+   [
+    "설치할 환경 선택",
+    "PowerShell과 WSL 명령 구분"
+   ],
+   [
+    "계정과 권한 확인",
+    "버전 · 로그인 · 상태 확인"
+   ],
+   [
+    "README 한 장 읽기",
+    "변경 없이 설명을 원문과 비교"
+   ]
+  ],
+  "tags": [
+   "Claude Code",
+   "Claude Code 설치",
+   "WSL",
+   "Windows",
+   "AI 코딩 도구"
+  ],
+  "related": [
+   "ai-agent-first-task",
+   "codex-first-settings"
+  ]
+ },
+ {
+  "id": "agents-claude-md-first-guide",
+  "kind": "guide",
+  "category": "AI 시작하기",
+  "title": "AGENTS.md와 CLAUDE.md 처음 쓰기: 어떤 파일을 읽는지 직접 확인하는 법",
+  "sources": [
+   "https://learn.chatgpt.com/docs/agent-configuration/agents-md",
+   "https://code.claude.com/docs/en/memory"
+  ],
+  "markdown": "docs/posts/agents-claude-md-first-guide.md",
+  "checked_on": "2026-11-15",
+  "verification": "Linux 한 환경에서 Codex CLI 0.167.2와 Claude Code 2.1.325를 임시 폴더로 각각 실행해 문서의 읽기 규칙을 확인. 조건별 1회 실행이며 Windows·macOS와 요금제별 차이는 미확인.",
+  "assets": {
+   "cover": "docs/posts/assets/agents-claude-md-first-guide-cover.png",
+   "flow": "docs/posts/assets/agents-claude-md-first-guide-flow.png"
+  },
+  "cover_text": [
+   "AI 시작하기",
+   "지침 파일",
+   "AGENTS · CLAUDE",
+   "어떤 파일을 읽는지 확인하기"
+  ],
+  "diagram_title": "지침 파일 읽기 확인 순서",
+  "diagram_steps": [
+   [
+    "지침 파일 만들기",
+    "규칙이 다른 파일 두 개"
+   ],
+   [
+    "같은 질문으로 확인",
+    "도구마다 읽은 파일 묻기"
+   ],
+   [
+    "읽은 파일 대조",
+    "문서의 읽기 규칙과 비교"
+   ]
+  ],
+  "tags": [
+   "AGENTS.md",
+   "CLAUDE.md",
+   "지침 파일",
+   "AI 코딩 도구",
+   "Codex",
+   "Claude Code"
+  ],
+  "related": [
+   "codex-first-settings",
+   "claude-code-first-settings"
+  ]
+ },
+ {
+  "id": "agent-permissions-first-guide",
+  "kind": "guide",
+  "category": "AI 시작하기",
+  "title": "AI 코딩 도구 권한 처음 설정하기: 파일을 만들기 전에 물어보게 하는 법",
+  "sources": [
+   "https://learn.chatgpt.com/docs/agent-approvals-security",
+   "https://code.claude.com/docs/en/permissions"
+  ],
+  "markdown": "docs/posts/agent-permissions-first-guide.md",
+  "checked_on": "2026-11-15",
+  "verification": "Linux 한 환경에서 Codex CLI 0.167.2와 Claude Code 2.1.325를 임시 폴더로 실행해 파일 생성 허용·차단을 조건별 1회 확인. 규칙의 검사 순서는 공식 문서 설명이며 직접 시험하지 않음. Windows·macOS와 요금제별 차이는 미확인.",
+  "assets": {
+   "cover": "docs/posts/assets/agent-permissions-first-guide-cover.png",
+   "flow": "docs/posts/assets/agent-permissions-first-guide-flow.png"
+  },
+  "cover_text": [
+   "AI 시작하기",
+   "권한 설정",
+   "승인과 샌드박스",
+   "처음에는 어디까지 허용할까"
+  ],
+  "diagram_title": "권한 설정 확인 순서",
+  "diagram_steps": [
+   [
+    "권한 단계 고르기",
+    "읽기 전용 · 편집 허용"
+   ],
+   [
+    "같은 요청으로 시험",
+    "파일 만들기를 요청"
+   ],
+   [
+    "결과로 설정 확정",
+    "막힌 일과 허용한 일"
+   ]
+  ],
+  "tags": [
+   "AI 코딩 도구 권한",
+   "Codex 샌드박스",
+   "Claude Code 권한",
+   "승인 설정",
+   "AI 입문"
+  ],
+  "related": [
+   "agents-claude-md-first-guide",
+   "codex-first-settings",
+   "claude-code-first-settings"
+  ]
+ },
+ {
+  "id": "codex-vs-claude-code-compare",
+  "kind": "guide",
+  "category": "도구·모델 비교",
+  "title": "Codex와 Claude Code 비교: 같은 버그 수정을 맡겨 보고 설정 차이까지 정리",
+  "sources": [
+   "https://learn.chatgpt.com/docs/agent-approvals-security",
+   "https://code.claude.com/docs/en/permissions"
+  ],
+  "markdown": "docs/posts/codex-vs-claude-code-compare.md",
+  "checked_on": "2026-11-15",
+  "verification": "Linux 한 환경에서 Codex CLI 0.167.2와 Claude Code 2.1.325로 같은 버그 수정을 각 1회 실행해 통과 여부·시간·표시된 사용량을 기록. 설정은 공식 문서와 임시 폴더 실행으로 확인. 개인 설정 범위와 모델이 달라 속도·사용량은 직접 비교하지 않음.",
+  "assets": {
+   "cover": "docs/posts/assets/codex-vs-claude-code-compare-cover.png",
+   "flow": "docs/posts/assets/codex-vs-claude-code-compare-flow.png"
+  },
+  "cover_text": [
+   "도구·모델 비교",
+   "Codex",
+   "vs Claude Code",
+   "같은 버그를 맡겨 보고 설정 차이 정리"
+  ],
+  "diagram_title": "같은 과제로 비교한 순서",
+  "diagram_steps": [
+   [
+    "폴더 복사",
+    "같은 시작 폴더 두 개"
+   ],
+   [
+    "같은 요청 전송",
+    "요청 문장과 성공 기준 동일"
+   ],
+   [
+    "결과 대조",
+    "통과 · 시간 · 수정 방식"
+   ]
+  ],
+  "tags": [
+   "Codex",
+   "Claude Code",
+   "Codex Claude Code 비교",
+   "AI 코딩 도구 비교",
+   "AI 코딩 입문"
+  ],
+  "related": [
+   "agents-claude-md-first-guide",
+   "agent-permissions-first-guide",
+   "codex-first-settings"
+  ]
+ },
+ {
+  "id": "skills-first-guide",
+  "kind": "guide",
+  "category": "AI 시작하기",
+  "title": "스킬(SKILL.md) 처음 만들기: Codex와 Claude Code에서 같은 파일로 써 본 결과",
+  "sources": [
+   "https://learn.chatgpt.com/docs/build-skills",
+   "https://code.claude.com/docs/en/skills"
+  ],
+  "markdown": "docs/posts/skills-first-guide.md",
+  "checked_on": "2026-11-15",
+  "verification": "Linux 한 환경에서 같은 SKILL.md를 Codex CLI 0.167.2와 Claude Code 2.1.325에 넣고 이름 호출·이름 없는 요청·스킬 없는 폴더를 각 1회 실행해 출력 형식을 확인. 개인용 위치와 우선순위, 경계 요청, 스킬 없이 규칙을 직접 적은 경우는 미확인.",
+  "assets": {
+   "cover": "docs/posts/assets/skills-first-guide-cover.png",
+   "flow": "docs/posts/assets/skills-first-guide-flow.png"
+  },
+  "cover_text": [
+   "AI 시작하기",
+   "스킬 만들기",
+   "SKILL.md",
+   "같은 파일을 두 도구에서 써 보기"
+  ],
+  "diagram_title": "스킬 확인 순서",
+  "diagram_steps": [
+   [
+    "스킬 폴더 만들기",
+    "SKILL.md 한 개, 두 위치에 복사"
+   ],
+   [
+    "두 방식으로 호출",
+    "이름으로 부르기 · 이름 없이 요청"
+   ],
+   [
+    "빈 폴더와 비교",
+    "출력 형식과 덧붙인 문장 확인"
+   ]
+  ],
+  "tags": [
+   "스킬",
+   "SKILL.md",
+   "Codex 스킬",
+   "Claude Code 스킬",
+   "AI 코딩 입문"
+  ],
+  "related": [
+   "agents-claude-md-first-guide",
+   "agent-permissions-first-guide",
+   "codex-vs-claude-code-compare"
+  ]
+ },
+ {
+  "id": "skill-situation-guide",
+  "kind": "guide",
+  "category": "도구·모델 비교",
+  "title": "어떤 상황에 어떤 스킬을 설치할까: 문서 작업·화면 디자인·개발 절차·코드 줄이기·한글 윤문 다섯 가지",
+  "sources": [
+   "https://code.claude.com/docs/en/skills",
+   "https://github.com/anthropics/skills",
+   "https://github.com/anthropics/claude-plugins-official"
+  ],
+  "markdown": "docs/posts/skill-situation-guide.md",
+  "checked_on": "2026-11-16",
+  "verification": "Linux 한 환경의 Claude Code 2.1.325에 설치된 플러그인 폴더 네 곳의 스킬·명령·에이전트 수를 직접 세고, 다섯 저장소의 별 수·라이선스·마지막 푸시를 GitHub API로, 기능과 설치 명령을 각 README에서 확인. 같은 작업에 켜고 끄는 효과 비교, README 수치 재현, 동시 설치 충돌, Codex 설치, Windows·macOS는 미확인.",
+  "assets": {
+   "cover": "docs/posts/assets/skill-situation-guide-cover.png",
+   "flow": "docs/posts/assets/skill-situation-guide-flow.png"
+  },
+  "cover_text": [
+   "도구·모델 비교",
+   "어떤 스킬을",
+   "설치할까",
+   "작업 상황별 추천 다섯 가지"
+  ],
+  "diagram_title": "스킬 고르는 순서",
+  "diagram_steps": [
+   [
+    "내 작업 고르기",
+    "문서 · 디자인 · 개발 · 글"
+   ],
+   [
+    "플러그인 설치",
+    "마켓플레이스 추가 후 설치"
+   ],
+   [
+    "새 세션에서 확인",
+    "스킬 목록에 뜨는지 보기"
+   ]
+  ],
+  "tags": [
+   "스킬 추천",
+   "Claude Code 플러그인",
+   "superpowers",
+   "frontend-design",
+   "AI 코딩 입문"
+  ],
+  "related": [
+   "skills-first-guide",
+   "agents-claude-md-first-guide",
+   "codex-vs-claude-code-compare"
+  ]
+ },
+ {
+  "id": "model-selection-first-guide",
+  "kind": "guide",
+  "category": "도구·모델 비교",
+  "title": "AI 코딩 도구 모델 고르는 기준: 같은 버그 수정을 여러 모델로 돌려 본 결과",
+  "sources": [
+   "https://learn.chatgpt.com/docs/models",
+   "https://code.claude.com/docs/en/model-config"
+  ],
+  "markdown": "docs/posts/model-selection-first-guide.md",
+  "checked_on": "2026-11-15",
+  "verification": "Linux 한 환경에서 Codex CLI 0.167.2와 Claude Code 2.1.325로 같은 버그 수정을 모델·강도 조건별 1회 실행해 통과 여부·시간·표시된 사용량을 기록. 가격과 사용 한도는 확인하지 않음.",
+  "assets": {
+   "cover": "docs/posts/assets/model-selection-first-guide-cover.png",
+   "flow": "docs/posts/assets/model-selection-first-guide-flow.png"
+  },
+  "cover_text": [
+   "도구·모델 비교",
+   "모델 고르는 기준",
+   "같은 버그를 여러 모델로",
+   "돌려 본 시간과 사용량 기록"
+  ],
+  "diagram_title": "모델별로 한 번씩 돌린 순서",
+  "diagram_steps": [
+   [
+    "폴더 복사",
+    "실행마다 같은 시작 폴더"
+   ],
+   [
+    "같은 요청 전송",
+    "모델과 강도만 변경"
+   ],
+   [
+    "기록 대조",
+    "통과 · 시간 · 사용량"
+   ]
+  ],
+  "tags": [
+   "Codex",
+   "Claude Code",
+   "AI 모델 선택",
+   "추론 강도",
+   "AI 코딩 입문"
+  ],
+  "related": [
+   "codex-vs-claude-code-compare",
+   "skills-first-guide",
+   "agent-permissions-first-guide"
+  ]
+ },
+ {
+  "id": "claude-model-traits-guide",
+  "kind": "guide",
+  "category": "도구·모델 비교",
+  "title": "Claude Code 모델별 특징 비교: 같은 작업 세 가지를 haiku·sonnet·opus·fable로 두 번씩 돌린 기록",
+  "sources": [
+   "https://code.claude.com/docs/en/model-config",
+   "https://github.com/kwonseongjae/ai-blog-automation/blob/main/docs/posts/evidence/claude-model-traits.json"
+  ],
+  "markdown": "docs/posts/claude-model-traits-guide.md",
+  "checked_on": "2026-11-16",
+  "verification": "Linux 한 환경의 Claude Code 2.1.325에서 별칭 haiku·sonnet·opus·fable로 작은 Python 프로젝트의 버그 수정·리뷰·모호한 요청 세 작업을 각 2회씩 실행하고 테스트 통과, 변경 범위, 턴·표시된 비용·시간을 기록. Codex 모델, 추론 강도 변경, 큰 프로젝트, 3회 이상 반복, 지적 타당성 전수 검증은 미확인.",
+  "assets": {
+   "cover": "docs/posts/assets/claude-model-traits-guide-cover.png",
+   "flow": "docs/posts/assets/claude-model-traits-guide-flow.png"
+  },
+  "cover_text": [
+   "도구·모델 비교",
+   "모델별 특징",
+   "haiku · sonnet",
+   "opus · fable 두 번씩 비교"
+  ],
+  "diagram_title": "모델 비교 순서",
+  "diagram_steps": [
+   [
+    "같은 폴더 복사",
+    "실행마다 새로 시작"
+   ],
+   [
+    "별칭만 바꿔 실행",
+    "작업 3가지를 2회씩"
+   ],
+   [
+    "결과와 범위 기록",
+    "통과 · 턴 · 변경된 줄"
+   ]
+  ],
+  "tags": [
+   "Claude Code 모델",
+   "haiku",
+   "sonnet",
+   "opus",
+   "fable",
+   "모델 비교"
+  ],
+  "related": [
+   "model-selection-first-guide",
+   "codex-vs-claude-code-compare",
+   "skills-first-guide"
+  ]
+ },
+ {
+  "id": "mcp-first-connect-guide",
+  "kind": "guide",
+  "category": "AI 시작하기",
+  "title": "MCP 서버 처음 연결하기: Codex와 Claude Code에 연습용 서버를 붙여 도구 호출까지 확인한 기록",
+  "sources": [
+   "https://learn.chatgpt.com/docs/extend/mcp",
+   "https://code.claude.com/docs/en/mcp"
+  ],
+  "markdown": "docs/posts/mcp-first-connect-guide.md",
+  "checked_on": "2026-11-16",
+  "verification": "Linux 한 환경에서 Codex CLI 0.167.2와 Claude Code 2.1.325에 직접 만든 stdio 연습용 서버를 연결하고 도구 호출·서버 로그·승인 설정별 결과를 조건별 1회 실행으로 기록. HTTP 서버, OAuth, 대화형 승인 창은 확인하지 않음.",
+  "assets": {
+   "cover": "docs/posts/assets/mcp-first-connect-guide-cover.png",
+   "flow": "docs/posts/assets/mcp-first-connect-guide-flow.png"
+  },
+  "cover_text": [
+   "AI 시작하기",
+   "MCP 서버 처음 연결",
+   "연습용 서버를 붙여",
+   "도구 호출까지 확인"
+  ],
+  "diagram_title": "MCP 연결을 확인하는 순서",
+  "diagram_steps": [
+   [
+    "서버 확인",
+    "프로토콜을 직접 넣어 보기"
+   ],
+   [
+    "도구에 등록",
+    "명령 한 줄과 설정 파일"
+   ],
+   [
+    "호출 대조",
+    "답변과 서버 로그 비교"
+   ]
+  ],
+  "tags": [
+   "MCP",
+   "Codex",
+   "Claude Code",
+   "MCP 서버 연결",
+   "AI 에이전트 설정"
+  ],
+  "related": [
+   "agent-permissions-first-guide",
+   "skills-first-guide",
+   "codex-vs-claude-code-compare"
+  ]
+ },
+ {
+  "id": "skills-troubleshooting-guide",
+  "kind": "guide",
+  "category": "AI 시작하기",
+  "title": "스킬이 안 불릴 때 점검하는 순서: 위치·파일 이름·머리글·설명·호출 설정을 하나씩 어겨 본 기록",
+  "sources": [
+   "https://learn.chatgpt.com/docs/build-skills",
+   "https://code.claude.com/docs/en/skills"
+  ],
+  "markdown": "docs/posts/skills-troubleshooting-guide.md",
+  "checked_on": "2026-11-16",
+  "verification": "Linux 한 환경에서 Codex CLI 0.167.2와 Claude Code 2.1.325로 같은 스킬을 아홉 가지 조건으로 바꿔 이름 호출과 이름 없는 요청을 조건별 1회 실행하고 시작 정보의 목록과 실행한 명령을 기록. 대화형 화면의 스킬 목록, 개인 위치, 같은 이름 중복은 확인하지 않음.",
+  "assets": {
+   "cover": "docs/posts/assets/skills-troubleshooting-guide-cover.png",
+   "flow": "docs/posts/assets/skills-troubleshooting-guide-flow.png"
+  },
+  "cover_text": [
+   "AI 시작하기",
+   "스킬이 안 불릴 때",
+   "조건을 하나씩 어겨 보고",
+   "원인을 가려내는 순서"
+  ],
+  "diagram_title": "스킬 조건을 바꿔 비교하는 순서",
+  "diagram_steps": [
+   [
+    "정상 스킬",
+    "같은 파일에서 시작"
+   ],
+   [
+    "조건 하나 변경",
+    "위치·이름·머리글·설명"
+   ],
+   [
+    "두 요청 비교",
+    "이름 호출과 이름 없는 요청"
+   ]
+  ],
+  "tags": [
+   "스킬",
+   "SKILL.md",
+   "Codex",
+   "Claude Code",
+   "AI 에이전트 설정"
+  ],
+  "related": [
+   "skills-first-guide",
+   "mcp-first-connect-guide",
+   "agents-claude-md-first-guide"
+  ]
+ },
+ {
+  "id": "instruction-files-troubleshooting-guide",
+  "kind": "guide",
+  "category": "AI 시작하기",
+  "title": "지침 파일이 안 먹힐 때 점검하는 순서: 이름·위치·크기·요청을 하나씩 바꿔 표식 한 줄로 확인한 기록",
+  "sources": [
+   "https://learn.chatgpt.com/docs/agent-configuration/agents-md",
+   "https://code.claude.com/docs/en/memory"
+  ],
+  "markdown": "docs/posts/instruction-files-troubleshooting-guide.md",
+  "checked_on": "2026-11-16",
+  "verification": "Linux 한 환경에서 Codex CLI 0.167.2와 Claude Code 2.1.325로 지침 파일의 이름·위치·크기·요청을 바꿔 답변 마지막 줄의 표식을 조건별 1회 실행으로 확인. 대화형 확인 명령, 개인 위치, 다른 운영체제는 확인하지 않음.",
+  "assets": {
+   "cover": "docs/posts/assets/instruction-files-troubleshooting-guide-cover.png",
+   "flow": "docs/posts/assets/instruction-files-troubleshooting-guide-flow.png"
+  },
+  "cover_text": [
+   "AI 시작하기",
+   "지침 파일이 안 먹힐 때",
+   "표식 한 줄로 읽혔는지",
+   "원인을 가려내는 순서"
+  ],
+  "diagram_title": "지침이 읽혔는지 확인하는 순서",
+  "diagram_steps": [
+   [
+    "표식 규칙 작성",
+    "지침에 한 줄 적기"
+   ],
+   [
+    "조건 하나 변경",
+    "이름·위치·크기·요청"
+   ],
+   [
+    "마지막 줄 확인",
+    "표식이 나오는지 비교"
+   ]
+  ],
+  "tags": [
+   "AGENTS.md",
+   "CLAUDE.md",
+   "지침 파일",
+   "Codex",
+   "Claude Code",
+   "AI 에이전트 설정"
+  ],
+  "related": [
+   "agents-claude-md-first-guide",
+   "skills-troubleshooting-guide",
+   "mcp-first-connect-guide"
+  ]
+ },
+ {
+  "id": "daily-publish-state",
+  "kind": "guide",
+  "category": "프로젝트 적용기",
+  "title": "블로그 자동화에서 하루 한 번 발행을 지키는 방법",
+  "sources": [
+   "https://docs.python.org/3/library/fcntl.html",
+   "https://docs.python.org/3/library/os.html#os.replace",
+   "https://github.com/kwonseongjae/ai-blog-automation/blob/main/automation/learning_blog.py"
+  ],
+  "markdown": "docs/posts/daily-publish-state.md",
+  "checked_on": "2026-11-15",
+  "verification": "공개 구현과 상태 전이 테스트 확인. 복수 서버·장기 가용성·검색 성과는 미검증.",
+  "assets": {
+   "cover": "docs/posts/assets/daily-publish-state-cover.png",
+   "flow": "docs/posts/assets/daily-publish-state-flow.png"
+  },
+  "cover_text": [
+   "프로젝트 기록",
+   "하루 한 번 발행",
+   "상태를 먼저 저장",
+   "잠금 · 확인 대기 · 공개 검증"
+  ],
+  "diagram_title": "발행 결과를 모를 때의 처리",
+  "diagram_steps": [
+   [
+    "발행 전 기록",
+    "잠금 획득 · 확인 대기 저장"
+   ],
+   [
+    "발행 후 대조",
+    "공개 주소 · 원고 · 이미지 확인"
+   ],
+   [
+    "검증 뒤 완료",
+    "확인 실패는 대기 상태 유지"
+   ]
+  ],
+  "project": {
+   "name": "기술블로그 발행기",
+   "url": "https://github.com/kwonseongjae/ai-blog-automation",
+   "role": "하루 한 번 발행 상태 기록, 실행 잠금, 공개 본문 검증을 직접 구현했습니다.",
+   "result": "중복 발행 방지와 공개 본문 대조를 테스트로 확인했습니다."
+  },
+  "tags": [
+   "블로그 자동화",
+   "중복 발행 방지",
+   "Python 자동화",
+   "발행 검증"
+  ],
+  "related": [
+   "ai-agent-first-task"
+  ]
+ },
+ {
+  "id": "validator-cases-guide",
+  "kind": "guide",
+  "category": "프로젝트 적용기",
+  "title": "블로그 발행기가 잘못된 원고를 발행 전에 막는 방법: 규칙 13가지를 일부러 어겨 본 기록",
+  "sources": [
+   "https://github.com/kwonseongjae/ai-blog-automation/blob/main/automation/learning_blog.py",
+   "https://github.com/kwonseongjae/ai-blog-automation/blob/main/docs/posts/evidence/validator-cases.json"
+  ],
+  "markdown": "docs/posts/validator-cases-guide.md",
+  "checked_on": "2026-11-15",
+  "verification": "Linux 한 환경에서 원고 항목을 한 가지씩 어긋나게 바꾼 13건과 발행 주소 5건을 검증 함수에 입력해 메시지를 기록. 저장 상태·원격 일치·본문 길이 검사는 코드만 읽었고 직접 어긴 입력은 넣지 않음.",
+  "assets": {
+   "cover": "docs/posts/assets/validator-cases-guide-cover.png",
+   "flow": "docs/posts/assets/validator-cases-guide-flow.png"
+  },
+  "cover_text": [
+   "프로젝트 적용기",
+   "발행 전 검사",
+   "어긋난 원고 13건을 넣어",
+   "메시지를 확인한 기록"
+  ],
+  "diagram_title": "발행 전 세 단계 검사",
+  "diagram_steps": [
+   [
+    "항목 검사",
+    "출처·표지·태그·분류"
+   ],
+   [
+    "저장소 확인",
+    "변경 저장과 원격 main 일치"
+   ],
+   [
+    "본문 확인",
+    "700자와 소제목 네 개"
+   ]
+  ],
+  "tags": [
+   "블로그 자동화",
+   "발행 자동화",
+   "입력 검증",
+   "Python",
+   "프로젝트 적용기"
+  ],
+  "related": [
+   "daily-publish-state"
+  ],
+  "project": {
+   "name": "ai-blog-automation",
+   "url": "https://github.com/kwonseongjae/ai-blog-automation",
+   "role": "발행 전 원고 검증 규칙을 코드로 두고 테스트로 확인",
+   "result": "어긋난 원고 13건과 발행 주소 4건이 모두 거절되고 정상 원고와 주소는 통과"
+  }
+ },
+ {
+  "id": "mobile-table-guide",
+  "kind": "guide",
+  "category": "프로젝트 적용기",
+  "title": "긴 비교표를 휴대폰에서 읽게 하려면: 폭 360px에서 표 11개를 재어 본 기록",
+  "sources": [
+   "https://github.com/kwonseongjae/ai-blog-automation/blob/main/automation/technical_skin.css",
+   "https://github.com/kwonseongjae/ai-blog-automation/blob/main/docs/posts/evidence/mobile-table-widths.json"
+  ],
+  "markdown": "docs/posts/mobile-table-guide.md",
+  "checked_on": "2026-11-15",
+  "verification": "Linux의 데스크톱 Chromium 145 모바일 에뮬레이션으로 폭 360·390·768px에서 공개 글 표 2개와 발행 전 글 표 9개의 스크롤 여부와 보이는 열 수를 측정. 실기기·iOS·안드로이드·키보드·스크린리더는 확인하지 않음.",
+  "assets": {
+   "cover": "docs/posts/assets/mobile-table-guide-cover.png",
+   "flow": "docs/posts/assets/mobile-table-guide-flow.png"
+  },
+  "cover_text": [
+   "프로젝트 적용기",
+   "휴대폰에서 읽는 표",
+   "폭 360px에서 표 11개를",
+   "재어 본 기록"
+  ],
+  "diagram_title": "표를 폭별로 재는 순서",
+  "diagram_steps": [
+   [
+    "스크롤 상자",
+    "표를 래퍼 안에 둠"
+   ],
+   [
+    "폭별 측정",
+    "360 · 390 · 768px"
+   ],
+   [
+    "넘침 확인",
+    "스크롤 여부와 보이는 열"
+   ]
+  ],
+  "tags": [
+   "블로그 화면",
+   "모바일 표",
+   "CSS",
+   "반응형",
+   "프로젝트 적용기"
+  ],
+  "related": [
+   "validator-cases-guide",
+   "daily-publish-state"
+  ],
+  "project": {
+   "name": "ai-blog-automation",
+   "url": "https://github.com/kwonseongjae/ai-blog-automation",
+   "role": "표를 스크롤 상자에 넣는 스킨 CSS를 두고 폭별로 측정",
+   "result": "360·390px에서 표 11개가 상자 안에서만 스크롤되고 페이지 전체는 옆으로 밀리지 않음"
+  }
+ },
+ {
+  "id": "dark-mode-contrast-guide",
+  "kind": "guide",
+  "category": "프로젝트 적용기",
+  "title": "블로그에 다크 모드를 넣고 글자 대비를 재어 고친 기록: 낮은 대비 17곳을 3곳으로",
+  "sources": [
+   "https://github.com/kwonseongjae/ai-blog-automation/blob/main/automation/technical_skin.css",
+   "https://github.com/kwonseongjae/ai-blog-automation/blob/main/docs/posts/evidence/dark-mode-contrast.json"
+  ],
+  "markdown": "docs/posts/dark-mode-contrast-guide.md",
+  "checked_on": "2026-11-15",
+  "verification": "Linux의 데스크톱 Chromium 145에서 어두운·밝은 화면 설정을 에뮬레이션해 공개 페이지 2개의 글자 대비를 네 차례 측정. 기준 3.5 미만을 낮은 대비로 표시. 실기기와 어두운 화면의 육안 확인은 하지 않음.",
+  "assets": {
+   "cover": "docs/posts/assets/dark-mode-contrast-guide-cover.png",
+   "flow": "docs/posts/assets/dark-mode-contrast-guide-flow.png"
+  },
+  "cover_text": [
+   "프로젝트 적용기",
+   "다크 모드 글자 대비",
+   "낮은 대비 17곳을",
+   "3곳으로 줄인 기록"
+  ],
+  "diagram_title": "다크 모드를 고치는 순서",
+  "diagram_steps": [
+   [
+    "규칙 적용",
+    "변수와 고정 색상 덮기"
+   ],
+   [
+    "대비 측정",
+    "글자 요소 전체"
+   ],
+   [
+    "다시 적용",
+    "낮은 곳부터 수정"
+   ]
+  ],
+  "tags": [
+   "다크 모드",
+   "글자 대비",
+   "CSS",
+   "접근성",
+   "프로젝트 적용기"
+  ],
+  "related": [
+   "mobile-table-guide",
+   "validator-cases-guide"
+  ],
+  "project": {
+   "name": "ai-blog-automation",
+   "url": "https://github.com/kwonseongjae/ai-blog-automation",
+   "role": "블로그 스킨에 다크 모드를 넣고 글자 대비를 측정해 고침",
+   "result": "어두운 화면 3번 글에서 낮은 대비 요소를 17곳에서 3곳으로 줄임(남은 곳은 티스토리 기본 위젯과 숨은 아이콘 글자)"
+  }
+ },
+ {
+  "id": "claude-hooks-guard-guide",
+  "kind": "guide",
+  "category": "AI 시작하기",
+  "title": "Claude Code 훅으로 명령 막기: 막히는 경우와 조용히 통과하는 경우를 일곱 가지로 확인한 기록",
+  "sources": [
+   "https://code.claude.com/docs/en/hooks-guide",
+   "https://github.com/kwonseongjae/ai-blog-automation/blob/main/docs/posts/evidence/claude-hooks-guard.json"
+  ],
+  "markdown": "docs/posts/claude-hooks-guard-guide.md",
+  "checked_on": "2026-11-16",
+  "verification": "Linux 한 환경에서 Claude Code 2.1.325와 모델 별칭 haiku로 PreToolUse 훅 조건 8가지(훅 없음 포함)를 조건별 1회 실행하고 결과 파일과 호출 기록으로 판정. 대화형 화면의 /hooks와 다른 이벤트는 확인하지 않음.",
+  "assets": {
+   "cover": "docs/posts/assets/claude-hooks-guard-guide-cover.png",
+   "flow": "docs/posts/assets/claude-hooks-guard-guide-flow.png"
+  },
+  "cover_text": [
+   "AI 시작하기",
+   "훅으로 명령 막기",
+   "막히는 경우와",
+   "조용히 통과하는 경우"
+  ],
+  "diagram_title": "훅 차단을 확인하는 순서",
+  "diagram_steps": [
+   [
+    "훅 설정",
+    "스크립트와 matcher"
+   ],
+   [
+    "명령 실행",
+    "막을 문자열 포함"
+   ],
+   [
+    "두 가지 대조",
+    "결과 파일과 호출 기록"
+   ]
+  ],
+  "tags": [
+   "Claude Code",
+   "훅",
+   "PreToolUse",
+   "명령 차단",
+   "AI 에이전트 설정"
+  ],
+  "related": [
+   "agent-permissions-first-guide",
+   "claude-code-first-settings"
+  ]
+ },
+ {
+  "id": "claude-subagent-troubleshooting-guide",
+  "kind": "guide",
+  "category": "AI 시작하기",
+  "title": "Claude Code 서브에이전트가 안 불릴 때 점검하는 순서: 위치·머리글·이름·도구 설정을 하나씩 어겨 본 기록",
+  "sources": [
+   "https://code.claude.com/docs/en/sub-agents",
+   "https://github.com/kwonseongjae/ai-blog-automation/blob/main/docs/posts/evidence/claude-subagent-troubleshooting.json"
+  ],
+  "markdown": "docs/posts/claude-subagent-troubleshooting-guide.md",
+  "checked_on": "2026-11-16",
+  "verification": "Linux 한 환경에서 Claude Code 2.1.325와 모델 별칭 haiku로 서브에이전트 파일 조건 10가지를 조건별 2회 실행하고 시작 정보의 등록 목록과 Agent 호출 기록으로 판정. 대화형 /agents와 --agents 옵션은 확인하지 않음.",
+  "assets": {
+   "cover": "docs/posts/assets/claude-subagent-troubleshooting-guide-cover.png",
+   "flow": "docs/posts/assets/claude-subagent-troubleshooting-guide-flow.png"
+  },
+  "cover_text": [
+   "AI 시작하기",
+   "서브에이전트 점검",
+   "안 불릴 때 확인하는",
+   "위치·머리글·이름·도구"
+  ],
+  "diagram_title": "서브에이전트 등록을 확인하는 순서",
+  "diagram_steps": [
+   [
+    "파일 조건 변경",
+    "위치와 머리글 하나씩"
+   ],
+   [
+    "등록 목록 확인",
+    "시작 정보의 agents"
+   ],
+   [
+    "호출 기록 대조",
+    "Agent의 subagent_type"
+   ]
+  ],
+  "tags": [
+   "Claude Code",
+   "서브에이전트",
+   ".claude/agents",
+   "등록 확인",
+   "AI 에이전트 설정"
+  ],
+  "related": [
+   "agents-claude-md-first-guide",
+   "skills-troubleshooting-guide"
+  ]
+ },
+ {
+  "id": "claude-headless-scripting-guide",
+  "kind": "guide",
+  "category": "AI 시작하기",
+  "title": "Claude Code를 스크립트에서 쓰기: -p 출력 형식과 종료 코드, 조용히 실패하는 경우를 확인한 기록",
+  "sources": [
+   "https://code.claude.com/docs/en/headless",
+   "https://github.com/kwonseongjae/ai-blog-automation/blob/main/docs/posts/evidence/claude-headless-scripting.json"
+  ],
+  "markdown": "docs/posts/claude-headless-scripting-guide.md",
+  "checked_on": "2026-11-16",
+  "verification": "Linux 한 환경에서 Claude Code 2.1.325와 모델 별칭 haiku로 claude -p의 출력 형식·제한·권한 거부·세션 이어서 실행 등 조건을 조건별 1회 실행해 종료 코드와 json 필드를 기록. stream-json과 --bare는 확인하지 않음.",
+  "assets": {
+   "cover": "docs/posts/assets/claude-headless-scripting-guide-cover.png",
+   "flow": "docs/posts/assets/claude-headless-scripting-guide-flow.png"
+  },
+  "cover_text": [
+   "AI 시작하기",
+   "스크립트에서 claude -p",
+   "종료 코드가 0이어도",
+   "실패한 경우를 확인"
+  ],
+  "diagram_title": "스크립트 성공 판정 순서",
+  "diagram_steps": [
+   [
+    "한 번 실행",
+    "claude -p와 json 출력"
+   ],
+   [
+    "종료 코드 확인",
+    "제한과 오류 구분"
+   ],
+   [
+    "거부 기록 확인",
+    "permission_denials"
+   ]
+  ],
+  "tags": [
+   "Claude Code",
+   "claude -p",
+   "종료 코드",
+   "자동화",
+   "AI 에이전트 설정"
+  ],
+  "related": [
+   "agent-permissions-first-guide",
+   "claude-code-first-settings"
+  ]
+ },
+ {
+  "id": "mcp-tool-scope-guide",
+  "kind": "guide",
+  "category": "AI 시작하기",
+  "title": "MCP 도구를 하나만 허용하기: 서버 하나에 읽기·쓰기 도구가 섞여 있을 때 Claude Code와 Codex에서 막히는 지점을 확인한 기록",
+  "sources": [
+   "https://code.claude.com/docs/en/mcp",
+   "https://learn.chatgpt.com/docs/extend/mcp",
+   "https://github.com/kwonseongjae/ai-blog-automation/blob/main/docs/posts/evidence/mcp-tool-scope.json"
+  ],
+  "markdown": "docs/posts/mcp-tool-scope-guide.md",
+  "checked_on": "2026-11-16",
+  "verification": "Linux 한 환경에서 Claude Code 2.1.325(모델 별칭 haiku)와 Codex CLI 0.167.2(gpt-6.1-sol)에 직접 만든 stdio 서버 두 개를 연결하고 도구 허용·승인 설정 조건 각 6가지를 조건별 1회 실행해 서버 로그와 결과 파일로 판정. 대화형 승인 창, HTTP 서버, 반복 실행은 확인하지 않음.",
+  "assets": {
+   "cover": "docs/posts/assets/mcp-tool-scope-guide-cover.png",
+   "flow": "docs/posts/assets/mcp-tool-scope-guide-flow.png"
+  },
+  "cover_text": [
+   "AI 시작하기",
+   "MCP 도구 하나만 허용",
+   "쓰기는 막고 덧셈만",
+   "허용해 본 기록"
+  ],
+  "diagram_title": "도구 하나만 허용했는지 확인하는 순서",
+  "diagram_steps": [
+   [
+    "서버 두 개 연결",
+    "읽기 도구와 쓰기 도구"
+   ],
+   [
+    "허용 범위 변경",
+    "허용 목록과 승인 설정"
+   ],
+   [
+    "로그와 파일 대조",
+    "답변 대신 호출 기록"
+   ]
+  ],
+  "tags": [
+   "MCP",
+   "도구 허용",
+   "Claude Code",
+   "Codex",
+   "AI 에이전트 설정"
+  ],
+  "related": [
+   "mcp-first-connect-guide",
+   "agent-permissions-first-guide",
+   "claude-hooks-guard-guide"
+  ]
+ }
 ]

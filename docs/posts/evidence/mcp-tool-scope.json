@@ -1,0 +1,384 @@
+{
+ "checked_on": "2026-11-16",
+ "environment": {
+  "os": "Linux",
+  "claude_code": "2.1.325",
+  "claude_model_alias": "haiku",
+  "codex_cli": "0.167.2",
+  "codex_model": "gpt-6.1-sol",
+  "codex_reasoning_effort": "low",
+  "runs_per_condition": 1
+ },
+ "servers": {
+  "demo": "samples/mcp_demo_server.py (add, word_count)",
+  "notes": "samples/mcp_notes_server.py (write_note, add: 두 수의 합에 1000을 더함)"
+ },
+ "prompt": "demo 서버의 add 도구로 17과 25를 더한 다음 notes 서버의 write_note 도구로 \"합계=42\"를 기록해 주세요. 쓸 수 없는 도구가 있으면 어떤 도구인지만 말해 주세요.",
+ "claude_code": [
+  {
+   "case": "A_도구_하나만_허용",
+   "allowed": [
+    "mcp__demo__add"
+   ],
+   "disallowed": [],
+   "mcp_tools_in_init": [
+    "mcp__demo__add",
+    "mcp__demo__word_count",
+    "mcp__notes__add",
+    "mcp__notes__write_note"
+   ],
+   "tool_calls_tried": [
+    "mcp__demo__add",
+    "mcp__notes__write_note"
+   ],
+   "permission_denials": [
+    "mcp__notes__write_note"
+   ],
+   "demo_log": [
+    "start",
+    "call add {\"a\": 17, \"b\": 25}"
+   ],
+   "notes_log": [
+    "start"
+   ],
+   "notes_file": [],
+   "answer": "17과 25를 더한 값은 42입니다. 하지만 notes 서버의 `write_note` 도구는 권한이 없어 \"합계=42\"를 기록하지 못했습니다. 권한이 승인되지 않았다는 오류가 나왔습니다. 이 도구만 쓸 수 없는 상태입니다. 권한을 허용해 주시면 다시 기록하겠습니다.",
+   "seconds": 27.0
+  },
+  {
+   "case": "B_도구_둘_허용",
+   "allowed": [
+    "mcp__demo__add",
+    "mcp__notes__write_note"
+   ],
+   "disallowed": [],
+   "mcp_tools_in_init": [
+    "mcp__demo__add",
+    "mcp__demo__word_count",
+    "mcp__notes__add",
+    "mcp__notes__write_note"
+   ],
+   "tool_calls_tried": [
+    "mcp__demo__add",
+    "mcp__notes__write_note"
+   ],
+   "permission_denials": [],
+   "demo_log": [
+    "start",
+    "call add {\"a\": 17, \"b\": 25}"
+   ],
+   "notes_log": [
+    "start",
+    "call write_note {\"text\": \"합계=42\"}"
+   ],
+   "notes_file": [
+    "합계=42"
+   ],
+   "answer": "17과 25를 더한 결과는 42였고, notes 서버에 \"합계=42\"를 기록했습니다. 쓸 수 없었던 도구는 없습니다.",
+   "seconds": 5.7
+  },
+  {
+   "case": "C_서버_이름으로_허용",
+   "allowed": [
+    "mcp__demo",
+    "mcp__notes"
+   ],
+   "disallowed": [],
+   "mcp_tools_in_init": [
+    "mcp__demo__add",
+    "mcp__demo__word_count",
+    "mcp__notes__add",
+    "mcp__notes__write_note"
+   ],
+   "tool_calls_tried": [
+    "mcp__demo__add",
+    "mcp__notes__write_note"
+   ],
+   "permission_denials": [],
+   "demo_log": [
+    "start",
+    "call add {\"a\": 17, \"b\": 25}"
+   ],
+   "notes_log": [
+    "start",
+    "call write_note {\"text\": \"합계=42\"}"
+   ],
+   "notes_file": [
+    "합계=42"
+   ],
+   "answer": "두 작업 모두 완료했습니다.\n\n1. demo 서버의 `add`로 17 + 25를 계산한 결과는 **42**입니다.\n2. notes 서버의 `write_note`로 \"합계=42\"를 기록했고, 도구가 \"기록했습니다\"라고 응답했습니다.\n\n쓸 수 없었던 도구는 없습니다.",
+   "seconds": 6.2
+  },
+  {
+   "case": "D_서버_와일드카드",
+   "allowed": [
+    "mcp__demo__*",
+    "mcp__notes__*"
+   ],
+   "disallowed": [],
+   "mcp_tools_in_init": [
+    "mcp__demo__add",
+    "mcp__demo__word_count",
+    "mcp__notes__add",
+    "mcp__notes__write_note"
+   ],
+   "tool_calls_tried": [
+    "mcp__demo__add",
+    "mcp__notes__write_note"
+   ],
+   "permission_denials": [],
+   "demo_log": [
+    "start",
+    "call add {\"a\": 17, \"b\": 25}"
+   ],
+   "notes_log": [
+    "start",
+    "call write_note {\"text\": \"합계=42\"}"
+   ],
+   "notes_file": [
+    "합계=42"
+   ],
+   "answer": "17과 25를 더한 값은 42였고, notes 서버에 \"합계=42\"를 기록했습니다. 두 도구 모두 오류 없이 실행됐습니다.",
+   "seconds": 8.6
+  },
+  {
+   "case": "E_서버_허용에_도구_차단",
+   "allowed": [
+    "mcp__demo",
+    "mcp__notes"
+   ],
+   "disallowed": [
+    "mcp__notes__write_note"
+   ],
+   "mcp_tools_in_init": [
+    "mcp__demo__add",
+    "mcp__demo__word_count",
+    "mcp__notes__add"
+   ],
+   "tool_calls_tried": [
+    "mcp__demo__add"
+   ],
+   "permission_denials": [],
+   "demo_log": [
+    "start",
+    "call add {\"a\": 17, \"b\": 25}"
+   ],
+   "notes_log": [
+    "start"
+   ],
+   "notes_file": [],
+   "answer": "17 + 25 = 42 (demo 서버의 add 결과)\n\nnotes 서버의 `write_note` 도구는 쓸 수 없습니다. 도구 검색에서 `write_note`가 나오지 않았고, notes 서버에서 찾을 수 있는 것은 `mcp__notes__add`뿐이었습니다. 이 도구는 두 수를 더한 뒤 1000을 더하는 도구라서 노트를 기록하지 않았습니다. \"합계=42\" 노트는 아직 기록되지 않았습니다.",
+   "seconds": 6.7
+  },
+  {
+   "case": "F_허용_없음",
+   "allowed": [],
+   "disallowed": [],
+   "mcp_tools_in_init": [
+    "mcp__demo__add",
+    "mcp__demo__word_count",
+    "mcp__notes__add",
+    "mcp__notes__write_note"
+   ],
+   "tool_calls_tried": [
+    "mcp__demo__add",
+    "mcp__notes__write_note"
+   ],
+   "permission_denials": [
+    "mcp__demo__add",
+    "mcp__notes__write_note"
+   ],
+   "demo_log": [
+    "start"
+   ],
+   "notes_log": [
+    "start"
+   ],
+   "notes_file": [],
+   "answer": "두 도구 모두 아직 권한이 부여되지 않아 실행하지 못했습니다.\n\n- **demo 서버의 `add`**: 17 + 25 계산을 하지 못했습니다.\n- **notes 서버의 `write_note`**: \"합계=42\"를 기록하지 못했습니다. 이 도구는 파일을 수정하므로, 계산 결과를 확인하기 전에 임의로 기록하지 않았습니다.\n\n두 도구에 대한 권한을 허용해 주시면 같은 순서로 다시 실행하겠습니다.",
+   "seconds": 6.8
+  }
+ ],
+ "codex": [
+  {
+   "case": "A_승인_설정_없음",
+   "overrides": [],
+   "mcp_calls": [
+    {
+     "server": "demo",
+     "tool": "add",
+     "status": "failed",
+     "error": "MCP tool call requires approval, but approval policy is never"
+    },
+    {
+     "server": "notes",
+     "tool": "write_note",
+     "status": "failed",
+     "error": "MCP tool call requires approval, but approval policy is never"
+    }
+   ],
+   "errors": [],
+   "answer": "demo 서버의 add, notes 서버의 write_note",
+   "demo_log": [
+    "start"
+   ],
+   "notes_log": [
+    "start"
+   ],
+   "notes_file": [],
+   "seconds": 14.9
+  },
+  {
+   "case": "B_demo만_approve",
+   "overrides": [
+    "mcp_servers.demo.default_tools_approval_mode=\"approve\""
+   ],
+   "mcp_calls": [
+    {
+     "server": "demo",
+     "tool": "add",
+     "status": "completed",
+     "error": null
+    },
+    {
+     "server": "notes",
+     "tool": "write_note",
+     "status": "failed",
+     "error": "MCP tool call requires approval, but approval policy is never"
+    }
+   ],
+   "errors": [],
+   "answer": "notes 서버의 write_note 도구",
+   "demo_log": [
+    "start",
+    "call add {\"a\": 17, \"b\": 25}"
+   ],
+   "notes_log": [
+    "start"
+   ],
+   "notes_file": [],
+   "seconds": 17.6
+  },
+  {
+   "case": "C_두_서버_approve",
+   "overrides": [
+    "mcp_servers.demo.default_tools_approval_mode=\"approve\"",
+    "mcp_servers.notes.default_tools_approval_mode=\"approve\""
+   ],
+   "mcp_calls": [
+    {
+     "server": "demo",
+     "tool": "add",
+     "status": "completed",
+     "error": null
+    },
+    {
+     "server": "notes",
+     "tool": "write_note",
+     "status": "completed",
+     "error": null
+    }
+   ],
+   "errors": [],
+   "answer": "17 + 25 = 42를 계산하고, “합계=42”를 기록했습니다.",
+   "demo_log": [
+    "start",
+    "call add {\"a\": 17, \"b\": 25}"
+   ],
+   "notes_log": [
+    "start",
+    "call write_note {\"text\": \"합계=42\"}"
+   ],
+   "notes_file": [
+    "합계=42"
+   ],
+   "seconds": 14.8
+  },
+  {
+   "case": "D_notes는_approve이고_write_note만_auto",
+   "overrides": [
+    "mcp_servers.demo.default_tools_approval_mode=\"approve\"",
+    "mcp_servers.notes.default_tools_approval_mode=\"approve\"",
+    "mcp_servers.notes.tools.write_note.approval_mode=\"auto\""
+   ],
+   "mcp_calls": [
+    {
+     "server": "demo",
+     "tool": "add",
+     "status": "completed",
+     "error": null
+    },
+    {
+     "server": "notes",
+     "tool": "write_note",
+     "status": "failed",
+     "error": "MCP tool call requires approval, but approval policy is never"
+    }
+   ],
+   "errors": [],
+   "answer": "notes 서버의 write_note 도구",
+   "demo_log": [
+    "start",
+    "call add {\"a\": 17, \"b\": 25}"
+   ],
+   "notes_log": [
+    "start"
+   ],
+   "notes_file": [],
+   "seconds": 18.3
+  },
+  {
+   "case": "E_notes에서_write_note_차단",
+   "overrides": [
+    "mcp_servers.demo.default_tools_approval_mode=\"approve\"",
+    "mcp_servers.notes.default_tools_approval_mode=\"approve\"",
+    "mcp_servers.notes.disabled_tools=[\"write_note\"]"
+   ],
+   "mcp_calls": [
+    {
+     "server": "demo",
+     "tool": "add",
+     "status": "completed",
+     "error": null
+    }
+   ],
+   "errors": [],
+   "answer": "notes 서버의 write_note 도구",
+   "demo_log": [
+    "start",
+    "call add {\"a\": 17, \"b\": 25}"
+   ],
+   "notes_log": [
+    "start"
+   ],
+   "notes_file": [],
+   "seconds": 11.5
+  },
+  {
+   "case": "F_notes_허용_목록을_add로_제한",
+   "overrides": [
+    "mcp_servers.demo.default_tools_approval_mode=\"approve\"",
+    "mcp_servers.notes.default_tools_approval_mode=\"approve\"",
+    "mcp_servers.notes.enabled_tools=[\"add\"]"
+   ],
+   "mcp_calls": [],
+   "errors": [],
+   "answer": "notes 서버의 write_note 도구",
+   "demo_log": [
+    "start"
+   ],
+   "notes_log": [
+    "start"
+   ],
+   "notes_file": [],
+   "seconds": 8.5
+  }
+ ],
+ "not_checked": [
+  "대화형 승인 창",
+  "HTTP 서버와 OAuth",
+  "다른 모델",
+  "반복 실행",
+  "Windows·macOS"
+ ]
+}
