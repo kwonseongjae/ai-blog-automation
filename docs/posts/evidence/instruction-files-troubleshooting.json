@@ -1,0 +1,236 @@
+{
+ "checked_on": "2026-11-16",
+ "environment": "Linux, Codex CLI 0.167.2, Claude Code 2.1.325, 조건별 1회 실행",
+ "rule": "지침 파일에 \"모든 답변의 마지막 줄에 정확히 `[점검-7]`만 적는다\"를 한 줄 적고 답변 마지막 줄에 표식이 나오는지로 읽혔는지 판정",
+ "requests": {
+  "r1": "2 더하기 3은 얼마인가요?",
+  "r1_숫자만": "2 더하기 3은 얼마인가요? 숫자만 답하세요.",
+  "r2_read_sub": "sub/README.txt의 첫 줄을 그대로 알려 주세요."
+ },
+ "variants": {
+  "control": "작업 폴더에 정식 이름의 파일",
+  "request_conflict": "control과 같은 파일, 요청에 \"숫자만 답하세요\"를 덧붙임",
+  "lowercase": "파일 이름을 소문자(agents.md, claude.md)로 둠",
+  "subdir_file": "지침 파일을 하위 폴더 sub에 두고 상위 폴더에서 실행",
+  "parent_nogit": "지침 파일을 상위 폴더에 두고 하위 폴더에서 실행(git 저장소 아님)",
+  "parent_git": "위와 같고 상위 폴더에 git init",
+  "conflict": "상위 폴더 파일은 [부모-1], 하위 폴더 파일은 [자식-2]를 요구, 하위 폴더에서 실행(git 저장소)",
+  "oversize": "파일 크기 62,886바이트(703줄), 표식 규칙은 맨 끝",
+  "oversize_first": "같은 크기, 표식 규칙은 맨 앞",
+  "override": "Codex만: AGENTS.md([점검-7])와 AGENTS.override.md([덮어쓰기-9])를 함께 둠"
+ },
+ "run_options": {
+  "codex": "CODEX_HOME을 임시 폴더로 바꾸고 인증 파일만 링크, exec --json -m gpt-6.1-sol, model_reasoning_effort=low, -s read-only",
+  "claude_code": "-p --model haiku --setting-sources project,local --output-format stream-json --verbose --allowedTools Read"
+ },
+ "codex_runs": [
+  {
+   "variant": "control",
+   "request": "r1",
+   "markers_in_answer": [
+    "[점검-7]"
+   ],
+   "last_line": "[점검-7]",
+   "followed": true,
+   "actions": []
+  },
+  {
+   "variant": "request_conflict",
+   "request": "r1_숫자만",
+   "markers_in_answer": [],
+   "last_line": "5",
+   "followed": false,
+   "actions": []
+  },
+  {
+   "variant": "lowercase",
+   "request": "r1",
+   "markers_in_answer": [],
+   "last_line": "5입니다.",
+   "followed": false,
+   "actions": []
+  },
+  {
+   "variant": "subdir_file",
+   "request": "r1",
+   "markers_in_answer": [],
+   "last_line": "5입니다.",
+   "followed": false,
+   "actions": []
+  },
+  {
+   "variant": "subdir_file",
+   "request": "r2_read_sub",
+   "markers_in_answer": [],
+   "last_line": "하위 README 첫 줄",
+   "followed": false,
+   "actions": [
+    "/bin/bash -lc 'head -n 1 sub/README.txt'"
+   ]
+  },
+  {
+   "variant": "parent_nogit",
+   "request": "r1",
+   "markers_in_answer": [],
+   "last_line": "5입니다.",
+   "followed": false,
+   "actions": []
+  },
+  {
+   "variant": "parent_git",
+   "request": "r1",
+   "markers_in_answer": [
+    "[점검-7]"
+   ],
+   "last_line": "[점검-7]",
+   "followed": true,
+   "actions": []
+  },
+  {
+   "variant": "conflict",
+   "request": "r1",
+   "markers_in_answer": [
+    "[자식-2]"
+   ],
+   "last_line": "[자식-2]",
+   "followed": true,
+   "actions": []
+  },
+  {
+   "variant": "oversize",
+   "request": "r1",
+   "markers_in_answer": [],
+   "last_line": "5입니다.",
+   "followed": false,
+   "actions": []
+  },
+  {
+   "variant": "override",
+   "request": "r1",
+   "markers_in_answer": [
+    "[덮어쓰기-9]"
+   ],
+   "last_line": "[덮어쓰기-9]",
+   "followed": true,
+   "actions": []
+  },
+  {
+   "variant": "oversize_first",
+   "request": "r1",
+   "markers_in_answer": [
+    "[점검-7]"
+   ],
+   "last_line": "[점검-7]",
+   "followed": true,
+   "actions": []
+  }
+ ],
+ "claude_code_runs": [
+  {
+   "variant": "control",
+   "request": "r1",
+   "markers_in_answer": [
+    "[점검-7]"
+   ],
+   "last_line": "[점검-7]",
+   "followed": true,
+   "actions": []
+  },
+  {
+   "variant": "request_conflict",
+   "request": "r1_숫자만",
+   "markers_in_answer": [
+    "[점검-7]"
+   ],
+   "last_line": "[점검-7]",
+   "followed": true,
+   "actions": []
+  },
+  {
+   "variant": "lowercase",
+   "request": "r1",
+   "markers_in_answer": [],
+   "last_line": "2 더하기 3은 **5**입니다.",
+   "followed": false,
+   "actions": []
+  },
+  {
+   "variant": "subdir_file",
+   "request": "r1",
+   "markers_in_answer": [],
+   "last_line": "2 더하기 3은 **5**입니다.",
+   "followed": false,
+   "actions": []
+  },
+  {
+   "variant": "subdir_file",
+   "request": "r2_read_sub",
+   "markers_in_answer": [
+    "[점검-7]"
+   ],
+   "last_line": "[점검-7]",
+   "followed": true,
+   "actions": [
+    "Read:{\"file_path\": \"<작업폴더>"
+   ]
+  },
+  {
+   "variant": "parent_nogit",
+   "request": "r1",
+   "markers_in_answer": [
+    "[점검-7]"
+   ],
+   "last_line": "[점검-7]",
+   "followed": true,
+   "actions": []
+  },
+  {
+   "variant": "parent_git",
+   "request": "r1",
+   "markers_in_answer": [
+    "[점검-7]"
+   ],
+   "last_line": "[점검-7]",
+   "followed": true,
+   "actions": []
+  },
+  {
+   "variant": "conflict",
+   "request": "r1",
+   "markers_in_answer": [
+    "[자식-2]"
+   ],
+   "last_line": "[자식-2]",
+   "followed": true,
+   "actions": []
+  },
+  {
+   "variant": "oversize",
+   "request": "r1",
+   "markers_in_answer": [
+    "[점검-7]"
+   ],
+   "last_line": "[점검-7]",
+   "followed": true,
+   "actions": []
+  },
+  {
+   "variant": "oversize_first",
+   "request": "r1",
+   "markers_in_answer": [
+    "[점검-7]"
+   ],
+   "last_line": "[점검-7]",
+   "followed": true,
+   "actions": []
+  }
+ ],
+ "first_attempt_note": "처음에는 모든 요청에 \"숫자만 답하세요\"를 붙였고 Codex가 표식을 붙이지 않았다. 같은 요청에서 문구를 빼자 표식이 나왔고 이 차이를 request_conflict 조건으로 따로 두었다.",
+ "not_checked": [
+  "대화형 화면의 /context, /memory, codex status",
+  "개인 위치(~/.codex/AGENTS.md, ~/.claude/CLAUDE.md)",
+  "CLAUDE.local.md, .claude/rules, fallback 파일 이름 설정",
+  "반복 실행과 다른 모델",
+  "Windows·macOS"
+ ]
+}
