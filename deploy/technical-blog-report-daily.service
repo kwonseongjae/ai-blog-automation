@@ -1,0 +1,12 @@
+[Unit]
+Description=Technical blog Telegram 일일 리포트
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/ai-blog-automation
+Environment=BLOG_AUTOMATION_ROOT=%h/blog-automation
+Environment=TECH_BLOG_STATE_DIR=%h/blog-automation/data/technical_blog
+ExecStart=/usr/bin/python3 -m automation.telegram_reports daily
+TimeoutStartSec=180

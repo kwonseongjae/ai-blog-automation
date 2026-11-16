@@ -1,0 +1,10 @@
+[Unit]
+Description=Technical blog Telegram 광고·색인 검증 리포트
+
+[Timer]
+OnCalendar=*-*-* 13:00:00 Asia/Seoul
+# 놓친 시각을 한꺼번에 보내지 않는다.
+Persistent=false
+
+[Install]
+WantedBy=timers.target
