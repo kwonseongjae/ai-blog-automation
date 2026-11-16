@@ -30,6 +30,13 @@ class CatalogueTests(unittest.TestCase):
         self.assertEqual(len(ids), 17)
         validate_catalogue(catalogue, ROOT)
 
+    def test_related_posts_are_published_earlier(self):
+        # 발행기는 아직 발행하지 않은 글을 관련 글로 연결하면 멈추므로 항상 앞선 순서여야 한다.
+        order = [e['id'] for e in load('catalogue.json')]
+        for index, entry in enumerate(load('catalogue.json')):
+            for related in entry.get('related', []):
+                self.assertIn(related, order[:index], f"{entry['id']}의 관련 글 {related}이 뒤에 있다")
+
     def test_archive_not_in_catalogue(self):
         self.assertEqual({e['id'] for e in load('archive.json')}, ARCHIVED)
         self.assertFalse(ARCHIVED & {e['id'] for e in load('catalogue.json')})
