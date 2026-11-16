@@ -1,0 +1,131 @@
+{
+ "checked_on": "2026-11-16",
+ "environment": "Linux, Claude Code 2.1.325, 모델 별칭 haiku, 조건별 1회 실행",
+ "common_options": "--model haiku --setting-sources project,local",
+ "runs": [
+  {
+   "case": "기본 텍스트 출력",
+   "command": "claude -p \"2 더하기 3은? 숫자만 답하세요.\"",
+   "exit_code": 0,
+   "stdout": "5"
+  },
+  {
+   "case": "json 출력",
+   "command": "--output-format json",
+   "exit_code": 0,
+   "json_keys": [
+    "api_error_status",
+    "credential_expires_at",
+    "duration_api_ms",
+    "duration_ms",
+    "fast_mode_disabled_reason",
+    "fast_mode_state",
+    "first_content_frame_ms",
+    "is_error",
+    "modelUsage",
+    "num_turns",
+    "permission_denials",
+    "queued_turn_count",
+    "result",
+    "result_index",
+    "safety_stops",
+    "session_id",
+    "stop_reason",
+    "subagent_stats",
+    "subtype",
+    "terminal_reason",
+    "time_to_request_ms",
+    "total_cost_usd",
+    "ttft_ms",
+    "ttft_stream_ms",
+    "type",
+    "usage",
+    "uuid"
+   ],
+   "key_values": {
+    "type": "result",
+    "subtype": "success",
+    "is_error": false,
+    "num_turns": 1,
+    "result": "5",
+    "permission_denials": []
+   }
+  },
+  {
+   "case": "표준입력 전달",
+   "command": "printf <내용> | claude -p \"이 내용에서 부산 날씨만 알려 주세요.\"",
+   "exit_code": 0,
+   "stdout": "부산의 날씨는 흐림입니다."
+  },
+  {
+   "case": "최대 턴 1, 도구가 필요한 요청(Read 허용)",
+   "command": "--max-turns 1 --output-format json",
+   "exit_code": 1,
+   "subtype": "error_max_turns",
+   "is_error": true,
+   "has_result_key": false,
+   "num_turns": 2
+  },
+  {
+   "case": "같은 요청, 최대 턴 3",
+   "command": "--max-turns 3 --output-format json",
+   "exit_code": 0,
+   "subtype": "success",
+   "result": "둘째 줄은 다음과 같습니다.\n\n```\n부산의 날씨는 흐림\n```"
+  },
+  {
+   "case": "예산 상한 0.0001달러",
+   "command": "--max-budget-usd 0.0001 --output-format json",
+   "exit_code": 1,
+   "subtype": "error_max_budget_usd",
+   "is_error": true,
+   "has_result_key": false
+  },
+  {
+   "case": "허용하지 않은 도구(touch made.txt)",
+   "command": "--output-format json",
+   "exit_code": 0,
+   "subtype": "success",
+   "is_error": false,
+   "permission_denials": "Bash 한 건",
+   "file_created": false
+  },
+  {
+   "case": "같은 요청, --allowedTools \"Bash(touch *)\"",
+   "exit_code": 0,
+   "subtype": "success",
+   "permission_denials": "없음",
+   "file_created": true
+  },
+  {
+   "case": "없는 모델 이름",
+   "command": "claude -p \"안녕\" --model nonexistent-model",
+   "exit_code": 1,
+   "message": "There's an issue with the selected model (nonexistent-model). It may not exist or you may not have access to it. Run --model to pick a different model."
+  },
+  {
+   "case": "json 스키마",
+   "command": "--json-schema <정수 answer 하나를 요구하는 스키마> --output-format json",
+   "exit_code": 0,
+   "structured_output": {
+    "answer": 5
+   },
+   "result": "{\"answer\":5}"
+  },
+  {
+   "case": "세션 이어서",
+   "first": "사용자의 이름이 하늘이라고 기억하겠습니다.",
+   "resumed_with_--resume": "하늘",
+   "new_run_without_resume": "모릅니다. 이 대화에서 이름을 말씀하신 적이 없습니다."
+  }
+ ],
+ "first_attempt_note": "처음에는 없는 모델 이름 조건에 공통 옵션의 --model haiku를 뒤에 붙여 잘못 실행했고 정상 응답이 나왔다. 옵션을 겹쳐 쓰면 뒤의 값이 쓰인 것으로 보이며 이 조건은 모델 옵션만 단독으로 다시 실행했다. 허용하지 않은 도구 조건도 처음에는 echo를 써서 승인 없이 실행됐고 touch로 바꿔 다시 실행했다.",
+ "not_checked": [
+  "stream-json 출력의 이벤트 구성",
+  "--bare 모드",
+  "--append-system-prompt",
+  "입력 10MB 상한",
+  "Codex의 비대화 실행",
+  "Windows·macOS"
+ ]
+}
