@@ -28,6 +28,20 @@
   if(document.body.id==='tt-body-index'){
     var title=document.querySelector('.title-search .archives');
     if(title)title.textContent='최근 기록';
+    var popular=document.querySelectorAll('.box-recent .list-tab a.link-recent'),posts=document.querySelectorAll('.article-type-common');
+    if(title&&popular.length&&posts.length>1&&!document.querySelector('.learning-tabs')){
+      var byLink={};posts.forEach(function(post){var a=post.querySelector('a[href]');if(a)byLink[a.getAttribute('href')]=post;});
+      var first=posts[0],clones=0;
+      popular.forEach(function(a){var post=byLink[a.getAttribute('href')];if(!post)return;var copy=post.cloneNode(true);copy.classList.add('learning-clone');first.parentNode.insertBefore(copy,first);clones++;});
+      if(clones){
+        var tabs=document.createElement('span');tabs.className='learning-tabs';tabs.setAttribute('role','tablist');
+        var buttons=[['최근 기록',false],['인기 글',true]].map(function(item){
+          var b=document.createElement('button');b.type='button';b.setAttribute('role','tab');b.textContent=item[0];b.setAttribute('aria-selected',item[1]?'false':'true');
+          b.addEventListener('click',function(){document.documentElement.classList.toggle('learning-popular-on',item[1]);buttons.forEach(function(o,i){o.setAttribute('aria-selected',(i===1)===item[1]?'true':'false');});});
+          tabs.appendChild(b);return b;});
+        title.textContent='';title.appendChild(tabs);
+      }
+    }
   }
   document.querySelectorAll('.img-thumbnail').forEach(function(img){
     var box=img.closest&&img.closest('.thumbnail');
@@ -40,6 +54,13 @@
     var title=cover.textContent;
     if(title.includes('한국 시간'))cover.textContent='한국 시간\n날짜 기준';
     else if(title.includes('파일')&&title.includes('실행'))cover.textContent='파일 경로\n실행 위치';
+    else if(title.includes('AI 에이전트란'))cover.textContent='AI 에이전트\n어디까지 맡길까';
+    else if(title.includes('Codex 처음'))cover.textContent='Codex\n처음 쓰는 설정';
+  });
+  // 큰 글씨 표지로 바꾸기 전에 올린 글(1~4번)은 목록에서 HTML 카드로 보여 준다.
+  document.querySelectorAll('.article-type-common').forEach(function(post){
+    var a=post.querySelector('a[href]'),box=post.querySelector('.thumbnail');
+    if(a&&box&&/^\/[1-4]$/.test(a.getAttribute('href')))box.classList.add('learning-legacy-cover');
   });
   var emptyCategories=new Set();
   document.querySelectorAll('.tt_category .link_item').forEach(function(a){

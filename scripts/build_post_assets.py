@@ -26,20 +26,22 @@ def save(image, name, title):
 
 
 def cover(article):
+    """목록 썸네일(가로 168px)에서도 읽히도록 큰 글자를 파란 바탕에 꽉 채운다."""
     label, line1, line2, caption = article['cover_text']
-    image = Image.new('RGB', (1280, 720), 'white')
+    image = Image.new('RGB', (1280, 720), BLUE)
     draw = ImageDraw.Draw(image)
-    draw.rounded_rectangle((306, 206, 312, 464), radius=3, fill=BLUE)
-    draw.text((340, 118), label, font=font(28, True), fill=BLUE, anchor='lt')
-    for text, y, base in [(line1, 238, 90), (line2, 358, 70)]:
+    draw.text((80, 72), label, font=font(46, True), fill='#FFE680', anchor='lt')
+    y = 170
+    for text, base in [(line1, 156), (line2, 112)]:
         size = base
-        while draw.textlength(text, font=font(size, True)) > 620:
+        while draw.textlength(text, font=font(size, True)) > 1120:
             size -= 1
-        draw.text((340, y), text, font=font(size, True), fill=INK, anchor='lt')
-    assert draw.textlength(caption, font=font(24)) < 640, '표지 설명이 너무 깁니다'
-    draw.text((340, 482), caption, font=font(24), fill=MUTED, anchor='lt')
-    draw.line((340, 584, 940, 584), fill='#E5E9EF', width=2)
-    draw.text((340, 616), 'Jack의 AI 개발노트', font=font(26, True), fill=MUTED, anchor='lt')
+        draw.text((80, y), text, font=font(size, True), fill='white', anchor='lt')
+        y += int(size * 1.3)
+    assert draw.textlength(caption, font=font(40)) < 1120, '표지 설명이 너무 깁니다'
+    draw.text((80, 520), caption, font=font(40), fill='#DCE5FA', anchor='lt')
+    draw.line((80, 620, 1200, 620), fill='#6F8FE0', width=2)
+    draw.text((80, 648), 'Jack의 AI 개발노트', font=font(34, True), fill='white', anchor='lt')
     save(image, article['id'] + '-cover.png', line1 + ' ' + line2)
 
 

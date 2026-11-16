@@ -64,3 +64,40 @@ console.log('카테고리 집계·미확인 값·메뉴 동기화·재실행·�
   assert.doesNotThrow(() => vm.runInContext(extras, vm.createContext({document: {querySelector: () => null}})));
   console.log('추가 기능 스크립트: DOM이 없을 때 무동작 확인');
 }
+
+// 인기 글 탭: 인기 순서대로 복제본을 만들고, 탭을 누르면 표시 상태 클래스가 바뀐다.
+{
+  const inserted = [];
+  const parent = {insertBefore: (node, ref) => inserted.push([node, ref])};
+  const makePost = href => {
+    const post = {parentNode: parent, classList: {added: [], add(n) { this.added.push(n); }},
+      querySelector: () => ({getAttribute: () => href, classList: {add() {}}}),
+      cloneNode() { return {...post, classList: {added: [], add(n) { this.added.push(n); }}, href}; }};
+    return post;
+  };
+  const posts = ['/1', '/2', '/3'].map(makePost);
+  const title = {textContent: '전체 글', children: [], appendChild(node) { this.children.push(node); }};
+  const state = new Set();
+  const make = () => ({children: [], attrs: {}, listeners: {}, appendChild(c) { this.children.push(c); },
+    setAttribute(k, v) { this.attrs[k] = v; }, addEventListener(n, f) { this.listeners[n] = f; }});
+  const document = {
+    body: {id: 'tt-body-index'},
+    documentElement: {classList: {toggle: (n, on) => on ? state.add(n) : state.delete(n)}},
+    createElement: make,
+    querySelector: s => s === '.title-search .archives' ? title : null,
+    querySelectorAll: s => s === '.box-recent .list-tab a.link-recent'
+      ? ['/3', '/9', '/1'].map(h => ({getAttribute: () => h}))
+      : s === '.article-type-common' ? posts : [],
+  };
+  vm.runInContext(source, vm.createContext({document, URL, Set, location: {href: 'https://jacks-aiblog.tistory.com/', pathname: '/'}}));
+  assert.deepEqual(inserted.map(([node]) => node.href), ['/3', '/1'], '목록에 없는 글은 건너뛰고 인기 순서를 따른다');
+  assert.ok(inserted.every(([node, ref]) => node.classList.added.includes('learning-clone') && ref === posts[0]));
+  const [recent, popular] = title.children[0].children;
+  assert.equal(recent.attrs['aria-selected'], 'true');
+  popular.listeners.click();
+  assert.ok(state.has('learning-popular-on'));
+  assert.equal(popular.attrs['aria-selected'], 'true');
+  recent.listeners.click();
+  assert.ok(!state.has('learning-popular-on'));
+  console.log('인기 글 탭: 순서·복제·전환 확인 통과');
+}
