@@ -53,6 +53,14 @@
   document.querySelectorAll('.learning-menu a').forEach(function(a){
     if(emptyCategories.has(new URL(a.href,location.href).pathname))a.closest('li').hidden=true;
   });
+  document.querySelectorAll('.learning-topics em[data-count-for]').forEach(function(em){
+    var name=decodeURIComponent(em.getAttribute('data-count-for'));
+    document.querySelectorAll('.tt_category .link_item').forEach(function(a){
+      try{if(decodeURIComponent(new URL(a.href,location.href).pathname)!=='/category/'+name)return;}catch(e){return;}
+      var m=a.querySelector('.c_cnt'),n=m&&/\(\s*([\d,]+)\s*\)/.exec(m.textContent);
+      if(n)em.textContent=n[1]+'편';
+    });
+  });
   document.querySelectorAll('.learning-navigation a,.tt_category a').forEach(function(a){
     try{if(decodeURIComponent(new URL(a.href,location.href).pathname)===decodeURIComponent(location.pathname))a.setAttribute('aria-current','page');}catch(e){}
   });

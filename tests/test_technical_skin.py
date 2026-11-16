@@ -17,8 +17,7 @@ class TechnicalSkinTests(unittest.TestCase):
         self.assertEqual(result.count('google-site-verification'), 1)
         self.assertEqual(result.count('id="learning-extras"'), 1)
         self.assertIn('data-learning-theme', result)
-        self.assertIn('<li>Claude Code</li>', result.split('class="learning-tools"')[1].split('</ul>')[0])
-        self.assertIn('<em>01</em>', result.split('class="learning-cards"')[1])
+        self.assertIn('data-count-for', result.split('class="learning-topics"')[1])
         self.assertEqual(result.count('naver-site-verification'), 1)
 
     def test_start_here_only_own_blog(self):
@@ -33,16 +32,16 @@ class TechnicalSkinTests(unittest.TestCase):
 
     def test_side_promo_only_own_urls(self):
         self.assertIn('https://jacks-aiblog.tistory.com/3', side_promo())
-        original = technical_skin.SIDE_PROMO
+        original = technical_skin.SIDE_LINKS
         try:
             for url in ('https://evil.test/3', 'https://github.com/other/repo'):
-                technical_skin.SIDE_PROMO = ('문구', url)
+                technical_skin.SIDE_LINKS = (('제목', '설명', url),)
                 with self.assertRaises(ValueError):
                     side_promo()
-            technical_skin.SIDE_PROMO = ('문구', 'https://github.com/kwonseongjae/ai-blog-automation')
+            technical_skin.SIDE_LINKS = (('제목', '설명', 'https://github.com/kwonseongjae/ai-blog-automation'),)
             self.assertIn('ai-blog-automation', side_promo())
         finally:
-            technical_skin.SIDE_PROMO = original
+            technical_skin.SIDE_LINKS = original
 
     def test_popular_tab_stays_hidden(self):
         self.assertIn('.area-aside .list-recent.list-tab{display:none!important}', technical_skin.CSS)
@@ -71,19 +70,18 @@ class TechnicalSkinTests(unittest.TestCase):
         self.assertIn('<s_search>검색</s_search>', result)
         self.assertEqual(result.count('<s_sidebar_element>'), 3)
         self.assertNotIn('default_L.png', result)
-        self.assertIn('AI를 처음 쓰는 개발자', result)
-        cards = result.split('class="learning-cards"')[1].split('</nav>')[0]
+        self.assertIn('AI 코딩 도구, 설정부터 같이 확인합니다', result)
+        topics = result.split('class="learning-topics"')[1].split('</nav>')[0]
         for name in ('AI 시작하기', '도구·모델 비교', '프로젝트 적용기'):
-            self.assertIn(name, cards)
-        self.assertEqual(cards.count('<a '), 3)
-        self.assertNotIn('Python·자동화', cards)
+            self.assertIn(name, topics)
+        self.assertEqual(topics.count('<a '), 3)
+        self.assertNotIn('Python·자동화', topics)
         principles = result.split('class="learning-principles"')[1].split('</ul>')[0]
         for text in ('하루 최대 한 편', '직접 실행해 확인한 내용', '확인일과 공식 출처'):
             self.assertIn(text, principles)
-        self.assertIn('먼저 읽을 글', result)
-        self.assertIn('GitHub 실습 코드', result)
-        self.assertIn('GitHub 프로필', result)
-        self.assertNotIn('class="learning-topics"', result)
+        self.assertIn('처음이라면 이 순서로', result)
+        self.assertIn('<code>codex --version</code>', result)
+        self.assertNotIn('class="learning-cards"', result)
         self.assertIn('Jack', result)
         self.assertIn('aria-label="블로그 메뉴"', result)
         self.assertIn('learning-widgets', result)
