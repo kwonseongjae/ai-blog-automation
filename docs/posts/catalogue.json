@@ -1099,5 +1099,56 @@
    "agent-permissions-first-guide",
    "claude-hooks-guard-guide"
   ]
+ },
+ {
+  "id": "codex-headless-scripting-guide",
+  "kind": "guide",
+  "category": "AI 시작하기",
+  "title": "Codex를 스크립트에서 쓰기: codex exec 출력 방식과 읽기 전용에서 조용히 실패하는 경우를 확인한 기록",
+  "sources": [
+   "https://learn.chatgpt.com/docs/non-interactive-mode",
+   "https://learn.chatgpt.com/docs/developer-commands",
+   "https://github.com/kwonseongjae/ai-blog-automation/blob/main/docs/posts/evidence/codex-headless-scripting.json"
+  ],
+  "markdown": "docs/posts/codex-headless-scripting-guide.md",
+  "checked_on": "2026-11-17",
+  "verification": "Linux 한 환경에서 Codex CLI 0.167.2(gpt-6.1-sol, 추론 강도 low, ChatGPT 계정)로 codex exec 열두 가지 조건을 조건별 1회 실행하고 종료 코드·출력·이벤트·결과 파일로 판정. API 키 인증, --ephemeral, 반복 실행, Windows·macOS는 확인하지 않음.",
+  "assets": {
+   "cover": "docs/posts/assets/codex-headless-scripting-guide-cover.png",
+   "flow": "docs/posts/assets/codex-headless-scripting-guide-flow.png"
+  },
+  "cover_text": [
+   "Codex 스크립트 실행",
+   "codex exec",
+   "읽기 전용 함정",
+   "종료 코드 0이어도 확인하기"
+  ],
+  "diagram_title": "codex exec 결과를 판정하는 순서",
+  "diagram_steps": [
+   [
+    "조건 하나씩 실행",
+    "출력 · 샌드박스 · 입력"
+   ],
+   [
+    "종료 코드와 이벤트",
+    "turn.completed와 오류"
+   ],
+   [
+    "결과 파일 확인",
+    "답변 대신 실제 파일"
+   ]
+  ],
+  "tags": [
+   "Codex",
+   "codex exec",
+   "비대화 실행",
+   "샌드박스",
+   "AI 에이전트 설정"
+  ],
+  "related": [
+   "claude-headless-scripting-guide",
+   "codex-first-settings",
+   "agent-permissions-first-guide"
+  ]
  }
 ]

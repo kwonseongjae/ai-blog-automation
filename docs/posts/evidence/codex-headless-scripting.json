@@ -1,0 +1,132 @@
+{
+ "checked_on": "2026-11-17",
+ "environment": "Linux, Codex CLI 0.167.2, gpt-6.1-sol(추론 강도 low), ChatGPT 계정 로그인, 조건별 1회 실행",
+ "common_options": "--skip-git-repo-check --ignore-user-config, 표준 입력은 비워 둠(필요한 조건만 전달)",
+ "runs": [
+  {
+   "case": "기본 출력",
+   "command": "codex exec \"2 더하기 3은? 숫자만 답하세요.\"",
+   "exit_code": 0,
+   "stdout": "5",
+   "note": "진행 문구는 표준 오류로 나옴"
+  },
+  {
+   "case": "json 이벤트",
+   "command": "--json",
+   "exit_code": 0,
+   "event_types": [
+    "thread.started",
+    "turn.started",
+    "item.completed",
+    "turn.completed"
+   ],
+   "usage_keys": [
+    "cache_write_input_tokens",
+    "cached_input_tokens",
+    "input_tokens",
+    "output_tokens",
+    "reasoning_output_tokens"
+   ],
+   "last_message": "5"
+  },
+  {
+   "case": "마지막 메시지를 파일로",
+   "command": "-o out.txt",
+   "exit_code": 0,
+   "stdout": "5",
+   "out_file": "5"
+  },
+  {
+   "case": "읽기 전용에서 파일 만들기",
+   "command": "-s read-only",
+   "exit_code": 0,
+   "stdout": "현재 폴더가 읽기 전용이라 파일을 만들 수 없습니다.",
+   "file_made": false
+  },
+  {
+   "case": "작업 폴더 쓰기에서 파일 만들기",
+   "command": "-s workspace-write",
+   "exit_code": 0,
+   "stdout": "made.txt 파일에 `테스트` 한 줄을 작성했습니다.",
+   "file_made": true,
+   "file_content": "테스트"
+  },
+  {
+   "case": "없는 모델",
+   "command": "-m nonexistent-model",
+   "exit_code": 1,
+   "stdout": "",
+   "stderr": "ERROR: The 'nonexistent-model' model is not supported when using Codex with a ChatGPT account."
+  },
+  {
+   "case": "출력 스키마",
+   "command": "--output-schema schema.json",
+   "exit_code": 0,
+   "stdout": "{\"answer\":5}"
+  },
+  {
+   "case": "표준 입력 + 프롬프트",
+   "command": "printf <내용> | codex exec \"이 내용에서 부산 날씨만 알려 주세요.\"",
+   "exit_code": 0,
+   "stdout": "부산의 날씨는 흐림입니다."
+  },
+  {
+   "case": "표준 입력만",
+   "command": "echo <프롬프트> | codex exec -",
+   "exit_code": 0,
+   "stdout": "5"
+  },
+  {
+   "case": "이름 알려 주기",
+   "command": "codex exec \"제 이름은 하늘입니다...\"",
+   "exit_code": 0,
+   "stdout": "네, 하늘님. 이름 기억하겠습니다."
+  },
+  {
+   "case": "같은 폴더에서 이어서",
+   "command": "codex exec resume --last \"제 이름이 뭐라고 했죠?\"",
+   "exit_code": 0,
+   "stdout": "하늘"
+  },
+  {
+   "case": "이어서 없이 새 실행",
+   "command": "codex exec \"제 이름이 뭐라고 했죠?\"",
+   "exit_code": 0,
+   "stdout": "모릅니다."
+  }
+ ],
+ "judge_script_runs": [
+  {
+   "ok": true,
+   "reason": "",
+   "result": "5",
+   "case": "계산",
+   "file_made": null,
+   "event_count": 4
+  },
+  {
+   "ok": true,
+   "reason": "",
+   "result": "못 합니다.",
+   "case": "읽기 전용에서 파일 만들기",
+   "file_made": false,
+   "event_count": 4
+  },
+  {
+   "ok": true,
+   "reason": "",
+   "result": "made.txt 파일에 “테스트” 한 줄을 썼습니다.",
+   "case": "작업 폴더 쓰기에서 파일 만들기",
+   "file_made": true,
+   "event_count": 7
+  },
+  {
+   "ok": false,
+   "reason": "종료 코드 1; 오류 이벤트; turn.completed 없음",
+   "result": null,
+   "case": "없는 모델",
+   "file_made": null,
+   "event_count": 5
+  }
+ ]
+}
