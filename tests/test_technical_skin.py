@@ -26,6 +26,11 @@ class TechnicalSkinTests(unittest.TestCase):
         self.assertIn('auth/login', extras)
         self.assertIn('stopImmediatePropagation', extras)
 
+    def test_claude_code_post_uses_codex_style_list_card(self):
+        js = technical_skin.SCRIPT
+        self.assertIn("Claude Code\\n처음 쓰는 설정", js)
+        self.assertIn('/^\\/[1-5]$/', js)
+
     def test_start_here_only_own_blog(self):
         self.assertIn('https://jacks-aiblog.tistory.com/3', start_here())
         original = technical_skin.START_HERE

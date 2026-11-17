@@ -56,11 +56,12 @@
     else if(title.includes('파일')&&title.includes('실행'))cover.textContent='파일 경로\n실행 위치';
     else if(title.includes('AI 에이전트란'))cover.textContent='AI 에이전트\n어디까지 맡길까';
     else if(title.includes('Codex 처음'))cover.textContent='Codex\n처음 쓰는 설정';
+    else if(title.includes('Claude Code 처음'))cover.textContent='Claude Code\n처음 쓰는 설정';
   });
-  // 큰 글씨 표지로 바꾸기 전에 올린 글(1~4번)은 목록에서 HTML 카드로 보여 준다.
+  // 큰 글씨 표지로 바꾸기 전에 올린 글(1~5번)은 목록에서 HTML 카드로 보여 준다.
   document.querySelectorAll('.article-type-common').forEach(function(post){
     var a=post.querySelector('a[href]'),box=post.querySelector('.thumbnail');
-    if(a&&box&&/^\/[1-4]$/.test(a.getAttribute('href')))box.classList.add('learning-legacy-cover');
+    if(a&&box&&/^\/[1-5]$/.test(a.getAttribute('href')))box.classList.add('learning-legacy-cover');
   });
   var emptyCategories=new Set();
   document.querySelectorAll('.tt_category .link_item').forEach(function(a){
