@@ -30,6 +30,13 @@ class CatalogueTests(unittest.TestCase):
         self.assertEqual(len(ids), 24)
         validate_catalogue(catalogue, ROOT)
 
+    def test_covers_keep_white_design(self):
+        from PIL import Image
+        for entry in load('catalogue.json'):
+            with Image.open(ROOT / entry['assets']['cover']) as cover:
+                self.assertEqual(cover.size, (1280, 720), entry['id'])
+                self.assertEqual(cover.convert('RGB').getpixel((5, 5)), (255, 255, 255), entry['id'])
+
     def test_related_posts_are_published_earlier(self):
         # 발행기는 아직 발행하지 않은 글을 관련 글로 연결하면 멈추므로 항상 앞선 순서여야 한다.
         order = [e['id'] for e in load('catalogue.json')]
