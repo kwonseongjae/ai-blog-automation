@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from automation.tistory_publisher import default_tags
-from automation.learning_blog import project_box, reading_minutes, related_box, BLOG, kst_day, publish_daily, render_markdown, resolve_pending, validate_article, validate_catalogue, validate_url
+from automation.learning_blog import project_box, reading_minutes, related_box, BLOG, kst_day, publish_daily, render_markdown, resolve_pending, mobile_issues, validate_article, validate_catalogue, validate_url
 
 
 class LearningBlogTests(unittest.TestCase):
@@ -26,6 +26,23 @@ class LearningBlogTests(unittest.TestCase):
                                '## 실행 코드\n```python\nprint("<hello>")\n```\n\n'
                                '## 확인 결과\n시간대를 지정합니다.\n\n'
                                '## 주의할 점\n실행 환경을 확인합니다.\n', encoding='utf-8')
+
+    def test_mobile_issues_flags_long_paragraph_and_wide_table(self):
+        self.assertEqual(mobile_issues('## 제목\n짧은 문단입니다.\n\n| a | b | c |\n| - | - | - |\n| 1 | 2 | 3 |\n'), [])
+        self.assertEqual(len(mobile_issues('가' * 151)), 1)
+        self.assertEqual(len(mobile_issues('| a | b | c | d | e |\n| - | - | - | - | - |\n')), 1)
+        self.assertEqual(mobile_issues('```\n' + '가' * 300 + '\n```\n'), [])
+
+    def test_new_guides_must_pass_mobile_check(self):
+        guide = self.article | {'kind': 'guide', 'checked_on': '2026-11-17', 'verification': '확인',
+                                'sources': ['https://code.claude.com/docs/en/a', 'https://code.claude.com/docs/en/b'],
+                                'tags': ['a', 'b', 'c']}
+        self.source.write_text('가' * 200, encoding='utf-8')
+        (self.root / 'cover.png').write_bytes(b'\x89PNG\r\n\x1a\n')
+        guide['assets'] = {'cover': 'cover.png'}
+        with self.assertRaisesRegex(ValueError, '모바일'):
+            validate_article(guide, self.root)
+        validate_article(guide | {'checked_on': '2026-11-16'}, self.root)
 
     def publish(self, **kwargs):
         return publish_daily(self.root, [self.article], root=self.root,

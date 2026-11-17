@@ -34,6 +34,27 @@ def validate_url(url):
     return url
 
 
+MOBILE_PARAGRAPH_MAX = 150  # 모바일 본문은 한 줄 약 23자, 6~7줄 이하
+MOBILE_TABLE_COLUMNS_MAX = 4
+MOBILE_RULE_FROM = '2026-11-17'  # 이전 글은 그대로 두고 새 글부터 적용
+
+
+def mobile_issues(source):
+    issues, in_code = [], False
+    for line in source.splitlines():
+        if line.startswith('```'):
+            in_code = not in_code
+        elif in_code:
+            continue
+        elif line.startswith('|'):
+            wide = f'표 열이 {MOBILE_TABLE_COLUMNS_MAX}개를 넘습니다'
+            if line.count('|') - 1 > MOBILE_TABLE_COLUMNS_MAX and wide not in issues:
+                issues.append(wide)
+        elif len(line) > MOBILE_PARAGRAPH_MAX and not line.startswith(('#', '!', '>')):
+            issues.append(f'문단이 {len(line)}자입니다: {line[:20]}…')
+    return issues
+
+
 def validate_article(article, root):
     for key in ('id', 'title', 'category', 'markdown', 'sources'):
         if not article.get(key):
@@ -55,6 +76,10 @@ def validate_article(article, root):
     path = (root / article['markdown']).resolve()
     if not path.is_relative_to(root.resolve()) or not path.is_file():
         raise ValueError('저장소 내부 원고가 필요합니다')
+    if kind == 'guide' and article['checked_on'] >= MOBILE_RULE_FROM:
+        issues = mobile_issues(path.read_text(encoding='utf-8'))
+        if issues:
+            raise ValueError('모바일에서 읽기 어려운 원고입니다: ' + '; '.join(issues[:3]))
     for source in article['sources']:
         p = urlsplit(source)
         official = p.netloc in {'docs.python.org', 'www.sqlite.org', 'learn.chatgpt.com',
