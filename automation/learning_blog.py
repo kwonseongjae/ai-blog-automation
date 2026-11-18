@@ -300,8 +300,10 @@ def publish_daily(state_dir, catalogue, *, root, publish, verify, now=None, dry_
             illustrated = source.replace('\n## ', '\n' + cover + '## ', 1) if '\n## ' in source else cover + source
         meta = f'<p class="learning-meta">읽는 시간 약 {reading_minutes(source)}분</p>'
         head = f'<p class="learning-correction">정정 안내: {html.escape(article["correction"])}</p>' if article.get('correction') else ''
-        # 검색 설명(스니펫)이 "읽는 시간"으로 시작하지 않도록 첫 문단 뒤에 둔다.
-        rendered = render_markdown(illustrated, assets).replace('</p>', '</p>' + meta, 1)
+        # 검색 설명(스니펫)이 "읽는 시간"으로 시작하거나 도입 문단 사이에 끼지 않도록 첫 그림·소제목 앞에 둔다.
+        rendered = render_markdown(illustrated, assets)
+        at = re.search(r'<figure|<h2', rendered)
+        rendered = rendered[:at.start()] + meta + rendered[at.start():] if at else rendered + meta
         body = f'<div id="{marker}">\n{head}{rendered}\n</div>'
         body += related_box(article.get('related', []), state['posted'])
         if article.get('project'):
