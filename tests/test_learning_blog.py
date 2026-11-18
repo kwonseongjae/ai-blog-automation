@@ -1,4 +1,5 @@
 import json
+import re
 import tempfile
 import unittest
 from datetime import datetime, timezone
@@ -118,6 +119,13 @@ class LearningBlogTests(unittest.TestCase):
         self.assertIn('읽는 시간 약 1분', captured['html'])
         self.assertIn('정정 안내: &lt;i&gt;표현&lt;/i&gt;', captured['html'])
         self.assertNotIn('<i>', captured['html'])
+
+    def test_reading_time_follows_first_paragraph(self):
+        captured = {}
+        self.publish(publish=lambda payload: captured.update(payload) or f'https://{BLOG}/2')
+        text = re.sub(r'<[^>]+>', '', captured['html'])
+        self.assertFalse(text.strip().startswith('읽는 시간'))
+        self.assertIn('읽는 시간 약 1분', text)
 
     def test_kst_midnight_uses_local_date(self):
         self.assertEqual(kst_day(datetime(2026, 11, 12, 15, 1, tzinfo=timezone.utc)), '2026-11-13')

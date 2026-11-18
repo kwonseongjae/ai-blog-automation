@@ -1104,7 +1104,7 @@
   "id": "codex-headless-scripting-guide",
   "kind": "guide",
   "category": "AI 시작하기",
-  "title": "Codex를 스크립트에서 쓰기: codex exec 출력 방식과 읽기 전용에서 조용히 실패하는 경우를 확인한 기록",
+  "title": "Codex 스크립트 실행: 읽기 전용에서 파일 없이 종료 코드 0이 나왔다",
   "sources": [
    "https://learn.chatgpt.com/docs/non-interactive-mode",
    "https://learn.chatgpt.com/docs/developer-commands",
