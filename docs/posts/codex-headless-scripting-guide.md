@@ -108,6 +108,8 @@ def ask(prompt, *options, cwd='.'):
     return {'ok': not problems, 'reason': '; '.join(problems)}
 ```
 
+처음 만든 측정 스크립트는 표준 출력의 `5`를 JSON 줄로 읽었고, 그 줄이 숫자가 되자 `.get`을 부르다 멈췄습니다. 그래서 위 함수는 객체가 아닌 줄을 건너뜁니다.
+
 네 가지 요청으로 이 함수를 돌렸습니다. 마지막 열은 요청한 파일이 실제로 있는지 따로 확인한 값입니다.
 
 | 요청 | `ok` | `reason` | 파일 |
