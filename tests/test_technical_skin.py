@@ -26,6 +26,15 @@ class TechnicalSkinTests(unittest.TestCase):
         self.assertIn('auth/login', extras)
         self.assertIn('stopImmediatePropagation', extras)
 
+    def test_ga4_uses_direct_gtag_and_skips_internal_visits(self):
+        extras = transform('<html><head></head><body><main class="main"><div class="area-main"></div></main></body></html>').split('id="learning-extras"')[1]
+        self.assertIn('G-KYEEZVW0X2', extras)
+        self.assertIn("if(internal)return;", extras)
+        self.assertIn('ga_internal', extras)
+        self.assertIn('HeadlessChrome', extras)
+        self.assertIn("'scroll_depth'", extras)
+        self.assertNotIn('GTM-', extras)
+
     def test_claude_code_post_uses_codex_style_list_card(self):
         js = technical_skin.SCRIPT
         self.assertIn("Claude Code\\n처음 쓰는 설정", js)

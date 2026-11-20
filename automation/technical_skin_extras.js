@@ -51,5 +51,35 @@
     var base=(window.appInfo&&window.appInfo.loginUrl)||'https://www.tistory.com/auth/login';
     location.href=base+'/?redirectUrl='+encodeURIComponent(location.href.split('#')[0]);
   },true);
+  // GA4: 직접 설치(gtag). 자동 브라우저와 ?ga_internal=1로 표시한 내 기기는 GA4를 아예 불러오지 않아 통계에서 빠진다(?ga_internal=0으로 해제).
+  (function(){
+    var GA='G-KYEEZVW0X2',internal=false;
+    try{
+      if(/[?&]ga_internal=1(&|$)/.test(location.search))localStorage.setItem('ga_internal','1');
+      if(/[?&]ga_internal=0(&|$)/.test(location.search))localStorage.removeItem('ga_internal');
+      internal=localStorage.getItem('ga_internal')==='1';
+    }catch(e){}
+    if(navigator.webdriver||/HeadlessChrome/.test(navigator.userAgent))internal=true;
+    if(internal)return;
+    window.dataLayer=window.dataLayer||[];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js',new Date());
+    gtag('config',GA);
+    var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+GA;document.head.appendChild(s);
+    var art=document.getElementById('article-view'),seen={};
+    if(art)window.addEventListener('scroll',function(){
+      var r=art.getBoundingClientRect(),read=(innerHeight-r.top)/Math.max(r.height,1)*100;
+      [25,50,75,100].forEach(function(p){if(read>=p&&!seen[p]){seen[p]=1;gtag('event','scroll_depth',{percent:p});}});
+    },{passive:true});
+    document.addEventListener('click',function(e){
+      var a=e.target&&e.target.closest&&e.target.closest('a[href]');
+      if(!a||a.hostname!==location.hostname||a.closest('.layer_tool'))return;
+      gtag('event','internal_link_click',{link_url:a.pathname,link_text:a.textContent.trim().slice(0,60),area:art&&art.contains(a)?'article':'other'});
+    },true);
+    document.addEventListener('copy',function(){
+      var n=getSelection&&getSelection().anchorNode,el=n&&(n.nodeType===1?n:n.parentElement);
+      if(el&&el.closest&&el.closest('pre'))gtag('event','code_copy',{page_path:location.pathname});
+    });
+  })();
   apply();
 })();
