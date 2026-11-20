@@ -16,7 +16,9 @@ RECORD = (('명령', 'codex --version'), ('결과', 'codex-cli 0.167.2'))
 RECORD_NOTE = '2026-11-15 · Linux · 1회 실행'
 PRINCIPLES = ('하루 최대 한 편', '직접 실행해 확인한 내용', '확인일과 공식 출처 표기')
 # 사이드바 안내 상자: (제목, 설명, 주소). 주소는 내 블로그 글이나 내 저장소만 허용한다.
-SIDE_LINKS = (('AI 에이전트란?', '챗봇과 다른 점, 처음 맡길 일', 'https://jacks-aiblog.tistory.com/3'),
+ABOUT_URL = 'https://jacks-aiblog.tistory.com/pages/about'
+SIDE_LINKS = (('블로그 소개', '지키는 기준과 글을 만드는 방법', ABOUT_URL),
+              ('AI 에이전트란?', '챗봇과 다른 점, 처음 맡길 일', 'https://jacks-aiblog.tistory.com/3'),
               ('Codex 처음 쓰기', '설치와 로그인, 첫 요청까지', 'https://jacks-aiblog.tistory.com/4'),
               ('실습 코드', '글에 쓴 코드와 실행 기록', REPOSITORY))
 # 검색엔진 소유 확인 태그(공개 값). 서치콘솔·서치어드바이저 확인이 끝난 뒤에도 지우지 않는다.
@@ -37,7 +39,7 @@ def navigation():
 def side_promo():
     items = []
     for title, note, url in SIDE_LINKS:
-        if not url.startswith(REPOSITORY):
+        if not url.startswith(REPOSITORY) and url != ABOUT_URL:
             validate_url(url)
         items.append(f'<li><a href="{url}"><strong>{title}</strong><span>{note}</span></a></li>')
     return '<section class="learning-promo" aria-label="처음 쓰는 분께"><h3>처음 쓰는 분께</h3><ul>' + ''.join(items) + '</ul></section>'

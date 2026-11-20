@@ -63,6 +63,9 @@ class TechnicalSkinTests(unittest.TestCase):
         finally:
             technical_skin.SIDE_LINKS = original
 
+    def test_side_promo_links_about_page(self):
+        self.assertIn('https://jacks-aiblog.tistory.com/pages/about', side_promo())
+
     def test_popular_tab_stays_hidden(self):
         self.assertIn('.area-aside .list-recent.list-tab{display:none!important}', technical_skin.CSS)
 
