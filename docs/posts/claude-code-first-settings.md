@@ -1,4 +1,4 @@
-# Claude Code 처음 설정하기: Windows와 WSL 명령을 섞지 않는 법
+# Claude Code 설치 방법: Windows와 WSL 명령을 섞지 않는 법
 
 Claude Code를 처음 설치할 때는 Windows PowerShell인지 WSL 터미널인지 먼저 확인해야 합니다. 설치 위치를 정하고 로그인 방식과 권한을 확인한 뒤, README 한 장을 읽는 작업으로 첫 사용을 시작해봅시다.
 

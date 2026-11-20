@@ -87,7 +87,7 @@
   "id": "codex-first-settings",
   "kind": "guide",
   "category": "AI 시작하기",
-  "title": "Codex 처음 쓸 때: 설치·로그인·작업 폴더부터 확인하는 법",
+  "title": "Codex 설치 방법: 처음 쓸 때 로그인·작업 폴더까지 확인하는 법",
   "sources": [
    "https://learn.chatgpt.com/docs/codex/cli.md",
    "https://learn.chatgpt.com/docs/permission-modes.md",
@@ -129,13 +129,19 @@
   ],
   "related": [
    "ai-agent-first-task"
-  ]
+  ],
+  "target_query": "codex 설치 방법",
+  "demand": {
+   "grade": "B",
+   "basis": "구글 자동완성 2026-11-20: 'codex 설치 방법'",
+   "checked_on": "2026-11-20"
+  }
  },
  {
   "id": "claude-code-first-settings",
   "kind": "guide",
   "category": "AI 시작하기",
-  "title": "Claude Code 처음 설정하기: Windows와 WSL 명령을 섞지 않는 법",
+  "title": "Claude Code 설치 방법: Windows와 WSL 명령을 섞지 않는 법",
   "sources": [
    "https://code.claude.com/docs/en/quickstart",
    "https://code.claude.com/docs/en/setup",
@@ -179,13 +185,19 @@
   "related": [
    "ai-agent-first-task",
    "codex-first-settings"
-  ]
+  ],
+  "target_query": "claude code 설치 방법",
+  "demand": {
+   "grade": "B",
+   "basis": "구글 자동완성 2026-11-20: 'claude code 설치 방법'",
+   "checked_on": "2026-11-20"
+  }
  },
  {
   "id": "agents-claude-md-first-guide",
   "kind": "guide",
   "category": "AI 시작하기",
-  "title": "AGENTS.md와 CLAUDE.md 처음 쓰기: 어떤 파일을 읽는지 직접 확인하는 법",
+  "title": "AGENTS.md·CLAUDE.md 작성법: 어떤 파일을 읽는지 직접 확인하는 법",
   "sources": [
    "https://learn.chatgpt.com/docs/agent-configuration/agents-md",
    "https://code.claude.com/docs/en/memory"
@@ -229,13 +241,19 @@
   "related": [
    "codex-first-settings",
    "claude-code-first-settings"
-  ]
+  ],
+  "target_query": "agents.md 작성법",
+  "demand": {
+   "grade": "B",
+   "basis": "구글 자동완성 2026-11-20: 'agents.md 작성법'",
+   "checked_on": "2026-11-20"
+  }
  },
  {
   "id": "agent-permissions-first-guide",
   "kind": "guide",
   "category": "AI 시작하기",
-  "title": "AI 코딩 도구 권한 처음 설정하기: 파일을 만들기 전에 물어보게 하는 법",
+  "title": "Claude Code·Codex 권한 설정: 파일을 만들기 전에 물어보게 하는 법",
   "sources": [
    "https://learn.chatgpt.com/docs/agent-approvals-security",
    "https://code.claude.com/docs/en/permissions"
@@ -279,7 +297,13 @@
    "agents-claude-md-first-guide",
    "codex-first-settings",
    "claude-code-first-settings"
-  ]
+  ],
+  "target_query": "claude code 권한 설정",
+  "demand": {
+   "grade": "B",
+   "basis": "구글 자동완성 2026-11-20: 'claude code 권한 설정'",
+   "checked_on": "2026-11-20"
+  }
  },
  {
   "id": "codex-vs-claude-code-compare",
@@ -329,13 +353,19 @@
    "agents-claude-md-first-guide",
    "agent-permissions-first-guide",
    "codex-first-settings"
-  ]
+  ],
+  "target_query": "codex claude code 비교",
+  "demand": {
+   "grade": "B",
+   "basis": "구글 자동완성 2026-11-20: 'codex claude code 비교'",
+   "checked_on": "2026-11-20"
+  }
  },
  {
   "id": "skills-first-guide",
   "kind": "guide",
   "category": "AI 시작하기",
-  "title": "스킬(SKILL.md) 처음 만들기: Codex와 Claude Code에서 같은 파일로 써 본 결과",
+  "title": "Claude Code 스킬 만들기: SKILL.md 하나를 Codex와 Claude Code에서 같이 써 본 결과",
   "sources": [
    "https://learn.chatgpt.com/docs/build-skills",
    "https://code.claude.com/docs/en/skills"
@@ -379,13 +409,19 @@
    "agents-claude-md-first-guide",
    "agent-permissions-first-guide",
    "codex-vs-claude-code-compare"
-  ]
+  ],
+  "target_query": "claude code 스킬 만들기",
+  "demand": {
+   "grade": "B",
+   "basis": "구글 자동완성 2026-11-20: 'claude code 스킬 만들기'",
+   "checked_on": "2026-11-20"
+  }
  },
  {
   "id": "skill-situation-guide",
   "kind": "guide",
   "category": "도구·모델 비교",
-  "title": "어떤 상황에 어떤 스킬을 설치할까: 문서 작업·화면 디자인·개발 절차·코드 줄이기·한글 윤문 다섯 가지",
+  "title": "Claude Code 스킬 설치: 어떤 상황에 어떤 스킬을 설치할까, 문서 작업·화면 디자인·개발 절차·코드 줄이기·한글 윤문 다섯 가지",
   "sources": [
    "https://code.claude.com/docs/en/skills",
    "https://github.com/anthropics/skills",
@@ -430,13 +466,19 @@
    "skills-first-guide",
    "agents-claude-md-first-guide",
    "codex-vs-claude-code-compare"
-  ]
+  ],
+  "target_query": "claude code 스킬 설치",
+  "demand": {
+   "grade": "B",
+   "basis": "구글 자동완성 2026-11-20: 'claude code 스킬 설치'",
+   "checked_on": "2026-11-20"
+  }
  },
  {
   "id": "model-selection-first-guide",
   "kind": "guide",
   "category": "도구·모델 비교",
-  "title": "AI 코딩 도구 모델 고르는 기준: 같은 버그 수정을 여러 모델로 돌려 본 결과",
+  "title": "AI 코딩 모델 선택 기준: 같은 버그 수정을 여러 모델로 돌려 본 결과",
   "sources": [
    "https://learn.chatgpt.com/docs/models",
    "https://code.claude.com/docs/en/model-config"
@@ -480,7 +522,13 @@
    "codex-vs-claude-code-compare",
    "skills-first-guide",
    "agent-permissions-first-guide"
-  ]
+  ],
+  "target_query": "ai 코딩 모델 선택",
+  "demand": {
+   "grade": "B",
+   "basis": "구글 자동완성 2026-11-20: 'ai 코딩 모델 선택'",
+   "checked_on": "2026-11-20"
+  }
  },
  {
   "id": "claude-model-traits-guide",
@@ -531,7 +579,13 @@
    "model-selection-first-guide",
    "codex-vs-claude-code-compare",
    "skills-first-guide"
-  ]
+  ],
+  "target_query": "claude 모델 비교",
+  "demand": {
+   "grade": "B",
+   "basis": "구글 자동완성 2026-11-20: 'claude 모델 비교'",
+   "checked_on": "2026-11-20"
+  }
  },
  {
   "id": "mcp-first-connect-guide",
@@ -581,7 +635,13 @@
    "agent-permissions-first-guide",
    "skills-first-guide",
    "codex-vs-claude-code-compare"
-  ]
+  ],
+  "target_query": "claude code mcp 연결",
+  "demand": {
+   "grade": "B",
+   "basis": "구글 자동완성 2026-11-20: 'claude code mcp 연결'",
+   "checked_on": "2026-11-20"
+  }
  },
  {
   "id": "skills-troubleshooting-guide",
@@ -631,13 +691,19 @@
    "skills-first-guide",
    "mcp-first-connect-guide",
    "agents-claude-md-first-guide"
-  ]
+  ],
+  "target_query": "스킬 안 불릴 때",
+  "demand": {
+   "grade": "C",
+   "basis": "구글·네이버 자동완성 2026-11-20 확인: '스킬 안 불릴 때'와 같은 표현 없음(가설)",
+   "checked_on": "2026-11-20"
+  }
  },
  {
   "id": "instruction-files-troubleshooting-guide",
   "kind": "guide",
   "category": "AI 시작하기",
-  "title": "지침 파일이 안 먹힐 때 점검하는 순서: 이름·위치·크기·요청을 하나씩 바꿔 표식 한 줄로 확인한 기록",
+  "title": "CLAUDE.md·AGENTS.md 지침 파일이 적용 안 될 때 점검하는 순서: 이름·위치·크기·요청을 하나씩 바꿔 표식 한 줄로 확인한 기록",
   "sources": [
    "https://learn.chatgpt.com/docs/agent-configuration/agents-md",
    "https://code.claude.com/docs/en/memory"
@@ -682,7 +748,13 @@
    "agents-claude-md-first-guide",
    "skills-troubleshooting-guide",
    "mcp-first-connect-guide"
-  ]
+  ],
+  "target_query": "claude.md 적용",
+  "demand": {
+   "grade": "B",
+   "basis": "구글 자동완성 2026-11-20: 'claude.md 적용법'",
+   "checked_on": "2026-11-20"
+  }
  },
  {
   "id": "daily-publish-state",
@@ -736,13 +808,19 @@
   ],
   "related": [
    "ai-agent-first-task"
-  ]
+  ],
+  "target_query": "블로그 자동화",
+  "demand": {
+   "grade": "B",
+   "basis": "구글 자동완성 2026-11-20: '블로그 자동화'",
+   "checked_on": "2026-11-20"
+  }
  },
  {
   "id": "validator-cases-guide",
   "kind": "guide",
   "category": "프로젝트 적용기",
-  "title": "블로그 발행기가 잘못된 원고를 발행 전에 막는 방법: 규칙 13가지를 일부러 어겨 본 기록",
+  "title": "블로그 발행 자동화: 발행기가 잘못된 원고를 발행 전에 막는 방법, 규칙 13가지를 일부러 어겨 본 기록",
   "sources": [
    "https://github.com/kwonseongjae/ai-blog-automation/blob/main/automation/learning_blog.py",
    "https://github.com/kwonseongjae/ai-blog-automation/blob/main/docs/posts/evidence/validator-cases.json"
@@ -790,13 +868,19 @@
    "url": "https://github.com/kwonseongjae/ai-blog-automation",
    "role": "발행 전 원고 검증 규칙을 코드로 두고 테스트로 확인",
    "result": "어긋난 원고 13건과 발행 주소 4건이 모두 거절되고 정상 원고와 주소는 통과"
+  },
+  "target_query": "블로그 발행 자동화",
+  "demand": {
+   "grade": "B",
+   "basis": "구글 자동완성 2026-11-20: '블로그 발행 자동화'",
+   "checked_on": "2026-11-20"
   }
  },
  {
   "id": "mobile-table-guide",
   "kind": "guide",
   "category": "프로젝트 적용기",
-  "title": "긴 비교표를 휴대폰에서 읽게 하려면: 폭 360px에서 표 11개를 재어 본 기록",
+  "title": "블로그 표 모바일에서 읽게 하려면: 폭 360px에서 표 11개를 재어 본 기록",
   "sources": [
    "https://github.com/kwonseongjae/ai-blog-automation/blob/main/automation/technical_skin.css",
    "https://github.com/kwonseongjae/ai-blog-automation/blob/main/docs/posts/evidence/mobile-table-widths.json"
@@ -845,13 +929,19 @@
    "url": "https://github.com/kwonseongjae/ai-blog-automation",
    "role": "표를 스크롤 상자에 넣는 스킨 CSS를 두고 폭별로 측정",
    "result": "360·390px에서 표 11개가 상자 안에서만 스크롤되고 페이지 전체는 옆으로 밀리지 않음"
+  },
+  "target_query": "블로그 표 모바일",
+  "demand": {
+   "grade": "B",
+   "basis": "네이버 자동완성 2026-11-20: '블로그 표 모바일'",
+   "checked_on": "2026-11-20"
   }
  },
  {
   "id": "dark-mode-contrast-guide",
   "kind": "guide",
   "category": "프로젝트 적용기",
-  "title": "블로그에 다크 모드를 넣고 글자 대비를 재어 고친 기록: 낮은 대비 17곳을 3곳으로",
+  "title": "블로그 다크모드 글자 대비: 낮은 대비 17곳을 3곳으로 고쳐 재어 본 기록",
   "sources": [
    "https://github.com/kwonseongjae/ai-blog-automation/blob/main/automation/technical_skin.css",
    "https://github.com/kwonseongjae/ai-blog-automation/blob/main/docs/posts/evidence/dark-mode-contrast.json"
@@ -900,13 +990,19 @@
    "url": "https://github.com/kwonseongjae/ai-blog-automation",
    "role": "블로그 스킨에 다크 모드를 넣고 글자 대비를 측정해 고침",
    "result": "어두운 화면 3번 글에서 낮은 대비 요소를 17곳에서 3곳으로 줄임(남은 곳은 티스토리 기본 위젯과 숨은 아이콘 글자)"
+  },
+  "target_query": "블로그 다크모드",
+  "demand": {
+   "grade": "B",
+   "basis": "구글 자동완성 2026-11-20: '블로그 다크모드'",
+   "checked_on": "2026-11-20"
   }
  },
  {
   "id": "claude-hooks-guard-guide",
   "kind": "guide",
   "category": "AI 시작하기",
-  "title": "Claude Code 훅으로 명령 막기: 막히는 경우와 조용히 통과하는 경우를 일곱 가지로 확인한 기록",
+  "title": "Claude Code hooks 사용법: 훅으로 명령 막기, 막히는 경우와 조용히 통과하는 경우 일곱 가지 확인",
   "sources": [
    "https://code.claude.com/docs/en/hooks-guide",
    "https://github.com/kwonseongjae/ai-blog-automation/blob/main/docs/posts/evidence/claude-hooks-guard.json"
@@ -949,7 +1045,13 @@
   "related": [
    "agent-permissions-first-guide",
    "claude-code-first-settings"
-  ]
+  ],
+  "target_query": "claude code hooks 사용법",
+  "demand": {
+   "grade": "B",
+   "basis": "구글 자동완성 2026-11-20: 'claude code hooks 사용법'",
+   "checked_on": "2026-11-20"
+  }
  },
  {
   "id": "claude-subagent-troubleshooting-guide",
@@ -998,13 +1100,19 @@
   "related": [
    "agents-claude-md-first-guide",
    "skills-troubleshooting-guide"
-  ]
+  ],
+  "target_query": "claude code 서브에이전트",
+  "demand": {
+   "grade": "B",
+   "basis": "구글 자동완성 2026-11-20: 'claude code 서브에이전트 사용법'",
+   "checked_on": "2026-11-20"
+  }
  },
  {
   "id": "claude-headless-scripting-guide",
   "kind": "guide",
   "category": "AI 시작하기",
-  "title": "Claude Code를 스크립트에서 쓰기: -p 출력 형식과 종료 코드, 조용히 실패하는 경우를 확인한 기록",
+  "title": "Claude Code headless(-p) 스크립트 실행: 출력 형식과 종료 코드, 조용히 실패하는 경우를 확인한 기록",
   "sources": [
    "https://code.claude.com/docs/en/headless",
    "https://github.com/kwonseongjae/ai-blog-automation/blob/main/docs/posts/evidence/claude-headless-scripting.json"
@@ -1047,7 +1155,13 @@
   "related": [
    "agent-permissions-first-guide",
    "claude-code-first-settings"
-  ]
+  ],
+  "target_query": "claude code headless",
+  "demand": {
+   "grade": "B",
+   "basis": "구글 자동완성 2026-11-20: 'claude code headless'",
+   "checked_on": "2026-11-20"
+  }
  },
  {
   "id": "mcp-tool-scope-guide",
@@ -1098,13 +1212,19 @@
    "mcp-first-connect-guide",
    "agent-permissions-first-guide",
    "claude-hooks-guard-guide"
-  ]
+  ],
+  "target_query": "mcp 도구 허용",
+  "demand": {
+   "grade": "C",
+   "basis": "구글·네이버 자동완성 2026-11-20 확인: 'mcp 도구 허용'와 같은 표현 없음(가설)",
+   "checked_on": "2026-11-20"
+  }
  },
  {
   "id": "codex-headless-scripting-guide",
   "kind": "guide",
   "category": "AI 시작하기",
-  "title": "Codex 스크립트 실행: 읽기 전용에서 파일 없이 종료 코드 0이 나왔다",
+  "title": "codex exec 스크립트 실행: 읽기 전용에서 파일 없이 종료 코드 0이 나왔다",
   "sources": [
    "https://learn.chatgpt.com/docs/non-interactive-mode",
    "https://learn.chatgpt.com/docs/developer-commands",
@@ -1149,6 +1269,12 @@
    "claude-headless-scripting-guide",
    "codex-first-settings",
    "agent-permissions-first-guide"
-  ]
+  ],
+  "target_query": "codex exec",
+  "demand": {
+   "grade": "B",
+   "basis": "구글 자동완성 2026-11-20: 'codex exec'",
+   "checked_on": "2026-11-20"
+  }
  }
 ]

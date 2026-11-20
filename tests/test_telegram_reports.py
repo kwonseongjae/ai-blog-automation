@@ -53,6 +53,18 @@ class TelegramReportsTest(unittest.TestCase):
                 t.send('x')
         self.assertNotIn('SECRET', str(ctx.exception))
 
+    def test_weekly_text_waits_then_flags_first_impressions(self):
+        none = t.weekly_text([{}], [], [], '2026-10-21', '2026-11-17', '2026-11-20')
+        self.assertIn('아직 노출이 없습니다', none)
+        row = {'keys': ['claude code 설치 방법'], 'impressions': 12, 'clicks': 1, 'ctr': 0.083, 'position': 8.4}
+        total = {'impressions': 12, 'clicks': 1, 'ctr': 0.083, 'position': 8.4}
+        seen = t.weekly_text([total], [row], [row | {'keys': ['https://x/5']}], '2026-10-21', '2026-11-17', '2026-11-20')
+        self.assertIn('노출이 잡혔습니다', seen)
+        self.assertIn('claude code 설치 방법 | 노출 12 · 클릭 1 · CTR 8.3% · 평균 8.4위', seen)
+
+    def test_weekly_text_reports_unavailable_search_console(self):
+        self.assertIn('조회 불가', t.weekly_text(None, None, None, 'a', 'b', 'c'))
+
 
 if __name__ == '__main__':
     unittest.main()

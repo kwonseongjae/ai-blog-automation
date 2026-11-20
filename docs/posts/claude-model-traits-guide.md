@@ -1,6 +1,6 @@
 # Claude Code 모델별 특징 비교: 같은 작업 세 가지를 haiku·sonnet·opus·fable로 두 번씩 돌린 기록
 
-같은 작업 세 가지를 haiku·sonnet·opus·fable에 두 번씩 맡기고 결과를 비교했습니다. 순위는 매기지 않습니다. 턴 수와 표시된 비용을 비롯해 변경 범위와 보고 방식에서 차이가 난 부분만 기록합니다.
+Claude Code 모델 비교를 위해 같은 작업 세 가지를 haiku·sonnet·opus·fable에 두 번씩 맡기고 결과를 비교했습니다. 순위는 매기지 않습니다. 턴 수와 표시된 비용을 비롯해 변경 범위와 보고 방식에서 차이가 난 부분만 기록합니다.
 
 확인일: 2026-11-16 · 범위: Linux 한 환경, Claude Code 2.1.325, 별칭 haiku·sonnet·opus·fable의 기본 추론 강도, 작업 3가지를 각 2회, 작은 Python 프로젝트
 

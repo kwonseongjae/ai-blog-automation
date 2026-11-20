@@ -45,6 +45,20 @@ class LearningBlogTests(unittest.TestCase):
             validate_article(guide, self.root)
         validate_article(guide | {'checked_on': '2026-11-16'}, self.root)
 
+    def test_new_guides_need_target_query_from_rule_date(self):
+        guide = self.article | {'kind': 'guide', 'checked_on': '2026-11-16', 'verification': '확인',
+                                'sources': ['https://code.claude.com/docs/en/a', 'https://code.claude.com/docs/en/b'],
+                                'tags': ['a', 'b', 'c'], 'assets': {'cover': 'cover.png'}}
+        (self.root / 'cover.png').write_bytes(b'\x89PNG\r\n\x1a\n')
+        run = lambda now: publish_daily(self.root, [guide], root=self.root, publish=lambda _: f'https://{BLOG}/9',
+                                        verify=lambda *_: True, now=now)
+        with self.assertRaisesRegex(ValueError, 'target_query'):
+            run(datetime(2026, 11, 21, 1, tzinfo=timezone.utc))
+        with self.assertRaises(ValueError) as caught:  # 이전 날짜는 요구하지 않으므로 다른 이유로만 실패할 수 있다
+            publish_daily(self.root, [guide | {'target_query': '없는 검색어', 'demand': {}}], root=self.root,
+                          publish=lambda _: 'x', verify=lambda *_: True, now=datetime(2026, 11, 21, 1, tzinfo=timezone.utc))
+        self.assertIn('검색어', str(caught.exception))
+
     def publish(self, **kwargs):
         return publish_daily(self.root, [self.article], root=self.root,
                              publish=kwargs.pop('publish', lambda _: f'https://{BLOG}/2'),

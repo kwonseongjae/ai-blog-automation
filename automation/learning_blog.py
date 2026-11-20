@@ -14,6 +14,8 @@ from pathlib import Path
 from urllib.parse import urlsplit
 from zoneinfo import ZoneInfo
 
+from automation.demand import demand_issues
+
 BLOG = 'jacks-aiblog.tistory.com'
 REPOSITORY = 'https://github.com/kwonseongjae/ai-blog-automation'
 CATEGORIES = ('AI 시작하기', '도구·모델 비교', '프로젝트 적용기', 'Python·자동화')
@@ -37,6 +39,7 @@ def validate_url(url):
 MOBILE_PARAGRAPH_MAX = 150  # 모바일 본문은 한 줄 약 23자, 6~7줄 이하
 MOBILE_TABLE_COLUMNS_MAX = 4
 MOBILE_RULE_FROM = '2026-11-17'  # 이전 글은 그대로 두고 새 글부터 적용
+DEMAND_RULE_FROM = '2026-11-21'  # 이날부터 새 안내 글은 목표 검색어와 수요 근거가 있어야 발행
 
 
 def mobile_issues(source):
@@ -80,6 +83,10 @@ def validate_article(article, root):
         issues = mobile_issues(path.read_text(encoding='utf-8'))
         if issues:
             raise ValueError('모바일에서 읽기 어려운 원고입니다: ' + '; '.join(issues[:3]))
+    if kind == 'guide' and (article.get('target_query') or article.get('demand')):
+        issues = demand_issues(article, path.read_text(encoding='utf-8'))
+        if issues:
+            raise ValueError('목표 검색어·수요 근거 문제: ' + '; '.join(issues))
     for source in article['sources']:
         p = urlsplit(source)
         official = p.netloc in {'docs.python.org', 'www.sqlite.org', 'learn.chatgpt.com',
@@ -288,6 +295,8 @@ def publish_daily(state_dir, catalogue, *, root, publish, verify, now=None, dry_
         article = next((a for a in catalogue if a['id'] not in posted), None)
         if article is None:
             return {'status': 'empty'}
+        if article.get('kind') == 'guide' and today >= DEMAND_RULE_FROM and not (article.get('target_query') and article.get('demand')):
+            raise ValueError('목표 검색어(target_query)와 수요 근거(demand)가 필요합니다')
         source = validate_article(article, root).read_text(encoding='utf-8')
         assets = read_assets(article, root)
         digest = hashlib.sha256((source + (json.dumps(assets, sort_keys=True) if assets else '')).encode()).hexdigest()

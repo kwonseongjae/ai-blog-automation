@@ -1,4 +1,4 @@
-# 스킬(SKILL.md) 처음 만들기: Codex와 Claude Code에서 같은 파일로 써 본 결과
+# Claude Code 스킬 만들기: SKILL.md 하나를 Codex와 Claude Code에서 같이 써 본 결과
 
 같은 `SKILL.md` 파일을 Codex와 Claude Code에 각각 넣고 릴리스 노트를 만들어 봤습니다. 이름으로 직접 부르는 경우와 이름 없이 요청하는 경우를 나눠 실행했습니다. 스킬이 없는 빈 폴더에도 같은 변경 목록을 넣어 결과를 비교했습니다.
 

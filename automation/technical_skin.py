@@ -8,7 +8,7 @@ from automation.learning_blog import CATEGORIES, REPOSITORY, validate_url
 BLOG_TITLE = 'Jack의 AI 개발노트'
 # 처음이라면 읽는 순서: 실제로 이어서 읽는 순서라서 번호를 붙인다. 새 입문 글이 발행되면 한 줄 추가한다.
 START_HERE = (('AI 에이전트란? 챗봇과 다른 점과 처음 맡길 일 3가지', 'https://jacks-aiblog.tistory.com/3'),
-              ('Codex 처음 쓸 때: 설치·로그인·작업 폴더부터 확인하는 법', 'https://jacks-aiblog.tistory.com/4'))
+              ('Codex 설치 방법: 처음 쓸 때 로그인·작업 폴더까지 확인하는 법', 'https://jacks-aiblog.tistory.com/4'))
 # 대문 주제 목록: 분류 이름(CATEGORIES 앞 세 개)과 한 줄 설명
 TOPIC_NOTES = ('설치, 로그인, 지침 파일, 권한 같은 첫 설정', '같은 과제를 맡겨 보고 차이를 기록합니다', '직접 만든 프로젝트에 쓴 방법과 결과')
 # 대문 실행 기록 예시: 실제로 실행한 명령과 결과만 적는다(Codex 첫 설정 글의 확인 값).

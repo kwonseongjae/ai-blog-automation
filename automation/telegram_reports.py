@@ -5,8 +5,9 @@ import os
 import re
 import subprocess
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
+from urllib.parse import quote
 from zoneinfo import ZoneInfo
 
 import httpx
@@ -111,6 +112,60 @@ def verify_recent(count=5):
     return results
 
 
+def search_rows(start, end, dimension=None, limit=10):
+    """서치콘솔 검색 실적을 읽는다. 권한이 없거나 응답이 이상하면 None."""
+    try:
+        sys.path.insert(0, str(_legacy_root()))
+        import config  # noqa: F401
+        from services.search_ping import _get_access_token
+        token = _get_access_token()
+        if not token:
+            return None
+        body = {'startDate': start, 'endDate': end, 'rowLimit': limit}
+        if dimension:
+            body['dimensions'] = [dimension]
+        site = quote(SITE + '/', safe='')
+        r = httpx.post(f'https://searchconsole.googleapis.com/webmasters/v3/sites/{site}/searchAnalytics/query',
+                       headers={'Authorization': f'Bearer {token}'}, json=body, timeout=30)
+        rows = r.json().get('rows', []) if r.status_code == 200 else None
+        return rows if rows is None or all(isinstance(x, dict) for x in rows) else None
+    except Exception:
+        return None
+
+
+def _stats(row):
+    return (f'노출 {row.get("impressions", 0):.0f} · 클릭 {row.get("clicks", 0):.0f}'
+            f' · CTR {row.get("ctr", 0) * 100:.1f}% · 평균 {row.get("position", 0):.1f}위')
+
+
+def _row_line(row):
+    return f'   · {row["keys"][0]} | {_stats(row)}'
+
+
+def weekly_text(total, queries, pages, start, end, today):
+    """검색 노출이 처음 잡히는 순간을 알린다. 서치콘솔은 최근 2~3일치가 늦게 반영된다."""
+    lines = [f'📈 [{TITLE}] 주간 검색 리포트 {today}', f'기간 {start} ~ {end} (최근 2~3일은 반영 전)', '']
+    if total is None or queries is None or pages is None:
+        return '\n'.join(lines + ['⚠️ 서치콘솔 조회 불가(서비스 계정 권한 확인)'])
+    summary = total[0] if total else {}
+    lines.append(f'총합: {_stats(summary)}')
+    if not summary.get('impressions'):
+        lines += ['', '🔎 아직 노출이 없습니다. 첫 신호를 기다리는 중입니다(색인 대기 상태일 수 있음).']
+        return '\n'.join(lines)
+    lines += ['', '🚨 노출이 잡혔습니다. 신호가 온 검색어 주변 글을 우선 편성하고, 수요 등급 A 근거로 기록하세요.',
+              '', '검색어 상위'] + [_row_line(r) for r in queries[:5]]
+    lines += ['', '글 상위'] + [_row_line(r) for r in pages[:5]]
+    return '\n'.join(lines)
+
+
+def weekly_report(today):
+    end = (datetime.fromisoformat(today) - timedelta(days=3)).date()
+    start = end - timedelta(days=27)
+    args = (start.isoformat(), end.isoformat())
+    return weekly_text(search_rows(*args, limit=1), search_rows(*args, dimension='query'),
+                       search_rows(*args, dimension='page'), *args, today)
+
+
 def systemd_value(unit, prop):
     out = subprocess.run(['systemctl', '--user', 'show', unit, '-p', prop, '--value'], capture_output=True, text=True)
     return out.stdout.strip() or '확인 불가'
@@ -122,7 +177,7 @@ def timer_next():
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('kind', choices=('daily', 'verify'))
+    parser.add_argument('kind', choices=('daily', 'verify', 'weekly'))
     parser.add_argument('--dry-run', action='store_true')
     args = parser.parse_args()
     today = kst_day(datetime.now(ZoneInfo('Asia/Seoul')))
@@ -131,6 +186,8 @@ def main():
         posted = json.loads((state_dir / 'state.json').read_text(encoding='utf-8'))['posted']
         catalogue = json.loads((ROOT / 'docs/posts/catalogue.json').read_text(encoding='utf-8'))
         text = daily_text(posted, len(catalogue), today, timer_next(), systemd_value('technical-blog.service', 'Result'))
+    elif args.kind == 'weekly':
+        text = weekly_report(today)
     else:
         text = verify_text(verify_recent(), today)
     print(text) if args.dry_run else send(text)
