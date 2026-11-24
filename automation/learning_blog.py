@@ -15,6 +15,7 @@ from urllib.parse import urlsplit
 from zoneinfo import ZoneInfo
 
 from automation.demand import demand_issues
+from automation.operation_events import emit
 
 BLOG = 'jacks-aiblog.tistory.com'
 REPOSITORY = 'https://github.com/kwonseongjae/ai-blog-automation'
@@ -295,55 +296,70 @@ def publish_daily(state_dir, catalogue, *, root, publish, verify, now=None, dry_
         article = next((a for a in catalogue if a['id'] not in posted), None)
         if article is None:
             return {'status': 'empty'}
-        if article.get('kind') == 'guide' and today >= DEMAND_RULE_FROM and not (article.get('target_query') and article.get('demand')):
-            raise ValueError('목표 검색어(target_query)와 수요 근거(demand)가 필요합니다')
-        source = validate_article(article, root).read_text(encoding='utf-8')
-        assets = read_assets(article, root)
-        digest = hashlib.sha256((source + (json.dumps(assets, sort_keys=True) if assets else '')).encode()).hexdigest()
-        if digest in {x.get('hash') for x in state['posted']}:
-            raise ValueError('이미 발행한 본문입니다')
-        marker = f'learning-{article["id"]}-{digest[:12]}'
-        illustrated = source
-        if 'cover' in assets:
-            cover = f'![{article["title"]}](asset:cover)\n\n'
-            illustrated = source.replace('\n## ', '\n' + cover + '## ', 1) if '\n## ' in source else cover + source
-        meta = f'<p class="learning-meta">읽는 시간 약 {reading_minutes(source)}분</p>'
-        head = f'<p class="learning-correction">정정 안내: {html.escape(article["correction"])}</p>' if article.get('correction') else ''
-        # 검색 설명(스니펫)이 "읽는 시간"으로 시작하거나 도입 문단 사이에 끼지 않도록 첫 그림·소제목 앞에 둔다.
-        rendered = render_markdown(illustrated, assets)
-        at = re.search(r'<figure|<h2', rendered)
-        rendered = rendered[:at.start()] + meta + rendered[at.start():] if at else rendered + meta
-        body = f'<div id="{marker}">\n{head}{rendered}\n</div>'
-        body += related_box(article.get('related', []), state['posted'])
-        if article.get('project'):
-            body += project_box(article['project'])
-        revision = article.get('revision')
-        if revision:
-            if not re.fullmatch(r'[0-9a-f]{40}', revision):
-                raise ValueError('공개 코드 버전이 올바르지 않습니다')
-            if article.get('kind', 'lab') == 'lab':
-                body += (f'<h2>이 글의 코드 버전</h2><p><a href="{REPOSITORY}/blob/{revision}/labs/learning_basics.py">'
-                         f'실습 코드 고정 버전</a> · <a href="{REPOSITORY}/blob/{revision}/tests/test_learning_labs.py">'
-                         '검증 테스트 고정 버전</a></p>')
-            else:
-                body += f'<p><a href="{REPOSITORY}/blob/{revision}/{article["markdown"]}">이 글의 원문 고정 버전</a></p>'
-        payload = article | {'html': body, 'marker': marker, 'hash': digest}
+        if not dry_run:
+            emit(root, article, 'production', 'running', '발행용 원고 검증과 본문 구성을 시작했습니다.')
+        try:
+            if article.get('kind') == 'guide' and today >= DEMAND_RULE_FROM and not (article.get('target_query') and article.get('demand')):
+                raise ValueError('목표 검색어(target_query)와 수요 근거(demand)가 필요합니다')
+            source = validate_article(article, root).read_text(encoding='utf-8')
+            assets = read_assets(article, root)
+            digest = hashlib.sha256((source + (json.dumps(assets, sort_keys=True) if assets else '')).encode()).hexdigest()
+            if digest in {x.get('hash') for x in state['posted']}:
+                raise ValueError('이미 발행한 본문입니다')
+            marker = f'learning-{article["id"]}-{digest[:12]}'
+            illustrated = source
+            if 'cover' in assets:
+                cover = f'![{article["title"]}](asset:cover)\n\n'
+                illustrated = source.replace('\n## ', '\n' + cover + '## ', 1) if '\n## ' in source else cover + source
+            meta = f'<p class="learning-meta">읽는 시간 약 {reading_minutes(source)}분</p>'
+            head = f'<p class="learning-correction">정정 안내: {html.escape(article["correction"])}</p>' if article.get('correction') else ''
+            # 검색 설명(스니펫)이 "읽는 시간"으로 시작하거나 도입 문단 사이에 끼지 않도록 첫 그림·소제목 앞에 둔다.
+            rendered = render_markdown(illustrated, assets)
+            at = re.search(r'<figure|<h2', rendered)
+            rendered = rendered[:at.start()] + meta + rendered[at.start():] if at else rendered + meta
+            body = f'<div id="{marker}">\n{head}{rendered}\n</div>'
+            body += related_box(article.get('related', []), state['posted'])
+            if article.get('project'):
+                body += project_box(article['project'])
+            revision = article.get('revision')
+            if revision:
+                if not re.fullmatch(r'[0-9a-f]{40}', revision):
+                    raise ValueError('공개 코드 버전이 올바르지 않습니다')
+                if article.get('kind', 'lab') == 'lab':
+                    body += (f'<h2>이 글의 코드 버전</h2><p><a href="{REPOSITORY}/blob/{revision}/labs/learning_basics.py">'
+                             f'실습 코드 고정 버전</a> · <a href="{REPOSITORY}/blob/{revision}/tests/test_learning_labs.py">'
+                             '검증 테스트 고정 버전</a></p>')
+                else:
+                    body += f'<p><a href="{REPOSITORY}/blob/{revision}/{article["markdown"]}">이 글의 원문 고정 버전</a></p>'
+            payload = article | {'html': body, 'marker': marker, 'hash': digest}
+        except Exception:
+            if not dry_run:
+                emit(root, article, 'production', 'failed', '발행용 원고를 준비하지 못했습니다.')
+            raise
+        if not dry_run:
+            emit(root, article, 'production', 'done', '검증한 원고와 발행용 본문 준비를 마쳤습니다.')
         if dry_run:
             return {'status': 'ready', 'id': article['id'], 'category': article['category']}
-        state['pending'] = {'id': article['id'], 'title': article['title'], 'date': today,
-                            'target': BLOG, 'hash': digest, 'marker': marker}
-        from automation.tistory_publisher import body_signature
-        state['pending']['kind'] = article.get('kind', 'lab')
-        state['pending']['expected_body'] = body_signature(body, marker)
-        save_json(path, state)
-        url = validate_url(publish(payload))
-        state['pending']['url'] = url
-        save_json(path, state)
-        if not verify(url, payload):
-            raise RuntimeError('공개 글 검증 실패: 자동 재발행을 보류합니다')
-        finished_day = kst_day(now if fixed_time else datetime.now(timezone.utc))
-        state['posted'].append(state.pop('pending') | {'url': url, 'date': finished_day})
-        save_json(path, state)
+        emit(root, article, 'publish', 'running', '티스토리 발행 절차를 시작했습니다.')
+        try:
+            state['pending'] = {'id': article['id'], 'title': article['title'], 'date': today,
+                                'target': BLOG, 'hash': digest, 'marker': marker}
+            from automation.tistory_publisher import body_signature
+            state['pending']['kind'] = article.get('kind', 'lab')
+            state['pending']['expected_body'] = body_signature(body, marker)
+            save_json(path, state)
+            url = validate_url(publish(payload))
+            state['pending']['url'] = url
+            save_json(path, state)
+            if not verify(url, payload):
+                raise RuntimeError('공개 글 검증 실패: 자동 재발행을 보류합니다')
+            finished_day = kst_day(now if fixed_time else datetime.now(timezone.utc))
+            state['posted'].append(state.pop('pending') | {'url': url, 'date': finished_day})
+            save_json(path, state)
+        except Exception:
+            emit(root, article, 'publish', 'failed', '발행 절차가 중단됐습니다. 공개 여부는 발행 대장에서 확인합니다.')
+            raise
+        emit(root, article, 'publish', 'published', '공개 주소와 본문을 검증하고 발행 대장에 기록했습니다.', url)
         remaining = len([a for a in catalogue if a['id'] not in {x['id'] for x in state['posted']}])
         return {'status': 'published', 'url': url, 'remaining': remaining,
                 'record': {'id': article['id'], 'title': article['title'], 'url': url, 'date': finished_day}}
@@ -366,7 +382,7 @@ def record_publication(root, entry):
         subprocess.run(['git', *AUTHOR, *args], cwd=root, check=True, timeout=60)
 
 
-def resolve_pending(state_dir, url=None, *, clear=False, verify=None, now=None):
+def resolve_pending(state_dir, url=None, *, clear=False, verify=None, now=None, root=None):
     with (state_dir / 'publish.lock').open('a') as lock:
         fcntl.flock(lock, fcntl.LOCK_EX)
         path = state_dir / 'state.json'
@@ -378,12 +394,21 @@ def resolve_pending(state_dir, url=None, *, clear=False, verify=None, now=None):
             if pending.get('url'):
                 raise ValueError('공개 주소가 있는 기록은 확인 없이 지울 수 없습니다')
         else:
-            validate_url(url)
-            if not verify or not verify(url, pending):
-                raise RuntimeError('공개 본문을 확인하지 못했습니다')
+            if root is not None:
+                emit(root, pending, 'publish', 'running', '확인 대기 중인 글의 공개 여부를 검증합니다.')
+            try:
+                validate_url(url)
+                if not verify or not verify(url, pending):
+                    raise RuntimeError('공개 본문을 확인하지 못했습니다')
+            except Exception:
+                if root is not None:
+                    emit(root, pending, 'publish', 'review', '공개 글을 확인하지 못해 검증 대기를 유지했습니다.')
+                raise
             state['posted'].append(pending | {'url': url, 'date': kst_day(now or datetime.now(timezone.utc))})
         state.pop('pending')
         save_json(path, state)
+        if root is not None and not clear:
+            emit(root, pending, 'publish', 'published', '확인 대기 중이던 글의 공개 본문을 검증했습니다.', url)
         return {'status': 'confirmed' if not clear else 'cleared'}
 
 
@@ -400,7 +425,7 @@ def main():
     if args.confirm_url or args.clear_pending:
         if args.clear_pending and not args.confirmed_not_published:
             raise ValueError('관리 화면에서 미발행을 확인한 경우에만 --confirmed-not-published를 지정하세요')
-        result = resolve_pending(state_dir, args.confirm_url, clear=args.clear_pending, verify=verify)
+        result = resolve_pending(state_dir, args.confirm_url, clear=args.clear_pending, verify=verify, root=ROOT)
         save_json(state_dir / 'status.json', result | {'checked_at': datetime.now(timezone.utc).isoformat()})
         print(json.dumps(result, ensure_ascii=False))
         return

@@ -65,6 +65,36 @@ class LearningBlogTests(unittest.TestCase):
                              verify=kwargs.pop('verify', lambda *_: True),
                              now=kwargs.pop('now', self.now), **kwargs)
 
+    def test_native_publish_events_follow_verified_article(self):
+        self.publish()
+        path = self.root / 'storage/sjon-operations/tistory-ai-dev-note.jsonl'
+        rows = [json.loads(line) for line in path.read_text().splitlines()]
+        self.assertEqual([(r['stage'], r['state']) for r in rows], [
+            ('production', 'running'), ('production', 'done'),
+            ('publish', 'running'), ('publish', 'published'),
+        ])
+        self.assertEqual({r['artifact'] for r in rows}, {'timezone'})
+        self.assertEqual(rows[-1]['link'], f'https://{BLOG}/2')
+        self.assertTrue(all(datetime.fromisoformat(r['at']).tzinfo for r in rows))
+
+    def test_failed_verify_has_failed_event_and_keeps_pending(self):
+        with self.assertRaisesRegex(RuntimeError, '검증 실패'):
+            self.publish(verify=lambda *_: False)
+        path = self.root / 'storage/sjon-operations/tistory-ai-dev-note.jsonl'
+        row = json.loads(path.read_text().splitlines()[-1])
+        self.assertEqual((row['stage'], row['state']), ('publish', 'failed'))
+        self.assertIn('pending', json.loads((self.root / 'state.json').read_text()))
+
+    def test_unwritable_event_location_does_not_prevent_verified_publish(self):
+        (self.root / 'storage').write_text('파일')
+        self.assertEqual(self.publish()['status'], 'published')
+
+    def test_linked_event_directory_is_not_created_outside_the_project(self):
+        with tempfile.TemporaryDirectory() as outside:
+            (self.root / 'storage').symlink_to(outside, target_is_directory=True)
+            self.assertEqual(self.publish()['status'], 'published')
+            self.assertFalse((Path(outside) / 'sjon-operations').exists())
+
     def test_old_category_is_rejected(self):
         with self.assertRaises(ValueError):
             validate_article(self.article | {'category': '자동화 실습'}, self.root)
@@ -222,7 +252,10 @@ class LearningBlogTests(unittest.TestCase):
             self.publish(verify=lambda *_: False)
         with self.assertRaises(RuntimeError):
             resolve_pending(self.root, f'https://{BLOG}/2', verify=lambda *_: False, now=self.now)
-        resolve_pending(self.root, f'https://{BLOG}/2', verify=lambda *_: True, now=self.now)
+        resolve_pending(self.root, f'https://{BLOG}/2', verify=lambda *_: True, now=self.now, root=self.root)
+        path = self.root / 'storage/sjon-operations/tistory-ai-dev-note.jsonl'
+        events = [json.loads(line) for line in path.read_text().splitlines()]
+        self.assertEqual([event['state'] for event in events[-2:]], ['running', 'published'])
         self.assertEqual(self.publish()['status'], 'already_published')
 
     def test_clear_pending_never_discards_a_known_url(self):

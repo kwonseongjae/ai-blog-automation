@@ -5,3 +5,5 @@ __pycache__/
 state.json
 status.json
 *.lock
+
+storage/sjon-operations/
