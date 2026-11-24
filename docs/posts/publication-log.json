@@ -1,0 +1,38 @@
+[
+  {
+    "id": "agent-permissions-first-guide",
+    "title": "Claude Code·Codex 권한 설정: 파일을 만들기 전에 물어보게 하는 법",
+    "url": "https://jacks-aiblog.tistory.com/7",
+    "date": "2026-11-19"
+  },
+  {
+    "id": "codex-vs-claude-code-compare",
+    "title": "Codex와 Claude Code 비교: 같은 버그 수정을 맡겨 보고 설정 차이까지 정리",
+    "url": "https://jacks-aiblog.tistory.com/8",
+    "date": "2026-11-20"
+  },
+  {
+    "id": "skills-first-guide",
+    "title": "Claude Code 스킬 만들기: SKILL.md 하나를 Codex와 Claude Code에서 같이 써 본 결과",
+    "url": "https://jacks-aiblog.tistory.com/10",
+    "date": "2026-11-21"
+  },
+  {
+    "id": "skill-situation-guide",
+    "title": "Claude Code 스킬 설치: 어떤 상황에 어떤 스킬을 설치할까, 문서 작업·화면 디자인·개발 절차·코드 줄이기·한글 윤문 다섯 가지",
+    "url": "https://jacks-aiblog.tistory.com/11",
+    "date": "2026-11-22"
+  },
+  {
+    "id": "model-selection-first-guide",
+    "title": "AI 코딩 모델 선택 기준: 같은 버그 수정을 여러 모델로 돌려 본 결과",
+    "url": "https://jacks-aiblog.tistory.com/12",
+    "date": "2026-11-23"
+  },
+  {
+    "id": "claude-model-traits-guide",
+    "title": "Claude Code 모델별 특징 비교: 같은 작업 세 가지를 haiku·sonnet·opus·fable로 두 번씩 돌린 기록",
+    "url": "https://jacks-aiblog.tistory.com/13",
+    "date": "2026-11-24"
+  }
+]

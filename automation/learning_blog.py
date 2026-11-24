@@ -345,7 +345,25 @@ def publish_daily(state_dir, catalogue, *, root, publish, verify, now=None, dry_
         state['posted'].append(state.pop('pending') | {'url': url, 'date': finished_day})
         save_json(path, state)
         remaining = len([a for a in catalogue if a['id'] not in {x['id'] for x in state['posted']}])
-        return {'status': 'published', 'url': url, 'remaining': remaining}
+        return {'status': 'published', 'url': url, 'remaining': remaining,
+                'record': {'id': article['id'], 'title': article['title'], 'url': url, 'date': finished_day}}
+
+
+PUBLICATION_LOG = 'docs/posts/publication-log.json'
+AUTHOR = ('-c', 'user.name=권성재', '-c', 'user.email=18046794+kwonseongjae@users.noreply.github.com')
+
+
+def record_publication(root, entry):
+    """발행 성공 기록을 저장소에 남기고 main에 올린다. 같은 URL은 한 번만 기록한다."""
+    path = root / PUBLICATION_LOG
+    log = json.loads(path.read_text(encoding='utf-8')) if path.exists() else []
+    if any(x['url'] == entry['url'] for x in log):
+        return
+    save_json(path, log + [entry])
+    for args in (['add', PUBLICATION_LOG],
+                 ['commit', '-m', f'docs: 발행 기록 추가 ({entry["date"]} {entry["id"]})', '--', PUBLICATION_LOG],
+                 ['push', 'origin', 'HEAD:main']):
+        subprocess.run(['git', *AUTHOR, *args], cwd=root, check=True, timeout=60)
 
 
 def resolve_pending(state_dir, url=None, *, clear=False, verify=None, now=None):
@@ -411,8 +429,16 @@ def main():
             run_lab(article['lab'])
     result = publish_daily(state_dir, catalogue, root=ROOT, publish=publish, verify=verify,
                            dry_run=args.dry_run)
+    record = result.pop('record', None)
+    if record and not args.dry_run:
+        try:
+            record_publication(ROOT, record)
+        except Exception as error:  # 글은 이미 발행됐으므로 기록 실패는 알리되 발행 결과는 유지한다
+            result['record_error'] = f'{type(error).__name__}: {str(error)[:200]}'
     save_json(state_dir / 'status.json', result | {'checked_at': datetime.now(timezone.utc).isoformat()})
     print(json.dumps(result, ensure_ascii=False))
+    if result.get('record_error'):
+        raise SystemExit(3)
     if result['status'] == 'needs_confirmation':
         raise SystemExit(2)
 

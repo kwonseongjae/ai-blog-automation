@@ -77,6 +77,10 @@ python3 -m automation.learning_blog --confirm-url https://jacks-aiblog.tistory.c
 python3 -m automation.learning_blog --clear-pending --confirmed-not-published
 ```
 
+## 발행 기록
+
+발행에 성공하면 `docs/posts/publication-log.json`에 글 id·제목·주소·날짜를 추가해 커밋하고 `main`에 올린다. 같은 주소는 한 번만 기록한다. 기록 단계가 실패하면 글은 그대로 발행된 채 `status.json`에 `record_error`가 남고 종료 코드 3으로 끝난다. 이때 저장소에 남은 커밋은 `git push origin HEAD:main`으로 직접 올려야 다음 발행이 막히지 않는다.
+
 ## 학습과 반응 평가
 
 처음에는 학습 완성도와 재현성을 우선한다. 매주 실행 가능한 글, 본인이 설명할 수 있는 글, 정정이 필요했던 글과 준비 시간을 확인한다. 검색 관리도구를 연결한 뒤에는 색인·관련 검색어·노출·클릭을 함께 관찰한다. 8주를 첫 점검 시점으로 삼되 검색 성장이나 취업·수익을 보장하는 기간으로 해석하지 않는다.
