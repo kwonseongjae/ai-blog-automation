@@ -30,6 +30,16 @@ class DemandTest(unittest.TestCase):
         self.assertIn('인용', ' '.join(d.demand_issues(bad, SOURCE)))
         self.assertIn('등급', ' '.join(d.demand_issues(ARTICLE | {'demand': ARTICLE['demand'] | {'grade': 'Z'}}, SOURCE)))
 
+    def test_new_editorial_rules_preserve_exact_search_term_and_bilingual_names(self):
+        article = {'title': 'Codex exec MCP enabled인데 호출이 막힐 때',
+                   'search_anchor': 'Codex exec', 'checked_on': '2026-11-25'}
+        lead = 'Linux의 Codex CLI(코덱스) 0.167.2에서 호출 승인 설정을 바꾸니 도구가 실행됐습니다.'
+        self.assertEqual(d.editorial_issues(article, '# 제목\n\n' + lead), [])
+        old_style = article | {'title': '도구를 연결했지만 실행할 수 없는 상황을 해결하는 Codex exec 사용법'}
+        issues = d.editorial_issues(old_style, '# 제목\n\nCodex CLI에서 연결을 확인합니다.\n\n확인일: 2026-11-25')
+        self.assertEqual(len(issues), 3)
+        self.assertTrue(d.editorial_issues(article | {'search_anchor': ''}, lead))
+
     def test_grade_c_only_needs_a_basis_note(self):
         c = ARTICLE | {'demand': {'grade': 'C', 'basis': '자동완성에 같은 표현 없음(가설)', 'checked_on': '2026-11-20'}}
         self.assertEqual(d.demand_issues(c, SOURCE), [])

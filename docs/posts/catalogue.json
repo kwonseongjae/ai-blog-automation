@@ -644,6 +644,63 @@
   }
  },
  {
+  "id": "mcp-tool-scope-guide",
+  "kind": "guide",
+  "category": "AI 시작하기",
+  "title": "Codex exec MCP enabled인데 approval required가 뜰 때 · 도구별 승인 설정",
+  "sources": [
+   "https://code.claude.com/docs/en/mcp",
+   "https://learn.chatgpt.com/docs/extend/mcp",
+   "https://github.com/kwonseongjae/ai-blog-automation/blob/main/docs/posts/evidence/mcp-tool-scope.json"
+  ],
+  "markdown": "docs/posts/mcp-tool-scope-guide.md",
+  "checked_on": "2026-11-16",
+  "verification": "Linux 한 환경에서 Claude Code 2.1.325(모델 별칭 haiku)와 Codex CLI 0.167.2(gpt-6.1-sol)에 직접 만든 stdio 서버 두 개를 연결하고 도구 허용·승인 설정 조건 각 6가지를 조건별 1회 실행해 서버 로그와 결과 파일로 판정. 대화형 승인 창, HTTP 서버, 반복 실행은 확인하지 않음.",
+  "assets": {
+   "cover": "docs/posts/assets/mcp-tool-scope-guide-cover.png",
+   "flow": "docs/posts/assets/mcp-tool-scope-guide-flow.png"
+  },
+  "cover_text": [
+   "AI 시작하기",
+   "MCP 도구 하나만 허용",
+   "쓰기는 막고 덧셈만",
+   "허용해 본 기록"
+  ],
+  "diagram_title": "도구 하나만 허용했는지 확인하는 순서",
+  "diagram_steps": [
+   [
+    "서버 두 개 연결",
+    "읽기 도구와 쓰기 도구"
+   ],
+   [
+    "허용 범위 변경",
+    "허용 목록과 승인 설정"
+   ],
+   [
+    "로그와 파일 대조",
+    "답변 대신 호출 기록"
+   ]
+  ],
+  "tags": [
+   "MCP",
+   "도구 허용",
+   "Claude Code",
+   "Codex",
+   "AI 에이전트 설정"
+  ],
+  "related": [
+   "mcp-first-connect-guide",
+   "agent-permissions-first-guide"
+  ],
+  "target_query": "Codex exec MCP enabled approval required",
+  "demand": {
+   "grade": "C",
+   "basis": "11월 25일 공개 검색에서 MCP 승인 관련 개발 이슈를 확인했다. 한국어 검색 수요는 가설이다.",
+   "checked_on": "2026-11-25"
+  },
+  "search_anchor": "Codex exec"
+ },
+ {
   "id": "skills-troubleshooting-guide",
   "kind": "guide",
   "category": "AI 시작하기",
@@ -1160,63 +1217,6 @@
   "demand": {
    "grade": "B",
    "basis": "구글 자동완성 2026-11-20: 'claude code headless'",
-   "checked_on": "2026-11-20"
-  }
- },
- {
-  "id": "mcp-tool-scope-guide",
-  "kind": "guide",
-  "category": "AI 시작하기",
-  "title": "MCP 도구를 하나만 허용하기: 서버 하나에 읽기·쓰기 도구가 섞여 있을 때 Claude Code와 Codex에서 막히는 지점을 확인한 기록",
-  "sources": [
-   "https://code.claude.com/docs/en/mcp",
-   "https://learn.chatgpt.com/docs/extend/mcp",
-   "https://github.com/kwonseongjae/ai-blog-automation/blob/main/docs/posts/evidence/mcp-tool-scope.json"
-  ],
-  "markdown": "docs/posts/mcp-tool-scope-guide.md",
-  "checked_on": "2026-11-16",
-  "verification": "Linux 한 환경에서 Claude Code 2.1.325(모델 별칭 haiku)와 Codex CLI 0.167.2(gpt-6.1-sol)에 직접 만든 stdio 서버 두 개를 연결하고 도구 허용·승인 설정 조건 각 6가지를 조건별 1회 실행해 서버 로그와 결과 파일로 판정. 대화형 승인 창, HTTP 서버, 반복 실행은 확인하지 않음.",
-  "assets": {
-   "cover": "docs/posts/assets/mcp-tool-scope-guide-cover.png",
-   "flow": "docs/posts/assets/mcp-tool-scope-guide-flow.png"
-  },
-  "cover_text": [
-   "AI 시작하기",
-   "MCP 도구 하나만 허용",
-   "쓰기는 막고 덧셈만",
-   "허용해 본 기록"
-  ],
-  "diagram_title": "도구 하나만 허용했는지 확인하는 순서",
-  "diagram_steps": [
-   [
-    "서버 두 개 연결",
-    "읽기 도구와 쓰기 도구"
-   ],
-   [
-    "허용 범위 변경",
-    "허용 목록과 승인 설정"
-   ],
-   [
-    "로그와 파일 대조",
-    "답변 대신 호출 기록"
-   ]
-  ],
-  "tags": [
-   "MCP",
-   "도구 허용",
-   "Claude Code",
-   "Codex",
-   "AI 에이전트 설정"
-  ],
-  "related": [
-   "mcp-first-connect-guide",
-   "agent-permissions-first-guide",
-   "claude-hooks-guard-guide"
-  ],
-  "target_query": "mcp 도구 허용",
-  "demand": {
-   "grade": "C",
-   "basis": "구글·네이버 자동완성 2026-11-20 확인: 'mcp 도구 허용'와 같은 표현 없음(가설)",
    "checked_on": "2026-11-20"
   }
  },

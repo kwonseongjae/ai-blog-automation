@@ -14,7 +14,7 @@ from pathlib import Path
 from urllib.parse import urlsplit
 from zoneinfo import ZoneInfo
 
-from automation.demand import demand_issues
+from automation.demand import demand_issues, editorial_issues
 
 BLOG = 'jacks-aiblog.tistory.com'
 REPOSITORY = 'https://github.com/kwonseongjae/ai-blog-automation'
@@ -87,6 +87,10 @@ def validate_article(article, root):
         issues = demand_issues(article, path.read_text(encoding='utf-8'))
         if issues:
             raise ValueError('목표 검색어·수요 근거 문제: ' + '; '.join(issues))
+    if kind == 'guide':
+        issues = editorial_issues(article, path.read_text(encoding='utf-8'))
+        if issues:
+            raise ValueError('제목·도입 문제: ' + '; '.join(issues))
     for source in article['sources']:
         p = urlsplit(source)
         official = p.netloc in {'docs.python.org', 'www.sqlite.org', 'learn.chatgpt.com',

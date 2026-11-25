@@ -10,11 +10,33 @@ import time
 from datetime import date
 
 GRADES = ('A', 'B+', 'B', 'C')
+EDITORIAL_RULE_FROM = '2026-11-25'
 UA = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/124.0 Safari/537.36'}
 
 
 def _norm(text):
     return re.sub(r'\s+', '', text).lower()
+
+
+def editorial_issues(article, source):
+    """새 안내 글과 교정 대상으로 지정한 원고에 검색 표현을 확인한다."""
+    if 'search_anchor' not in article and article.get('checked_on', '') < EDITORIAL_RULE_FROM:
+        return []
+    issues = []
+    title = article['title']
+    anchor = article.get('search_anchor')
+    if not isinstance(anchor, str) or not anchor.strip() or anchor.lower() not in title[:20].lower():
+        issues.append('제목 첫 20자 안에 정확한 검색 표현(search_anchor)을 넣어야 합니다')
+    paragraphs = source.strip().split('\n\n')
+    opening = next((part for part in paragraphs if not part.startswith('#')), '')
+    first_section = re.split(r'^## ', source, maxsplit=1, flags=re.M)[0]
+    if re.search(r'^\s*(?:확인일|확인 범위|공식 출처)\s*[:：]', first_section, re.M):
+        issues.append('확인일·확인 범위·공식 출처는 본문 검증 절이나 하단에 둬야 합니다')
+    intro = f'{title} {opening}'.lower()
+    for name, korean in (('codex', '코덱스'), ('claude code', '클로드 코드')):
+        if re.search(rf'\b{re.escape(name)}\b', intro, re.ASCII) and korean not in intro:
+            issues.append(f'제목 또는 첫 문단에 {name}와(과) {korean}를 함께 써야 합니다')
+    return issues
 
 
 def suggestions(query, client=None):
