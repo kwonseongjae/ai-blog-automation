@@ -40,6 +40,11 @@ MOBILE_PARAGRAPH_MAX = 150  # 모바일 본문은 한 줄 약 23자, 6~7줄 이�
 MOBILE_TABLE_COLUMNS_MAX = 4
 MOBILE_RULE_FROM = '2026-11-17'  # 이전 글은 그대로 두고 새 글부터 적용
 DEMAND_RULE_FROM = '2026-11-21'  # 이날부터 새 안내 글은 목표 검색어와 수요 근거가 있어야 발행
+AUTHORING_TRACE = re.compile(
+    r'Co-Authored-By|Generated with \[|/tmp/claude|scratchpad|'
+    r'AI(가|로|로써)? ?(작성|생성)|인공지능(이|으로) ?(작성|생성)|GPT(가|로) ?작성|'
+    r'(?:작성자|검토자|작성 도구|검토 도구)[ \t]*[:：][ \t]*(?:Claude|클로드|ChatGPT|Codex|Anthropic|Opus|Sonnet|Haiku)\b'
+)
 
 
 def mobile_issues(source):
@@ -79,16 +84,19 @@ def validate_article(article, root):
     path = (root / article['markdown']).resolve()
     if not path.is_relative_to(root.resolve()) or not path.is_file():
         raise ValueError('저장소 내부 원고가 필요합니다')
+    source_text = path.read_text(encoding='utf-8')
+    if AUTHORING_TRACE.search(source_text) or AUTHORING_TRACE.search(json.dumps(article, ensure_ascii=False)):
+        raise ValueError(f"원고 또는 발행 정보에 작성 도구 흔적이 있습니다: {article['id']}")
     if kind == 'guide' and article['checked_on'] >= MOBILE_RULE_FROM:
-        issues = mobile_issues(path.read_text(encoding='utf-8'))
+        issues = mobile_issues(source_text)
         if issues:
             raise ValueError('모바일에서 읽기 어려운 원고입니다: ' + '; '.join(issues[:3]))
     if kind == 'guide' and (article.get('target_query') or article.get('demand')):
-        issues = demand_issues(article, path.read_text(encoding='utf-8'))
+        issues = demand_issues(article, source_text)
         if issues:
             raise ValueError('목표 검색어·수요 근거 문제: ' + '; '.join(issues))
     if kind == 'guide':
-        issues = editorial_issues(article, path.read_text(encoding='utf-8'))
+        issues = editorial_issues(article, source_text)
         if issues:
             raise ValueError('제목·도입 문제: ' + '; '.join(issues))
     for source in article['sources']:

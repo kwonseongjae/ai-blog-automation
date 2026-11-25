@@ -69,6 +69,19 @@ class LearningBlogTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             validate_article(self.article | {'category': '자동화 실습'}, self.root)
 
+    def test_publication_blocks_authoring_traces_but_allows_technical_subjects(self):
+        text = 'Claude Code·ChatGPT, https://www.anthropic.com, ~/.claude/skills 예제'
+        self.source.write_text(text, encoding='utf-8')
+        validate_article(self.article | {'title': 'Claude Code 설정 문서'}, self.root)
+        for trace in ('Co-Authored-By', 'Generated with [', '/tmp/claude', 'scratchpad', 'AI가 작성', '검토자: Claude Code'):
+            with self.subTest(trace=trace):
+                self.source.write_text(f'{text}\n\n{trace}', encoding='utf-8')
+                with self.assertRaisesRegex(ValueError, '작성 도구 흔적'):
+                    validate_article(self.article, self.root)
+        self.source.write_text(text, encoding='utf-8')
+        with self.assertRaisesRegex(ValueError, '작성 도구 흔적'):
+            validate_article(self.article | {'title': 'AI가 작성한 제목'}, self.root)
+
     def test_default_tags(self):
         self.assertEqual(default_tags('Python·자동화'), ['Python', '자동화'])
         for name in ('AI 시작하기', '도구·모델 비교', '프로젝트 적용기', '미등록'):
