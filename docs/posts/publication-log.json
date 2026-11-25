@@ -40,5 +40,11 @@
     "title": "MCP 서버 처음 연결하기: Codex와 Claude Code에 연습용 서버를 붙여 도구 호출까지 확인한 기록",
     "url": "https://jacks-aiblog.tistory.com/14",
     "date": "2026-11-25"
+  },
+  {
+    "id": "mcp-tool-scope-guide",
+    "title": "Codex exec MCP enabled인데 approval required가 뜰 때 · 도구별 승인 설정",
+    "url": "https://jacks-aiblog.tistory.com/15",
+    "date": "2026-11-26"
   }
 ]
