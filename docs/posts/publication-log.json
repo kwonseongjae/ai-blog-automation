@@ -46,5 +46,11 @@
     "title": "Codex exec MCP enabled인데 approval required가 뜰 때 · 도구별 승인 설정",
     "url": "https://jacks-aiblog.tistory.com/15",
     "date": "2026-11-26"
+  },
+  {
+    "id": "skills-troubleshooting-guide",
+    "title": "스킬이 안 불릴 때 점검하는 순서: 위치·파일 이름·머리글·설명·호출 설정을 하나씩 어겨 본 기록",
+    "url": "https://jacks-aiblog.tistory.com/16",
+    "date": "2026-11-27"
   }
 ]
